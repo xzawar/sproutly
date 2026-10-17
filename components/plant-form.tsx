@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Upload } from "lucide-react";
 import { useGarden } from "./garden-provider";
 import { PageHeading } from "./ui";
-import { plantSchema } from "@/lib/validation";
+import { plantSchema, plantCreateSchema } from "@/lib/validation";
 import { uploadPlantImage, removeUnusedImage } from "@/app/actions";
 import type { Plant } from "@/lib/types";
 const read = (f: FormData, k: string) => String(f.get(k) ?? "").trim();
@@ -16,6 +16,8 @@ export function PlantForm({ plant }: { plant?: Plant }) {
   const [imageMode, setImageMode] = useState(
     plant?.image_path ? "upload" : "url",
   );
+  const [waterRoutine, setWaterRoutine] = useState(false);
+  const [feedRoutine, setFeedRoutine] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
   async function submit(e: FormEvent<HTMLFormElement>) {
@@ -68,7 +70,31 @@ export function PlantForm({ plant }: { plant?: Plant }) {
       if (uploaded) void removeUnusedImage(uploaded);
       return;
     }
-    const ok = await run({ kind: "plant.save", payload: parsed.data });
+    const create = plantCreateSchema.safeParse({
+      plant: parsed.data,
+      routines: (
+        [
+          ["Water", "water", waterRoutine],
+          ["Fertilize", "feed", feedRoutine],
+        ] as const
+      )
+        .filter(([, , enabled]) => enabled)
+        .map(([activity, key]) => ({
+          activity,
+          interval_count: Number(f.get(`${key}_interval`)),
+          first_due_date: read(f, `${key}_due`),
+        })),
+    });
+    if (!plant && !create.success) {
+      setError(create.error.issues[0].message);
+      if (uploaded) void removeUnusedImage(uploaded);
+      return;
+    }
+    const ok = await run(
+      plant
+        ? { kind: "plant.save", payload: parsed.data }
+        : { kind: "plant.create", payload: create.data! },
+    );
     if (ok) {
       if (!demo && plant?.image_path && plant.image_path !== imagePath)
         void removeUnusedImage(plant.image_path);
@@ -86,15 +112,10 @@ export function PlantForm({ plant }: { plant?: Plant }) {
       >
         <ArrowLeft size={16} /> Back to {plant ? "plant" : "plants"}
       </Link>
-      <PageHeading
-        eyebrow="YOUR COLLECTION"
-        title={plant ? "Edit plant" : "Meet your new plant"}
-        description="A few details now. Healthier routines from here."
-      />
+      <PageHeading title={plant ? "Edit plant" : "Add plant"} />
       <form className="editor-form" onSubmit={submit}>
         <section className="panel form-section">
           <h2>The essentials</h2>
-          <p className="muted">Give your plant a place in your garden.</p>
           <div className="form-grid">
             <label className="field">
               <span>
@@ -164,6 +185,69 @@ export function PlantForm({ plant }: { plant?: Plant }) {
         </section>
         <section className="panel form-section">
           <h2>Care & character</h2>
+          {!plant && (
+            <div className="initial-routines">
+              {[
+                {
+                  key: "water",
+                  title: "💧 Watering routine",
+                  enabled: waterRoutine,
+                  set: setWaterRoutine,
+                  interval: 7,
+                },
+                {
+                  key: "feed",
+                  title: "🌻 Fertilizing routine",
+                  enabled: feedRoutine,
+                  set: setFeedRoutine,
+                  interval: 30,
+                },
+              ].map((r) => (
+                <fieldset className="routine-option" key={r.key}>
+                  <legend>
+                    <label className="routine-toggle">
+                      <input
+                        type="checkbox"
+                        checked={r.enabled}
+                        onChange={(e) => r.set(e.target.checked)}
+                        aria-controls={`${r.key}-fields`}
+                      />
+                      {r.title}
+                    </label>
+                  </legend>
+                  {r.enabled && (
+                    <div className="form-grid" id={`${r.key}-fields`}>
+                      <label className="field">
+                        {r.key === "water" ? "Water" : "Fertilize"} every (days)
+                        <input
+                          type="number"
+                          name={`${r.key}_interval`}
+                          min={1}
+                          max={3650}
+                          step={1}
+                          defaultValue={r.interval}
+                          required
+                        />
+                      </label>
+                      <label className="field">
+                        {r.key === "water" ? "Watering" : "Fertilizing"} first
+                        due
+                        <input
+                          type="date"
+                          name={`${r.key}_due`}
+                          defaultValue={today}
+                          min="1900-01-01"
+                          max="9999-12-31"
+                          required
+                        />
+                      </label>
+                    </div>
+                  )}
+                </fieldset>
+              ))}
+              <p className="hint">Optional. Add or change routines later.</p>
+            </div>
+          )}
           <label className="field">
             Plant environment
             <select
@@ -191,7 +275,7 @@ export function PlantForm({ plant }: { plant?: Plant }) {
             </label>
             <div />
             <label className="field">
-              Watering requirements
+              Watering notes (optional)
               <textarea
                 name="watering"
                 maxLength={2000}
@@ -201,7 +285,7 @@ export function PlantForm({ plant }: { plant?: Plant }) {
               />
             </label>
             <label className="field">
-              Fertilizing requirements
+              Fertilizing notes (optional)
               <textarea
                 name="fertilizing"
                 maxLength={2000}
@@ -231,7 +315,7 @@ export function PlantForm({ plant }: { plant?: Plant }) {
           </div>
         </section>
         <section className="panel form-section">
-          <h2>A face to the name</h2>
+          <h2>Photo</h2>
           <div className="segmented image-options">
             <button
               type="button"

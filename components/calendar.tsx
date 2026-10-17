@@ -88,22 +88,21 @@ export function CalendarView() {
   const eventCard = (e: Event) => (
     <span
       key={e.id}
+      title={`${e.name} · ${e.activity} · ${e.estimated ? "Estimated recurrence" : e.status}`}
       className={`calendar-event care-${e.activity.toLowerCase()} event-${e.status.toLowerCase().replaceAll(" ", "-")} ${e.estimated ? "estimated" : ""}`}
     >
-      <span>{e.name}</span>
-      <small>
-        {activityEmoji(e.activity)} {e.activity}
-        {e.estimated ? " · Est." : ` · ${e.status}`}
-      </small>
+      <span className="event-emoji" aria-hidden="true">
+        {activityEmoji(e.activity)}
+      </span>
+      <span className="event-name">{e.name}</span>
+      <span className="sr-only">
+        {e.activity} · {e.estimated ? "Estimated" : e.status}
+      </span>
     </span>
   );
   return (
     <>
-      <PageHeading
-        eyebrow="A RHYTHM FOR YOUR GARDEN"
-        title="Care calendar"
-        description="A little planning. A whole lot of growing."
-      />
+      <PageHeading title="Care calendar" />
       <div className="filter-bar calendar-filters">
         <label className="field">
           Plant
@@ -191,6 +190,13 @@ export function CalendarView() {
               </button>
             </div>
           </div>
+          <div className="calendar-legend">
+            <Badge status="Upcoming" />
+            <Badge status="Due Today" />
+            <Badge status="Overdue" />
+            <Badge status="Completed" />
+            <Badge status="Skipped" />
+          </div>
           <div className="segmented">
             <button
               className={mode === "month" ? "selected" : ""}
@@ -208,9 +214,7 @@ export function CalendarView() {
             </button>
           </div>
         </div>
-        <p className="calendar-mobile-hint">
-          Tap a date for activities. Future estimates may shift.
-        </p>
+        <p className="calendar-mobile-hint">Tap a date for details.</p>
         <div className="calendar-scroll">
           <div className={`calendar-grid ${mode}`}>
             <div className="weekdays">
@@ -266,18 +270,10 @@ export function CalendarView() {
             </div>
           </div>
         </div>
-        <div className="calendar-legend">
-          <Badge status="Upcoming" />
-          <Badge status="Due Today" />
-          <Badge status="Overdue" />
-          <Badge status="Completed" />
-          <Badge status="Skipped" />
-        </div>
       </section>
       <p className="hint calendar-disclaimer">
-        Est. = projected recurrence, not a committed task. Future dates shift
-        after care is recorded. History is shown on the day the action happened.
-        One overdue occurrence stays outstanding until completed or skipped.
+        Dashed chips are estimates; dates shift after care. Overdue tasks stay
+        open until completed or skipped.
       </p>
       {day && (
         <Modal
@@ -294,10 +290,13 @@ export function CalendarView() {
                 .filter((e) => e.date === day)
                 .map((e) => (
                   <div className="day-detail-row" key={e.id}>
+                    <span className="day-detail-icon" aria-hidden="true">
+                      {activityEmoji(e.activity)}
+                    </span>
                     <div>
                       <strong>{e.name}</strong>
                       <p className="muted">
-                        {activityEmoji(e.activity)} {e.activity}
+                        {e.activity}
                         {e.estimated ? " · Estimated recurrence" : ""}
                       </p>
                     </div>

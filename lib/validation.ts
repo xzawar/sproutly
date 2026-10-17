@@ -37,6 +37,26 @@ export const plantSchema = z
   .refine((p) => !(p.image_url && p.image_path), {
     message: "Choose an upload or an image URL, not both",
   });
+// A single create request validates every routine before any rows are written.
+export const plantCreateSchema = z.object({
+  plant: plantSchema.refine(
+    (p) => !p.id,
+    "Use edit to update an existing plant",
+  ),
+  routines: z
+    .array(
+      z.object({
+        activity: z.enum(["Water", "Fertilize"]),
+        interval_count: z.number().int().min(1).max(3650),
+        first_due_date: date,
+      }),
+    )
+    .max(2)
+    .refine(
+      (r) => new Set(r.map((x) => x.activity)).size === r.length,
+      "Choose each routine once",
+    ),
+});
 export const scheduleSchema = z
   .object({
     id: uuid.optional(),

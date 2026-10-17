@@ -1,6 +1,7 @@
 "use client";
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { Leaf, CheckCircle2 } from "lucide-react";
 import { PasswordInput } from "./password-input";
 import { requestPasswordReset, updatePassword } from "@/app/actions";
 export function RecoveryForm({
@@ -37,13 +38,16 @@ export function RecoveryForm({
   return (
     <main className="recovery-page">
       <Link href="/login" className="brand">
-        🌱 sproutly.
+        <span className="brand-mark">
+          <Leaf size={24} />
+        </span>
+        <span>sproutly.</span>
       </Link>
       <section className="panel recovery-card">
-        <p className="eyebrow">A FRESH START</p>
-        <h1>{reset ? "A new password." : "Forgot your password?"}</h1>
+        <h1>{reset ? "Reset password" : "Forgot password?"}</h1>
         {done ? (
-          <div role="status">
+          <div role="status" className="recovery-success">
+            <CheckCircle2 size={32} aria-hidden="true" />
             <h2>{reset ? "Password updated." : "Check your inbox."}</h2>
             <p className="muted">
               {reset
@@ -55,8 +59,8 @@ export function RecoveryForm({
           <>
             <p className="muted">
               {reset
-                ? "Choose a unique passphrase with at least 6 characters."
-                : "We’ll send you a link to get back to your garden."}
+                ? "Use at least 6 characters."
+                : "Enter your email for a reset link."}
             </p>
             {!configured && (
               <p className="info-note">
@@ -98,6 +102,7 @@ export function RecoveryForm({
                     required
                     maxLength={254}
                     autoComplete="email"
+                    placeholder="you@example.com"
                   />
                 </label>
               )}
@@ -106,7 +111,10 @@ export function RecoveryForm({
                   {error}
                 </p>
               )}
-              <button className="button primary" disabled={busy || !configured}>
+              <button
+                className="button primary auth-submit"
+                disabled={busy || !configured}
+              >
                 {busy
                   ? "Please wait…"
                   : reset

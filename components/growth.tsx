@@ -110,9 +110,8 @@ export function GrowthView() {
   return (
     <>
       <PageHeading
-        eyebrow="BIG LITTLE MILESTONES"
         title="Growth journal"
-        description="Measure the progress. Keep the memories."
+
         action={
           canEdit ? (
             <div className="heading-actions">
@@ -316,7 +315,7 @@ export function GrowthView() {
           </section>
           <section className="panel growth-panel">
             <h2>📷 Photo diary</h2>
-            <p className="muted">A visual record of the little changes.</p>
+
             {photos.length ? (
               <div className="photo-grid">
                 {photos.map((p: PlantPhoto) => (
@@ -343,7 +342,7 @@ export function GrowthView() {
                           year: "numeric",
                         })}
                       </strong>
-                      <p>{p.caption || "A moment of growth."}</p>
+                      <p>{p.caption}</p>
                       {canEdit && (
                         <button
                           className="text-link danger-text"
@@ -372,7 +371,7 @@ export function GrowthView() {
       )}
       {edit && (
         <Modal
-          title={edit.id ? "Edit measurement" : "A little taller? 🌱"}
+          title={edit.id ? "Edit measurement" : "Add measurement"}
           onClose={() => !busy && setEdit(null)}
         >
           <form className="journal-form" onSubmit={saveMeasurement}>
@@ -441,7 +440,7 @@ export function GrowthView() {
       )}
       {photo && (
         <Modal
-          title="A moment worth keeping 📷"
+          title="Add photo"
           onClose={() => !uploading && !busy && setPhoto(false)}
         >
           <form className="journal-form" onSubmit={savePhoto}>

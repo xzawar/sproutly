@@ -12,6 +12,7 @@ import {
   growthSchema,
   photoSchema,
   plantSchema,
+  plantCreateSchema,
   profileSchema,
   resolveSchema,
   scheduleSchema,
@@ -241,6 +242,35 @@ export function demoMutation(data: WorkspaceData, m: Mutation): WorkspaceData {
     case "photo.delete":
       d.photos = d.photos.filter((x) => x.id !== p.id);
       break;
+    case "plant.create": {
+      const { plant, routines } = plantCreateSchema.parse(p);
+      const id = crypto.randomUUID();
+      d.plants.push({
+        ...plant,
+        id,
+        user_id: d.profile.id,
+        archived_at: null,
+        display_image: plant.image_url,
+      });
+      d.schedules.push(
+        ...routines.map((r) => ({
+          id: crypto.randomUUID(),
+          user_id: d.profile.id,
+          plant_id: id,
+          activity: r.activity,
+          custom_name: "",
+          interval_count: r.interval_count,
+          interval_unit: "days" as const,
+          start_date: r.first_due_date,
+          next_due_date: r.first_due_date,
+          end_date: null,
+          notes: "",
+          active: true,
+          archived_at: null,
+        })),
+      );
+      break;
+    }
     case "plant.save": {
       const v = plantSchema.parse(p);
       if (v.id) {

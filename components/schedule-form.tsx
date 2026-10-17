@@ -78,11 +78,7 @@ export function ScheduleForm({
       <Link className="back-link" href={back}>
         <ArrowLeft size={16} /> Back to plant
       </Link>
-      <PageHeading
-        eyebrow="CARE ROUTINES"
-        title={schedule ? "Edit care schedule" : "A little care, on repeat"}
-        description="Create a routine that works for you and your plant."
-      />
+      <PageHeading title={schedule ? "Edit care schedule" : "Add routine"} />
       <form className="editor-form" onSubmit={submit}>
         <section className="panel form-section">
           <h2>Build your routine</h2>

@@ -210,14 +210,6 @@ function WorkspaceInner() {
           </>
         )}
         <div className="sidebar-bottom">
-          <div className="sidebar-note">
-            <Leaf size={19} />
-            <p>
-              Good things
-              <br />
-              take a little care.
-            </p>
-          </div>
           <Link
             href={`${base}/profile`}
             onClick={() => setMenu(false)}
@@ -266,17 +258,14 @@ function WorkspaceInner() {
             >
               <Menu size={22} />
             </button>
-            <span className="workspace-label">
-              LET’S GROW SOMETHING GOOD 🌱
-            </span>
+            <span className="workspace-label">Sproutly</span>
           </div>
           <NotificationCenter />
         </header>
         {demo && (
           <div className="demo-banner">
             <span>
-              <strong>Local demo</strong> · Sample data. Changes stay in this
-              browser.
+              <strong>Demo</strong> · Saved in this browser.
             </span>
             <Link href="/login">
               Connect your garden <ChevronRight size={14} />
@@ -287,9 +276,9 @@ function WorkspaceInner() {
           {route()}
           <footer className="app-footer">
             <span>
-              <Leaf size={14} /> Made for the way you grow.
+              <Leaf size={14} /> Sproutly
             </span>
-            <span>Sproutly · Plant Care Scheduling System</span>
+            <span>Plant care, organized.</span>
           </footer>
         </main>
       </div>

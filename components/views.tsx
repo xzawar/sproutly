@@ -83,7 +83,7 @@ export function Dashboard() {
           year: "numeric",
         }).toUpperCase()}
         title={`A good day to grow, ${data.profile.name.split(" ")[0]}.`}
-        description="Your garden, at a glance. A little care goes a long way."
+
         action={
           <Link className="button primary" href={`${base}/plants/new`}>
             <Plus size={18} /> Add plant
@@ -96,7 +96,6 @@ export function Dashboard() {
           alt="Lush monstera leaves in a simple ivory pot"
         />
         <div className="hero-copy">
-          <span className="eyebrow">GROW AT YOUR OWN PACE</span>
           <h2>
             Small routines.
             <br />
@@ -105,9 +104,7 @@ export function Dashboard() {
           <p>
             {due.length + overdue.length
               ? `You have ${due.length + overdue.length} ${due.length + overdue.length === 1 ? "task" : "tasks"} ready for your attention.`
-              : "A calmer home starts with a little green."}
-            <br />
-            Let’s give your garden a little love.
+              : "You’re all caught up."}
           </p>
           <Link href={`${base}/tasks`} className="text-link">
             See your care tasks <ArrowRight size={17} />
@@ -115,7 +112,7 @@ export function Dashboard() {
         </div>
       </section>
       <div className="stats-grid">
-        {stats.map(({ label, value, icon: Icon, sub, link }) => (
+        {stats.map(({ label, value, icon: Icon, link }) => (
           <Link href={`${base}${link}`} className="stat-card" key={label}>
             <div className="stat-top">
               <span>{label}</span>
@@ -123,7 +120,6 @@ export function Dashboard() {
             </div>
             <strong>{value.toString().padStart(2, "0")}</strong>
             <span className="stat-foot">
-              {sub}
               <ArrowDownRight size={15} />
             </span>
           </Link>
@@ -133,8 +129,7 @@ export function Dashboard() {
         <section className="panel">
           <div className="panel-heading">
             <div>
-              <h2>A little care, today</h2>
-              <p className="muted">Today’s tasks & anything overdue</p>
+              <h2>Due & overdue</h2>
             </div>
             <Link className="text-link" href={`${base}/tasks`}>
               View all <ArrowRight size={16} />
@@ -145,8 +140,7 @@ export function Dashboard() {
         <section className="panel week-panel">
           <div className="panel-heading">
             <div>
-              <h2>On the horizon</h2>
-              <p className="muted">Your next seven days</p>
+              <h2>Next 7 days</h2>
             </div>
             <CalendarDays size={19} />
           </div>
@@ -203,7 +197,6 @@ export function Dashboard() {
         <div className="panel-heading">
           <div>
             <h2>Recently cared for</h2>
-            <p className="muted">The small things make a difference.</p>
           </div>
           <Link className="text-link" href={`${base}/history`}>
             Full history <ArrowRight size={16} />
@@ -236,9 +229,8 @@ export function PlantsView() {
   return (
     <>
       <PageHeading
-        eyebrow="YOUR PERSONAL JUNGLE"
         title="My plants"
-        description="Every plant has a story. Keep yours growing."
+
         action={
           <Link className="button primary" href={`${base}/plants/new`}>
             <Plus size={18} /> Add plant
@@ -312,9 +304,7 @@ export function PlantsView() {
                   <ChevronRight size={17} />
                 </div>
                 <p className="scientific-name">
-                  {p.scientific_name ||
-                    p.common_name ||
-                    "Your growing companion"}
+                  {p.scientific_name || p.common_name || ""}
                 </p>
                 <div className="plant-meta">
                   <span>
@@ -412,11 +402,7 @@ export function PlantDetail({ plant }: { plant: Plant }) {
           "YOUR PLANT"
         }
         title={plant.name}
-        description={
-          plant.scientific_name ||
-          plant.common_name ||
-          "A growing part of your home."
-        }
+        description={plant.scientific_name || plant.common_name || ""}
         action={
           plant.archived_at ? (
             <RestorePlant plant={plant} />
@@ -513,7 +499,6 @@ export function PlantDetail({ plant }: { plant: Plant }) {
             <div className="panel-heading">
               <div>
                 <h2>Care routines</h2>
-                <p className="muted">A rhythm that keeps things growing.</p>
               </div>
               {!plant.archived_at && (
                 <Link
@@ -591,7 +576,7 @@ export function PlantDetail({ plant }: { plant: Plant }) {
           {schedules.some((s) => s.active) && (
             <section className="panel">
               <div className="panel-heading">
-                <h2>Tasks to tend to</h2>
+                <h2>Care tasks</h2>
               </div>
               <TaskList
                 schedules={schedules
@@ -696,11 +681,7 @@ export function TasksView({
     .sort((a, b) => a.next_due_date.localeCompare(b.next_due_date));
   return (
     <>
-      <PageHeading
-        eyebrow="ONE SMALL THING AT A TIME"
-        title="Care tasks"
-        description="Keep the good growing. Here’s what needs a little love."
-      />
+      <PageHeading title="Care tasks" />
       <div className="task-controls">
         <div className="tabs" role="tablist" aria-label="Task status">
           {tabs.map((t) => (
@@ -757,11 +738,7 @@ export function HistoryView() {
   );
   return (
     <>
-      <PageHeading
-        eyebrow="YOUR GARDEN’S STORY"
-        title="Care history"
-        description="Every small act of care, remembered."
-      />
+      <PageHeading title="Care history" />
       <div className="filter-bar history-filters">
         <label className="filter-label">
           Plant

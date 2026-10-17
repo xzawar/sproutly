@@ -2,6 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { PGlite } from "@electric-sql/pglite";
+import { createPlantWithRoutines } from "../lib/plant-create";
+import { createDemo } from "../lib/demo";
 import { addInterval, todayIn } from "../lib/dates";
 const A = "20000000-0000-4000-8000-000000000001",
   B = "20000000-0000-4000-8000-000000000002",
@@ -564,6 +566,79 @@ test("actual migration: permissions and complete/skip integration", async (t) =>
       assert.equal(
         await as(B, () =>
           scalar("select count(*) as n from public.sync_events"),
+        ),
+        0,
+      );
+    },
+  );
+  await t.test(
+    "plant and initial routines commit together and roll back on SQL failure",
+    async () => {
+      const source = createDemo().plants[0];
+      const plant = { ...source, id: undefined };
+      const request = {
+        plant: {
+          ...plant,
+          category_id: null,
+          name: "Atomic fern",
+          image_url: null,
+          image_path: null,
+        },
+        routines: [
+          { activity: "Water", interval_count: 4, first_due_date: today },
+          { activity: "Fertilize", interval_count: 21, first_due_date: today },
+        ],
+      };
+      const run = (fail: boolean) =>
+        db.transaction(async (tx) => {
+          await tx.exec("SET LOCAL ROLE authenticated");
+          await tx.query("select set_config('request.jwt.claim.sub',$1,true)", [
+            A,
+          ]);
+          let count = 0;
+          return createPlantWithRoutines(request, async (table, row) => {
+            // Inject an actual SQL constraint failure on the second routine.
+            const values = {
+              ...row,
+              user_id: A,
+              ...(fail && ++count === 3 ? { interval_count: 0 } : {}),
+            };
+            const keys = Object.keys(values).filter(
+              (k) => values[k as keyof typeof values] !== undefined,
+            );
+            const inserted = await tx.query<{ id: string }>(
+              `insert into public.${table} (${keys.join(",")}) values (${keys.map((_, i) => "$" + (i + 1)).join(",")}) returning id`,
+              keys.map((k) => values[k as keyof typeof values]),
+            );
+            return inserted.rows[0].id;
+          });
+        });
+      const before = await scalar("select count(*) as n from public.plants");
+      await assert.rejects(run(true));
+      assert.equal(
+        await scalar("select count(*) as n from public.plants"),
+        before,
+      );
+      assert.equal(
+        await scalar(
+          "select count(*) as n from public.plants where name='Atomic fern'",
+        ),
+        0,
+      );
+      const id = await run(false);
+      assert.equal(
+        await scalar(
+          "select count(*) as n from public.care_schedules where plant_id=$1",
+          [id],
+        ),
+        2,
+      );
+      assert.equal(
+        await as(B, () =>
+          scalar(
+            "select count(*) as n from public.care_schedules where plant_id=$1",
+            [id],
+          ),
         ),
         0,
       );

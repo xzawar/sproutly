@@ -109,4 +109,5 @@ export async function saveRow(
     );
   if (!changed.length)
     throw Error("This item is unavailable or you do not have access.");
+  return String((changed[0] as { id: string }).id);
 }

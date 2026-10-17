@@ -27,11 +27,7 @@ export function ProfileView() {
   }
   return (
     <>
-      <PageHeading
-        eyebrow="MAKE YOURSELF AT HOME"
-        title="Your profile"
-        description="A few personal details. A garden on your time."
-      />
+      <PageHeading title="Your profile" />
       <form onSubmit={submit} className="editor-form">
         <section className="panel form-section">
           <div className="profile-summary">
@@ -104,7 +100,7 @@ export function ProfileView() {
       </form>
       {demo && (
         <section className="panel form-section demo-settings">
-          <h2>Your local playground</h2>
+          <h2>Demo data</h2>
           <p className="muted">
             This is an isolated demo. Changes stay in this browser, not in
             Supabase. Admin sample users are fictional. Resetting clears all
@@ -157,11 +153,7 @@ export function AdminUsers() {
   );
   return (
     <>
-      <PageHeading
-        eyebrow="ADMINISTRATION"
-        title="Registered users"
-        description="A simple, read-only view of your community."
-      />
+      <PageHeading title="Registered users" />
       <div className="admin-note">
         <ShieldCheck size={18} />
         <span>
@@ -231,9 +223,8 @@ export function AdminCategories() {
   return (
     <>
       <PageHeading
-        eyebrow="ADMINISTRATION"
         title="Plant categories"
-        description="Keep everyone’s collection a little more organized."
+
         action={
           <button
             className="button primary"

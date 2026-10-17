@@ -46,19 +46,12 @@ export function AuthForm({
           <span>sproutly.</span>
         </Link>
         <div className="auth-quote">
-          <p className="eyebrow">A LITTLE CARE GOES A LONG WAY</p>
           <h1>
             Make room
             <br />
             for growing.
           </h1>
-          <p>
-            Your plants. Your rhythms.
-            <br />
-            One calmer place to care for them.
-          </p>
         </div>
-        <span className="auth-caption">PLANT CARE, SIMPLIFIED.</span>
       </section>
       <section className="auth-form-panel">
         <div className="auth-form-wrap">
@@ -73,10 +66,8 @@ export function AuthForm({
               <CheckCircle2 size={36} className="success-icon" />
               <h2>Check your inbox.</h2>
               <p className="muted">
-                If sign-up is available for this address, you’ll receive a
-                confirmation email. Confirm your account, then sign in. If email
-                confirmation is disabled in your Supabase project, you can sign
-                in now.
+                If confirmation is required, follow the email link before
+                signing in.
               </p>
               <Link className="button primary auth-submit" href="/login">
                 Back to sign in <ArrowRight size={17} />
@@ -84,21 +75,13 @@ export function AuthForm({
             </>
           ) : (
             <>
-              <span className="eyebrow">YOUR PERSONAL GARDEN AWAITS</span>
               <h2>
                 {mode === "login" ? "Welcome back." : "Let’s grow something."}
               </h2>
-              <p className="muted">
-                {mode === "login"
-                  ? "Sign in and pick up where you left off."
-                  : "A little more organized. A little greener."}
-              </p>
               {!configured && (
                 <div className="setup-notice">
-                  <strong>Ready when you are.</strong>
                   <p>
-                    Supabase isn’t connected yet. Explore the local demo, or
-                    follow the README to connect your project.
+                    Sign-in isn’t configured. Try the demo or connect Supabase.
                   </p>
                 </div>
               )}
@@ -143,10 +126,7 @@ export function AuthForm({
                     }
                   />
                   {mode === "register" && (
-                    <span className="hint">
-                      Use at least 6 characters. A unique passphrase works
-                      well.
-                    </span>
+                    <span className="hint">At least 6 characters.</span>
                   )}
                 </label>
                 {error && (
@@ -172,9 +152,7 @@ export function AuthForm({
                 </Link>
               )}
               <p className="auth-switch">
-                {mode === "login"
-                  ? "New to Sproutly?"
-                  : "Already growing with us?"}{" "}
+                {mode === "login" ? "New here?" : "Already have an account?"}{" "}
                 <Link href={mode === "login" ? "/register" : "/login"}>
                   {mode === "login" ? "Create an account" : "Sign in"}
                 </Link>
@@ -188,11 +166,7 @@ export function AuthForm({
               >
                 Explore the local demo <Leaf size={17} />
               </Link>
-              <p className="auth-fineprint">
-                No account needed for the demo.
-                <br />
-                Your real garden stays private to you.
-              </p>
+              <p className="auth-fineprint">No account needed.</p>
             </>
           )}
         </div>

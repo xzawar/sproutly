@@ -1,4 +1,5 @@
 "use server";
+import { createPlantWithRoutines } from "@/lib/plant-create";
 import { withUser } from "@/lib/server/prisma";
 import { saveRow } from "@/lib/server/repository";
 import { redirect } from "next/navigation";
@@ -11,6 +12,7 @@ import {
   categorySchema,
   idSchema,
   plantSchema,
+  plantCreateSchema,
   profileSchema,
   resolveSchema,
   scheduleSchema,
@@ -26,6 +28,14 @@ export async function mutate(input: Mutation): Promise<ActionResult> {
           throw Error("Invalid image owner");
       };
       switch (input.kind) {
+        case "plant.create": {
+          const v = plantCreateSchema.parse(p);
+          checkPath(v.plant.image_path);
+          await createPlantWithRoutines(v, (table, row) =>
+            saveRow(tx, table, row, uid),
+          );
+          break;
+        }
         case "plant.save": {
           const v = plantSchema.parse(p);
           checkPath(v.image_path);

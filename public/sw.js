@@ -1,6 +1,6 @@
 /* global self, caches, URL, location, fetch */
 /* Cache public assets only. Never cache authenticated HTML, API data or private images here. */
-const CACHE = "sproutly-public-v3";
+const CACHE = "sproutly-public-v4";
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches

@@ -74,6 +74,7 @@ export interface WorkspaceData {
 }
 export type Mutation = {
   kind:
+    | "plant.create"
     | "plant.save"
     | "plant.archive"
     | "plant.restore"

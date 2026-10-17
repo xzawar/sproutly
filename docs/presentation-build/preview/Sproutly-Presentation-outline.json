@@ -1,0 +1,1458 @@
+{
+  "widthEmu": 12192000,
+  "heightEmu": 6858000,
+  "slides": [
+    {
+      "slide": 1,
+      "shapes": [
+        {
+          "shapeId": 2,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 1047749,
+          "widthEmu": 8572500,
+          "heightEmu": 247649,
+          "paragraphs": [
+            "PLANT CARE SCHEDULING SYSTEM"
+          ]
+        },
+        {
+          "shapeId": 3,
+          "name": "Cover accent",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 685800,
+          "topEmu": 3143250,
+          "widthEmu": 533400,
+          "heightEmu": 47625,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 4,
+          "name": "TextBox 3",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 3390900,
+          "widthEmu": 9906000,
+          "heightEmu": 1600200,
+          "paragraphs": [
+            "Sproutly"
+          ]
+        },
+        {
+          "shapeId": 5,
+          "name": "TextBox 4",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 5124450,
+          "widthEmu": 7810499,
+          "heightEmu": 742950,
+          "paragraphs": [
+            "Small routines. Thriving plants.\nA responsive, weather-aware personal garden."
+          ]
+        },
+        {
+          "shapeId": 6,
+          "name": "Footer",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 8077200,
+          "topEmu": 6305550,
+          "widthEmu": 3429000,
+          "heightEmu": 171450,
+          "paragraphs": [
+            "01"
+          ]
+        },
+        {
+          "shapeId": 7,
+          "name": "Footer rule",
+          "type": "LINE (9)",
+          "leftEmu": 685800,
+          "topEmu": 6191250,
+          "widthEmu": 10820400,
+          "heightEmu": 0
+        },
+        {
+          "shapeId": 8,
+          "name": "Footer",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 6305550,
+          "widthEmu": 7239000,
+          "heightEmu": 171450,
+          "paragraphs": [
+            "Local implementation \u00b7 Production setup pending"
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "slide": 2,
+      "shapes": [
+        {
+          "shapeId": 2,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 685800,
+          "widthEmu": 5905500,
+          "heightEmu": 247649,
+          "paragraphs": [
+            "THE PROBLEM"
+          ]
+        },
+        {
+          "shapeId": 3,
+          "name": "Title accent",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 685800,
+          "topEmu": 1009650,
+          "widthEmu": 419100,
+          "heightEmu": 38100,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 4,
+          "name": "Slide title",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 1181100,
+          "widthEmu": 10820400,
+          "heightEmu": 876300,
+          "paragraphs": [
+            "Care should feel clear, not repetitive."
+          ]
+        },
+        {
+          "shapeId": 5,
+          "name": "Rounded Rectangle 4",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 685800,
+          "topEmu": 2152650,
+          "widthEmu": 5219700,
+          "heightEmu": 3562350,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 6,
+          "name": "Rounded Rectangle 5",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 6286500,
+          "topEmu": 2152650,
+          "widthEmu": 5219700,
+          "heightEmu": 3562350,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 7,
+          "name": "Rectangle 6",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 1104900,
+          "topEmu": 2571750,
+          "widthEmu": 381000,
+          "heightEmu": 38100,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 8,
+          "name": "Rectangle 7",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 6705600,
+          "topEmu": 2571750,
+          "widthEmu": 381000,
+          "heightEmu": 38100,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 9,
+          "name": "TextBox 8",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 1104900,
+          "topEmu": 3028950,
+          "widthEmu": 4381500,
+          "heightEmu": 400050,
+          "paragraphs": [
+            "Before"
+          ]
+        },
+        {
+          "shapeId": 10,
+          "name": "TextBox 9",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 1104900,
+          "topEmu": 3562350,
+          "widthEmu": 4381500,
+          "heightEmu": 1200150,
+          "paragraphs": [
+            "Repeated full data and image loads.\nCare notes confused with schedules.\nArchived plants had no way back."
+          ]
+        },
+        {
+          "shapeId": 11,
+          "name": "TextBox 10",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6705600,
+          "topEmu": 3028950,
+          "widthEmu": 4381500,
+          "heightEmu": 400050,
+          "paragraphs": [
+            "Sproutly"
+          ]
+        },
+        {
+          "shapeId": 12,
+          "name": "TextBox 11",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6705600,
+          "topEmu": 3562350,
+          "widthEmu": 4381500,
+          "heightEmu": 1200150,
+          "paragraphs": [
+            "Change-only synchronization and stable images.\nExplicit every-N-days routines.\nSelective restore with fresh due dates."
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "slide": 3,
+      "shapes": [
+        {
+          "shapeId": 2,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 685800,
+          "widthEmu": 5905500,
+          "heightEmu": 247649,
+          "paragraphs": [
+            "CORE WORKFLOW"
+          ]
+        },
+        {
+          "shapeId": 3,
+          "name": "Title accent",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 685800,
+          "topEmu": 1009650,
+          "widthEmu": 419100,
+          "heightEmu": 38100,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 4,
+          "name": "Slide title",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 1181100,
+          "widthEmu": 10820400,
+          "heightEmu": 876300,
+          "paragraphs": [
+            "A routine with a reliable memory."
+          ]
+        },
+        {
+          "shapeId": 5,
+          "name": "Connector 4",
+          "type": "LINE (9)",
+          "leftEmu": 1905000,
+          "topEmu": 3448050,
+          "widthEmu": 8382000,
+          "heightEmu": 0
+        },
+        {
+          "shapeId": 6,
+          "name": "Process step 1 marker",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 2324100,
+          "topEmu": 3200400,
+          "widthEmu": 495299,
+          "heightEmu": 495299,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 7,
+          "name": "TextBox 6",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 2324100,
+          "topEmu": 3333750,
+          "widthEmu": 495299,
+          "heightEmu": 228600,
+          "paragraphs": [
+            "01"
+          ]
+        },
+        {
+          "shapeId": 8,
+          "name": "TextBox 7",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 857250,
+          "topEmu": 3905249,
+          "widthEmu": 3429000,
+          "heightEmu": 323850,
+          "paragraphs": [
+            "Add a plant"
+          ]
+        },
+        {
+          "shapeId": 9,
+          "name": "TextBox 8",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 857250,
+          "topEmu": 4305300,
+          "widthEmu": 3429000,
+          "heightEmu": 781050,
+          "paragraphs": [
+            "Light and location."
+          ]
+        },
+        {
+          "shapeId": 10,
+          "name": "Process step 2 marker",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 5848350,
+          "topEmu": 3200400,
+          "widthEmu": 495299,
+          "heightEmu": 495299,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 11,
+          "name": "TextBox 10",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 5848350,
+          "topEmu": 3333750,
+          "widthEmu": 495299,
+          "heightEmu": 228600,
+          "paragraphs": [
+            "02"
+          ]
+        },
+        {
+          "shapeId": 12,
+          "name": "TextBox 11",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 4381500,
+          "topEmu": 3905249,
+          "widthEmu": 3429000,
+          "heightEmu": 323850,
+          "paragraphs": [
+            "Set N days"
+          ]
+        },
+        {
+          "shapeId": 13,
+          "name": "TextBox 12",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 4381500,
+          "topEmu": 4305300,
+          "widthEmu": 3429000,
+          "heightEmu": 781050,
+          "paragraphs": [
+            "Separate care routines."
+          ]
+        },
+        {
+          "shapeId": 14,
+          "name": "Process step 3 marker",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 9372600,
+          "topEmu": 3200400,
+          "widthEmu": 495299,
+          "heightEmu": 495299,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 15,
+          "name": "TextBox 14",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 9372600,
+          "topEmu": 3333750,
+          "widthEmu": 495299,
+          "heightEmu": 228600,
+          "paragraphs": [
+            "03"
+          ]
+        },
+        {
+          "shapeId": 16,
+          "name": "TextBox 15",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 7905750,
+          "topEmu": 3905249,
+          "widthEmu": 3429000,
+          "heightEmu": 323850,
+          "paragraphs": [
+            "Record and review"
+          ]
+        },
+        {
+          "shapeId": 17,
+          "name": "TextBox 16",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 7905750,
+          "topEmu": 4305300,
+          "widthEmu": 3429000,
+          "heightEmu": 781050,
+          "paragraphs": [
+            "History and progress."
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "slide": 4,
+      "shapes": [
+        {
+          "shapeId": 2,
+          "name": "Media frame",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 685800,
+          "topEmu": 1143000,
+          "widthEmu": 4457700,
+          "heightEmu": 3771900,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 3,
+          "name": "Story image",
+          "type": "PICTURE (13)",
+          "leftEmu": 685800,
+          "topEmu": 1143000,
+          "widthEmu": 4457700,
+          "heightEmu": 3771900
+        },
+        {
+          "shapeId": 4,
+          "name": "TextBox 3",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 5048250,
+          "widthEmu": 4457700,
+          "heightEmu": 266700,
+          "paragraphs": [
+            "Local demo screenshot; fictional sample data."
+          ]
+        },
+        {
+          "shapeId": 5,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 1143000,
+          "widthEmu": 4391025,
+          "heightEmu": 247649,
+          "paragraphs": [
+            "LIGHT, VIBRANT, RESPONSIVE"
+          ]
+        },
+        {
+          "shapeId": 6,
+          "name": "Rectangle 5",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 6191250,
+          "topEmu": 1447800,
+          "widthEmu": 419100,
+          "heightEmu": 38100,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 7,
+          "name": "TextBox 6",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 1619250,
+          "widthEmu": 4476750,
+          "heightEmu": 1181100,
+          "paragraphs": [
+            "A garden at a glance."
+          ]
+        },
+        {
+          "shapeId": 8,
+          "name": "TextBox 7",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 3009900,
+          "widthEmu": 4476750,
+          "heightEmu": 2000250,
+          "paragraphs": [
+            "Lime and forest contrast inspired by Sweet Tape.\nColourful task types and emoji categories.\nNo breadcrumbs; clear navigation and back links.\nIn-app inbox with opt-in open-tab reminders."
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "slide": 5,
+      "shapes": [
+        {
+          "shapeId": 2,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 685800,
+          "widthEmu": 5905500,
+          "heightEmu": 247649,
+          "paragraphs": [
+            "ARCHITECTURE"
+          ]
+        },
+        {
+          "shapeId": 3,
+          "name": "Title accent",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 685800,
+          "topEmu": 1009650,
+          "widthEmu": 419100,
+          "heightEmu": 38100,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 4,
+          "name": "Slide title",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 1181100,
+          "widthEmu": 10820400,
+          "heightEmu": 876300,
+          "paragraphs": [
+            "Prisma without bypassing garden privacy."
+          ]
+        },
+        {
+          "shapeId": 5,
+          "name": "TextBox 4",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 2247900,
+          "widthEmu": 514350,
+          "heightEmu": 285750,
+          "paragraphs": [
+            "01"
+          ]
+        },
+        {
+          "shapeId": 6,
+          "name": "TextBox 5",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 1276350,
+          "topEmu": 2228850,
+          "widthEmu": 3810000,
+          "heightEmu": 323850,
+          "paragraphs": [
+            "Application boundary"
+          ]
+        },
+        {
+          "shapeId": 7,
+          "name": "Connector 6",
+          "type": "LINE (9)",
+          "leftEmu": 685800,
+          "topEmu": 2781300,
+          "widthEmu": 5086350,
+          "heightEmu": 0
+        },
+        {
+          "shapeId": 8,
+          "name": "TextBox 7",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 2971800,
+          "widthEmu": 5086350,
+          "heightEmu": 2286000,
+          "paragraphs": [
+            "Next.js and TypeScript.\nSupabase verifies the session.\nPrisma runs a transaction as authenticated.\nVerified UID is transaction-local."
+          ]
+        },
+        {
+          "shapeId": 9,
+          "name": "TextBox 8",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 2247900,
+          "widthEmu": 514350,
+          "heightEmu": 285750,
+          "paragraphs": [
+            "02"
+          ]
+        },
+        {
+          "shapeId": 10,
+          "name": "TextBox 9",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6781800,
+          "topEmu": 2228850,
+          "widthEmu": 3810000,
+          "heightEmu": 323850,
+          "paragraphs": [
+            "Data boundary"
+          ]
+        },
+        {
+          "shapeId": 11,
+          "name": "Connector 10",
+          "type": "LINE (9)",
+          "leftEmu": 6191250,
+          "topEmu": 2781300,
+          "widthEmu": 5086350,
+          "heightEmu": 0
+        },
+        {
+          "shapeId": 12,
+          "name": "TextBox 11",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 2971800,
+          "widthEmu": 5086350,
+          "heightEmu": 2286000,
+          "paragraphs": [
+            "PostgreSQL RLS limits owner rows.\nComposite foreign keys protect ownership.\nAuth owns password hashing.\nPrivate Storage uses owner folders."
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "slide": 6,
+      "shapes": [
+        {
+          "shapeId": 2,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 685800,
+          "widthEmu": 5905500,
+          "heightEmu": 247649,
+          "paragraphs": [
+            "CACHE AND CONNECTIVITY"
+          ]
+        },
+        {
+          "shapeId": 3,
+          "name": "Title accent",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 685800,
+          "topEmu": 1009650,
+          "widthEmu": 419100,
+          "heightEmu": 38100,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 4,
+          "name": "Slide title",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 1181100,
+          "widthEmu": 10820400,
+          "heightEmu": 876300,
+          "paragraphs": [
+            "Less reloading. Honest offline behavior."
+          ]
+        },
+        {
+          "shapeId": 5,
+          "name": "Rounded Rectangle 4",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 685800,
+          "topEmu": 2152650,
+          "widthEmu": 5219700,
+          "heightEmu": 3562350,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 6,
+          "name": "Rounded Rectangle 5",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 6286500,
+          "topEmu": 2152650,
+          "widthEmu": 5219700,
+          "heightEmu": 3562350,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 7,
+          "name": "Rectangle 6",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 1104900,
+          "topEmu": 2571750,
+          "widthEmu": 381000,
+          "heightEmu": 38100,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 8,
+          "name": "Rectangle 7",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 6705600,
+          "topEmu": 2571750,
+          "widthEmu": 381000,
+          "heightEmu": 38100,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 9,
+          "name": "TextBox 8",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 1104900,
+          "topEmu": 3028950,
+          "widthEmu": 4381500,
+          "heightEmu": 400050,
+          "paragraphs": [
+            "While online"
+          ]
+        },
+        {
+          "shapeId": 10,
+          "name": "TextBox 9",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 1104900,
+          "topEmu": 3562350,
+          "widthEmu": 4381500,
+          "heightEmu": 1200150,
+          "paragraphs": [
+            "Keep workspace state across navigation.\nRestore per-user same-tab cache.\nFetch changed rows and deletion IDs.\nUse stable private image URLs."
+          ]
+        },
+        {
+          "shapeId": 11,
+          "name": "TextBox 10",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6705600,
+          "topEmu": 3028950,
+          "widthEmu": 4381500,
+          "heightEmu": 400050,
+          "paragraphs": [
+            "When offline"
+          ]
+        },
+        {
+          "shapeId": 12,
+          "name": "TextBox 11",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6705600,
+          "topEmu": 3562350,
+          "widthEmu": 4381500,
+          "heightEmu": 1200150,
+          "paragraphs": [
+            "Public service-worker fallback page.\nPreviously open views can remain visible.\nNo offline writes or queued task actions.\nNever cache private pages in the worker."
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "slide": 7,
+      "shapes": [
+        {
+          "shapeId": 2,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 685800,
+          "widthEmu": 5905500,
+          "heightEmu": 247649,
+          "paragraphs": [
+            "WEATHER-AWARE, USER-CONTROLLED"
+          ]
+        },
+        {
+          "shapeId": 3,
+          "name": "Title accent",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 685800,
+          "topEmu": 1009650,
+          "widthEmu": 419100,
+          "heightEmu": 38100,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 4,
+          "name": "Slide title",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 1181100,
+          "widthEmu": 10820400,
+          "heightEmu": 876300,
+          "paragraphs": [
+            "Rain is a suggestion, not completed care."
+          ]
+        },
+        {
+          "shapeId": 5,
+          "name": "TextBox 4",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 2381250,
+          "widthEmu": 4953000,
+          "heightEmu": 1809750,
+          "paragraphs": [
+            "A forecast never automatically marks watering done."
+          ]
+        },
+        {
+          "shapeId": 6,
+          "name": "TextBox 5",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 4305300,
+          "widthEmu": 4762500,
+          "heightEmu": 609600,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 7,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 2381250,
+          "widthEmu": 2857500,
+          "heightEmu": 171450,
+          "paragraphs": [
+            "LOCATION"
+          ]
+        },
+        {
+          "shapeId": 8,
+          "name": "TextBox 7",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 2628900,
+          "widthEmu": 5314950,
+          "heightEmu": 571500,
+          "paragraphs": [
+            "Permission-based or manual coordinates."
+          ]
+        },
+        {
+          "shapeId": 9,
+          "name": "Connector 8",
+          "type": "LINE (9)",
+          "leftEmu": 6191250,
+          "topEmu": 3238500,
+          "widthEmu": 5314950,
+          "heightEmu": 0
+        },
+        {
+          "shapeId": 10,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 3371850,
+          "widthEmu": 2857500,
+          "heightEmu": 171450,
+          "paragraphs": [
+            "EVIDENCE"
+          ]
+        },
+        {
+          "shapeId": 11,
+          "name": "TextBox 10",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 3619500,
+          "widthEmu": 5314950,
+          "heightEmu": 571500,
+          "paragraphs": [
+            "Fresh matching date, \u226560% chance and \u22651 mm."
+          ]
+        },
+        {
+          "shapeId": 12,
+          "name": "Connector 11",
+          "type": "LINE (9)",
+          "leftEmu": 6191250,
+          "topEmu": 4229100,
+          "widthEmu": 5314950,
+          "heightEmu": 0
+        },
+        {
+          "shapeId": 13,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 4362450,
+          "widthEmu": 2857500,
+          "heightEmu": 171450,
+          "paragraphs": [
+            "SCOPE"
+          ]
+        },
+        {
+          "shapeId": 14,
+          "name": "TextBox 13",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 4610100,
+          "widthEmu": 5314950,
+          "heightEmu": 571500,
+          "paragraphs": [
+            "Due outdoor watering only."
+          ]
+        },
+        {
+          "shapeId": 15,
+          "name": "Connector 14",
+          "type": "LINE (9)",
+          "leftEmu": 6191250,
+          "topEmu": 5219700,
+          "widthEmu": 5314950,
+          "heightEmu": 0
+        },
+        {
+          "shapeId": 16,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 5353050,
+          "widthEmu": 2857500,
+          "heightEmu": 171450,
+          "paragraphs": [
+            "ACTION"
+          ]
+        },
+        {
+          "shapeId": 17,
+          "name": "TextBox 16",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 5600700,
+          "widthEmu": 5314950,
+          "heightEmu": 571500,
+          "paragraphs": [
+            "User confirms \u201cSkipped \u2014 rain\u201d."
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "slide": 8,
+      "shapes": [
+        {
+          "shapeId": 2,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 685800,
+          "widthEmu": 5905500,
+          "heightEmu": 247649,
+          "paragraphs": [
+            "JOURNAL AND RESTORE"
+          ]
+        },
+        {
+          "shapeId": 3,
+          "name": "Title accent",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 685800,
+          "topEmu": 1009650,
+          "widthEmu": 419100,
+          "heightEmu": 38100,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 4,
+          "name": "Slide title",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 1181100,
+          "widthEmu": 10820400,
+          "heightEmu": 876300,
+          "paragraphs": [
+            "Keep the story. Restart safely."
+          ]
+        },
+        {
+          "shapeId": 5,
+          "name": "TextBox 4",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 2247900,
+          "widthEmu": 514350,
+          "heightEmu": 285750,
+          "paragraphs": [
+            "01"
+          ]
+        },
+        {
+          "shapeId": 6,
+          "name": "TextBox 5",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 1276350,
+          "topEmu": 2228850,
+          "widthEmu": 3810000,
+          "heightEmu": 323850,
+          "paragraphs": [
+            "Growth journal"
+          ]
+        },
+        {
+          "shapeId": 7,
+          "name": "Connector 6",
+          "type": "LINE (9)",
+          "leftEmu": 685800,
+          "topEmu": 2781300,
+          "widthEmu": 5086350,
+          "heightEmu": 0
+        },
+        {
+          "shapeId": 8,
+          "name": "TextBox 7",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 2971800,
+          "widthEmu": 5086350,
+          "heightEmu": 2286000,
+          "paragraphs": [
+            "Dated height and leaf observations.\nActual elapsed-day chart and exact table.\nCaptioned photo timeline/gallery.\nOwner-scoped edit and delete."
+          ]
+        },
+        {
+          "shapeId": 9,
+          "name": "TextBox 8",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 2247900,
+          "widthEmu": 514350,
+          "heightEmu": 285750,
+          "paragraphs": [
+            "02"
+          ]
+        },
+        {
+          "shapeId": 10,
+          "name": "TextBox 9",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6781800,
+          "topEmu": 2228850,
+          "widthEmu": 3810000,
+          "heightEmu": 323850,
+          "paragraphs": [
+            "Selective restore"
+          ]
+        },
+        {
+          "shapeId": 11,
+          "name": "Connector 10",
+          "type": "LINE (9)",
+          "leftEmu": 6191250,
+          "topEmu": 2781300,
+          "widthEmu": 5086350,
+          "heightEmu": 0
+        },
+        {
+          "shapeId": 12,
+          "name": "TextBox 11",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 2971800,
+          "widthEmu": 5086350,
+          "heightEmu": 2286000,
+          "paragraphs": [
+            "Archive stops routines and retains history.\nChoose routines explicitly on restore.\nNext due starts one interval from today.\nEnded routines remain stopped."
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "slide": 9,
+      "shapes": [
+        {
+          "shapeId": 2,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 685800,
+          "widthEmu": 5905500,
+          "heightEmu": 247649,
+          "paragraphs": [
+            "VERIFICATION"
+          ]
+        },
+        {
+          "shapeId": 3,
+          "name": "Title accent",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 685800,
+          "topEmu": 1009650,
+          "widthEmu": 419100,
+          "heightEmu": 38100,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 4,
+          "name": "Slide title",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 1181100,
+          "widthEmu": 10820400,
+          "heightEmu": 876300,
+          "paragraphs": [
+            "Evidence has a defined boundary."
+          ]
+        },
+        {
+          "shapeId": 5,
+          "name": "TextBox 4",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 2381250,
+          "widthEmu": 4953000,
+          "heightEmu": 1809750,
+          "paragraphs": [
+            "Local tests are not production acceptance."
+          ]
+        },
+        {
+          "shapeId": 6,
+          "name": "TextBox 5",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 4305300,
+          "widthEmu": 4762500,
+          "heightEmu": 609600,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 7,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 2381250,
+          "widthEmu": 2857500,
+          "heightEmu": 171450,
+          "paragraphs": [
+            "44 TESTS"
+          ]
+        },
+        {
+          "shapeId": 8,
+          "name": "TextBox 7",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 2628900,
+          "widthEmu": 5314950,
+          "heightEmu": 571500,
+          "paragraphs": [
+            "Dates, validation, demo and actual SQL policies."
+          ]
+        },
+        {
+          "shapeId": 9,
+          "name": "Connector 8",
+          "type": "LINE (9)",
+          "leftEmu": 6191250,
+          "topEmu": 3238500,
+          "widthEmu": 5314950,
+          "heightEmu": 0
+        },
+        {
+          "shapeId": 10,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 3371850,
+          "widthEmu": 2857500,
+          "heightEmu": 171450,
+          "paragraphs": [
+            "BROWSER SUITE"
+          ]
+        },
+        {
+          "shapeId": 11,
+          "name": "TextBox 10",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 3619500,
+          "widthEmu": 5314950,
+          "heightEmu": 571500,
+          "paragraphs": [
+            "Desktop/mobile flows; deterministic weather fixture."
+          ]
+        },
+        {
+          "shapeId": 12,
+          "name": "Connector 11",
+          "type": "LINE (9)",
+          "leftEmu": 6191250,
+          "topEmu": 4229100,
+          "widthEmu": 5314950,
+          "heightEmu": 0
+        },
+        {
+          "shapeId": 13,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 4362450,
+          "widthEmu": 2857500,
+          "heightEmu": 171450,
+          "paragraphs": [
+            "CHECKS"
+          ]
+        },
+        {
+          "shapeId": 14,
+          "name": "TextBox 13",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 4610100,
+          "widthEmu": 5314950,
+          "heightEmu": 571500,
+          "paragraphs": [
+            "Strict TypeScript, lint and production build."
+          ]
+        },
+        {
+          "shapeId": 15,
+          "name": "Connector 14",
+          "type": "LINE (9)",
+          "leftEmu": 6191250,
+          "topEmu": 5219700,
+          "widthEmu": 5314950,
+          "heightEmu": 0
+        },
+        {
+          "shapeId": 16,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 5353050,
+          "widthEmu": 2857500,
+          "heightEmu": 171450,
+          "paragraphs": [
+            "PENDING"
+          ]
+        },
+        {
+          "shapeId": 17,
+          "name": "TextBox 16",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 6191250,
+          "topEmu": 5600700,
+          "widthEmu": 5314950,
+          "heightEmu": 571500,
+          "paragraphs": [
+            "Real Auth/email, Storage, Prisma and hosted-site tests."
+          ]
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "slide": 10,
+      "shapes": [
+        {
+          "shapeId": 2,
+          "name": "Section label",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 685800,
+          "widthEmu": 5905500,
+          "heightEmu": 247649,
+          "paragraphs": [
+            "NEXT: LIVE ACCEPTANCE"
+          ]
+        },
+        {
+          "shapeId": 3,
+          "name": "Title accent",
+          "type": "AUTO_SHAPE (1)",
+          "leftEmu": 685800,
+          "topEmu": 1009650,
+          "widthEmu": 419100,
+          "heightEmu": 38100,
+          "paragraphs": [
+            ""
+          ]
+        },
+        {
+          "shapeId": 4,
+          "name": "Slide title",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 1181100,
+          "widthEmu": 10820400,
+          "heightEmu": 876300,
+          "paragraphs": [
+            "Ready for account-connected testing."
+          ]
+        },
+        {
+          "shapeId": 5,
+          "name": "TextBox 4",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 2152650,
+          "widthEmu": 685800,
+          "heightEmu": 457200,
+          "paragraphs": [
+            "01"
+          ]
+        },
+        {
+          "shapeId": 6,
+          "name": "TextBox 5",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 1600200,
+          "topEmu": 2133600,
+          "widthEmu": 9906000,
+          "heightEmu": 438150,
+          "paragraphs": [
+            "Connect authorized GitHub, Vercel and Supabase projects."
+          ]
+        },
+        {
+          "shapeId": 7,
+          "name": "Connector 6",
+          "type": "LINE (9)",
+          "leftEmu": 685800,
+          "topEmu": 2667000,
+          "widthEmu": 10820400,
+          "heightEmu": 0
+        },
+        {
+          "shapeId": 8,
+          "name": "TextBox 7",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 2971800,
+          "widthEmu": 685800,
+          "heightEmu": 457200,
+          "paragraphs": [
+            "02"
+          ]
+        },
+        {
+          "shapeId": 9,
+          "name": "TextBox 8",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 1600200,
+          "topEmu": 2952750,
+          "widthEmu": 9906000,
+          "heightEmu": 438150,
+          "paragraphs": [
+            "Apply migrations, configure environment and email redirects."
+          ]
+        },
+        {
+          "shapeId": 10,
+          "name": "Connector 9",
+          "type": "LINE (9)",
+          "leftEmu": 685800,
+          "topEmu": 3486150,
+          "widthEmu": 10820400,
+          "heightEmu": 0
+        },
+        {
+          "shapeId": 11,
+          "name": "TextBox 10",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 3790949,
+          "widthEmu": 685800,
+          "heightEmu": 457200,
+          "paragraphs": [
+            "03"
+          ]
+        },
+        {
+          "shapeId": 12,
+          "name": "TextBox 11",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 1600200,
+          "topEmu": 3771900,
+          "widthEmu": 9906000,
+          "heightEmu": 438150,
+          "paragraphs": [
+            "Verify two-user privacy, live uploads, caching and weather on HTTPS."
+          ]
+        },
+        {
+          "shapeId": 13,
+          "name": "Connector 12",
+          "type": "LINE (9)",
+          "leftEmu": 685800,
+          "topEmu": 4305300,
+          "widthEmu": 10820400,
+          "heightEmu": 0
+        },
+        {
+          "shapeId": 14,
+          "name": "TextBox 13",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 685800,
+          "topEmu": 4610100,
+          "widthEmu": 685800,
+          "heightEmu": 457200,
+          "paragraphs": [
+            "04"
+          ]
+        },
+        {
+          "shapeId": 15,
+          "name": "TextBox 14",
+          "type": "TEXT_BOX (17)",
+          "leftEmu": 1600200,
+          "topEmu": 4591050,
+          "widthEmu": 9906000,
+          "heightEmu": 438150,
+          "paragraphs": [
+            "Rehearse the live presentation and keep the local demo as backup."
+          ]
+        }
+      ],
+      "notes": ""
+    }
+  ]
+}

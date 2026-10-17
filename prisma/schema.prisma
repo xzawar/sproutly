@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Profile {
+  id         String   @id @db.Uuid
+  name       String
+  email      String
+  role       String   @default("user")
+  status     String   @default("active")
+  timezone   String   @default("UTC")
+  created_at DateTime @default(now()) @db.Timestamptz
+
+  @@map("profiles")
+}
+
+model Category {
+  id   String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name String
+
+  @@map("categories")
+}
+
+model Plant {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id         String    @db.Uuid
+  name            String
+  common_name     String    @default("")
+  scientific_name String    @default("")
+  category_id     String?   @db.Uuid
+  location        String    @default("")
+  sunlight        String    @default("Indirect")
+  watering        String    @default("")
+  fertilizing     String    @default("")
+  description     String    @default("")
+  notes           String    @default("")
+  image_url       String?
+  image_path      String?
+  environment     String    @default("indoor")
+  added_on        DateTime  @db.Date
+  archived_at     DateTime? @db.Timestamptz
+
+  @@map("plants")
+}
+
+model CareSchedule {
+  id             String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id        String    @db.Uuid
+  plant_id       String    @db.Uuid
+  activity       String
+  custom_name    String    @default("")
+  interval_count Int
+  interval_unit  String
+  start_date     DateTime  @db.Date
+  next_due_date  DateTime  @db.Date
+  end_date       DateTime? @db.Date
+  notes          String    @default("")
+  active         Boolean   @default(true)
+  archived_at    DateTime? @db.Timestamptz
+
+  @@map("care_schedules")
+}
+
+model CareHistory {
+  id          String   @id @db.Uuid
+  user_id     String   @db.Uuid
+  plant_id    String   @db.Uuid
+  schedule_id String   @db.Uuid
+  activity    String
+  due_date    DateTime @db.Date
+  action_date DateTime @db.Date
+  status      String
+  notes       String
+  created_at  DateTime @db.Timestamptz
+
+  @@map("care_history")
+}
+
+model GrowthRecord {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id     String   @db.Uuid
+  plant_id    String   @db.Uuid
+  recorded_on DateTime @db.Date
+  height_cm   Decimal  @db.Decimal(10, 2)
+  leaf_count  Int?
+  notes       String   @default("")
+
+  @@map("growth_records")
+}
+
+model PlantPhoto {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id    String   @db.Uuid
+  plant_id   String   @db.Uuid
+  taken_on   DateTime @db.Date
+  caption    String   @default("")
+  image_url  String?
+  image_path String?
+
+  @@map("plant_photos")
+}

@@ -1,0 +1,3 @@
+# Final requirements
+
+The authoritative implementation mapping and external pending items are in BOARD-AUDIT.md. Approved revision: Sproutly name, fixed light lime/forest palette inspired by sweet-tape.com, no breadcrumbs, every N days scheduling, explicit rain skip for outdoor watering, location/weather API, selective plant restore, growth/photo journal, calendar filters, accessible password eyes, improved inbox, change-only cache and dedicated offline fallback without offline editing. Production acceptance is defined in DEMO-RUNBOOK.md. No claim is made that account-dependent board work is complete.

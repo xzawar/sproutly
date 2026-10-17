@@ -1,0 +1,251 @@
+{
+  "schema": "local.presentation.layout/v2",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/s01e00",
+    "id": "1",
+    "slide": 1,
+    "role": "cover",
+    "recipeId": "cover-editorial",
+    "recipeGroup": "cover",
+    "contentLoad": "low",
+    "structureKey": "large-left-title-accent-rule",
+    "recipeSource": "notion-ppt-slide-recipes",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "Notion Native PPTX",
+    "colors": {
+      "bg1": "#FFFFFF",
+      "bg2": "#F0EFED",
+      "lt1": "#FFFFFF",
+      "lt2": "#F9F8F7",
+      "tx1": "#2C2C2B",
+      "tx2": "#FFFFFF",
+      "dk1": "#2C2C2B",
+      "dk2": "#7D7A75",
+      "panel": "#F0EFED",
+      "rule": "#B8BCC4",
+      "accent": "#2783DE",
+      "accentSoft": "#E5F2FC",
+      "accentMuted": "#A9CEF5"
+    },
+    "typefaces": [
+      "Arial"
+    ]
+  },
+  "inheritedLayers": [],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/s01e01",
+      "id": "1",
+      "name": "Section label",
+      "semanticRole": "label",
+      "bbox": [
+        72,
+        110,
+        900,
+        26
+      ],
+      "frame": {
+        "left": 72,
+        "top": 110,
+        "width": 900,
+        "height": 26
+      },
+      "text": "PLANT CARE SCHEDULING SYSTEM",
+      "textPreview": "PLANT CARE SCHEDULING SYSTEM",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "fontSize": 14,
+        "typeface": "Arial",
+        "color": "#53634f",
+        "bold": true
+      },
+      "lineColor": "#D8D6D1",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/s01e02",
+      "id": "2",
+      "name": "Cover accent",
+      "semanticRole": "indicator",
+      "bbox": [
+        72,
+        330,
+        56,
+        5
+      ],
+      "frame": {
+        "left": 72,
+        "top": 330,
+        "width": 56,
+        "height": 5
+      },
+      "geometry": "rect",
+      "resolvedFontSize": 0,
+      "fillColor": "#6a9700",
+      "lineColor": "#6a9700",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/s01e03",
+      "id": "3",
+      "semanticRole": "title",
+      "bbox": [
+        72,
+        356,
+        1040,
+        168
+      ],
+      "frame": {
+        "left": 72,
+        "top": 356,
+        "width": 1040,
+        "height": 168
+      },
+      "text": "Sproutly",
+      "textPreview": "Sproutly",
+      "resolvedFontSize": 66,
+      "resolvedTextStyle": {
+        "fontSize": 66,
+        "typeface": "Arial",
+        "color": "#14351a",
+        "bold": true
+      },
+      "lineColor": "#D8D6D1",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/s01e04",
+      "id": "4",
+      "semanticRole": "subtitle",
+      "bbox": [
+        72,
+        538,
+        820,
+        78
+      ],
+      "frame": {
+        "left": 72,
+        "top": 538,
+        "width": 820,
+        "height": 78
+      },
+      "text": "Small routines. Thriving plants.\nA responsive, weather-aware personal garden.",
+      "textPreview": "Small routines. Thriving plants. | A responsive, weather-aware personal garden.",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Arial",
+        "color": "#53634f"
+      },
+      "lineColor": "#D8D6D1",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/s01e05",
+      "id": "5",
+      "name": "Footer",
+      "semanticRole": "source",
+      "bbox": [
+        848,
+        662,
+        360,
+        18
+      ],
+      "frame": {
+        "left": 848,
+        "top": 662,
+        "width": 360,
+        "height": 18
+      },
+      "text": "01",
+      "textPreview": "01",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "fontSize": 12,
+        "typeface": "Arial",
+        "color": "#53634f",
+        "alignment": "right"
+      },
+      "lineColor": "#D8D6D1",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/s01e06",
+      "id": "6",
+      "name": "Footer rule",
+      "semanticRole": "rule",
+      "bbox": [
+        72,
+        650,
+        1136,
+        0
+      ],
+      "frame": {
+        "left": 72,
+        "top": 650,
+        "width": 1136,
+        "height": 0
+      },
+      "lineColor": "#E6E5E3",
+      "lineWidth": 1
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/s01e07",
+      "id": "7",
+      "name": "Footer",
+      "semanticRole": "source",
+      "bbox": [
+        72,
+        662,
+        760,
+        18
+      ],
+      "frame": {
+        "left": 72,
+        "top": 662,
+        "width": 760,
+        "height": 18
+      },
+      "text": "Local implementation · Production setup pending",
+      "textPreview": "Local implementation · Production setup pending",
+      "resolvedFontSize": 12,
+      "resolvedTextStyle": {
+        "fontSize": 12,
+        "typeface": "Arial",
+        "color": "#53634f",
+        "alignment": "left"
+      },
+      "lineColor": "#D8D6D1",
+      "lineWidth": 0
+    }
+  ]
+}

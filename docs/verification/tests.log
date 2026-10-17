@@ -1,0 +1,57 @@
+
+> sproutly-plant-care@1.0.0 test
+> tsx --test tests/*.test.ts
+
+▶ actual migration: permissions and complete/skip integration
+  ✔ signup creates profile without trusting metadata role (20.300991ms)
+  ✔ owners see only their rows, admins cannot read their plants (7.613471ms)
+  ✔ profile role, status and email escalation are blocked (9.644124ms)
+  ✔ ordinary users cannot create categories, admins can (5.515738ms)
+  ✔ cross-owner inserts and plant links are blocked (3.740615ms)
+  ✔ cannot change another user’s plant (2.19225ms)
+  ✔ complete: actual day, snapshot history and atomic recurrence (19.343068ms)
+  ✔ future task cannot be completed (2.342918ms)
+  ✔ history cannot be inserted, edited or deleted by clients (4.422965ms)
+  ✔ skip uses the same transaction and ends after inclusive end date (7.452085ms)
+  ✔ failed history insertion rolls back the whole completion (6.776748ms)
+  ✔ private Storage paths are isolated (10.212753ms)
+  ✔ archiving plant stops schedules without deleting history (4.726919ms)
+  ✔ category in use cannot be deleted, even for archived plants (4.202533ms)
+  ✔ disabled account loses read and write access (21.977475ms)
+  ✔ anonymous access is denied (1.601657ms)
+  ✔ SQL month arithmetic matches the shared date module (11.000788ms)
+  ✔ restore is owner-only, selective and resets stale due dates (12.721336ms)
+  ✔ growth is owner-scoped, validated, editable and removable (15.405562ms)
+  ✔ private photos reject cross-owner paths and ambiguous sources (15.359358ms)
+  ✔ delta log includes deletes, scopes owner and prevents writes (5.634709ms)
+✔ actual migration: permissions and complete/skip integration (2465.871518ms)
+✔ daily (2.537906ms)
+✔ every N days (0.143264ms)
+✔ weekly (0.094668ms)
+✔ biweekly (0.10943ms)
+✔ monthly (0.112512ms)
+✔ month end (0.08773ms)
+✔ leap year (0.097941ms)
+✔ year boundary (0.079294ms)
+✔ custom months (0.099804ms)
+✔ after clamping (0.170695ms)
+✔ invalid dates and interval are rejected (0.344984ms)
+✔ end date is inclusive and recurrence ends after it (0.72698ms)
+✔ status uses date comparisons without persisted stale status (0.103552ms)
+✔ timezone handles midnight and DST (13.034389ms)
+✔ calendar labels forecasts and respects end dates (0.994444ms)
+✔ demo completion preserves history and advances from actual day (4.176012ms)
+✔ archiving a plant preserves history and stops all its schedules (0.74901ms)
+✔ server input schemas enforce dates, URLs, custom names, lengths and timezone (6.224163ms)
+✔ overdue calendar forecasts never invent a backlog of missed occurrences (0.533044ms)
+✔ restore selectively resumes routines with a fresh date and retained history (17.020878ms)
+✔ rain suggestions require fresh, matching-day, measurable probable rain (0.251787ms)
+✔ journal inputs reject invalid dates, negative growth and ambiguous image sources (4.105298ms)
+ℹ tests 44
+ℹ suites 0
+ℹ pass 44
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3324.015463

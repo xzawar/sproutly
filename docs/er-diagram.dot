@@ -1,0 +1,11 @@
+digraph ER {graph[rankdir=LR,bgcolor="#ffffff",pad="0.4",nodesep="0.35",ranksep="0.65",label="Sproutly · Database relationships",labelloc=t,fontname=Arial,fontsize=24];node[shape=record,fontname=Arial,fontsize=12,color="#a7bc96",style="rounded,filled",fillcolor="#f5faec",margin="0.18,0.12"];edge[color="#547444",fontname=Arial,fontsize=10];
+auth[label="Supabase Auth|id PK\lpasswords managed by Auth\l"];
+profiles[label="profiles|id PK / FK auth.users\lname, email, timezone\lrole, status\l"];
+plants[label="plants|id PK, user_id FK\lcategory_id FK nullable\lname, environment, sunlight\lcare notes, image, archived_at\lUNIQUE(id,user_id)\l"];
+categories[label="categories|id PK\lname unique (case-insensitive)\l"];
+schedules[label="care_schedules|id PK, user_id FK\l(plant_id,user_id) owner FK\lactivity, interval count/unit\lnext due, end, active, archived\l"];
+history[label="care_history|id PK, user_id FK\lschedule_id FK, plant owner FK\ldue_date, action_date, status\lUNIQUE(schedule_id,due_date)\l"];
+growth[label="growth_records|id PK, user_id FK\l(plant_id,user_id) owner FK\lrecorded_on, height_cm\lleaf_count, notes\l"];
+photos[label="plant_photos|id PK, user_id FK\l(plant_id,user_id) owner FK\ltaken_on, caption\limage_path XOR image_url\l"];
+sync[label="sync_events|revision PK\lentity, row_id, user_id\ldeleted, created_at\lowner-scoped invalidation log\l"];
+auth->profiles[label="1 : 1"];profiles->plants[label="1 : N"];categories->plants[label="1 : N (optional)"];plants->schedules[label="1 : N"];schedules->history[label="1 : N"];plants->growth[label="1 : N"];plants->photos[label="1 : N"];profiles->sync[style=dashed,label="owner scope (not FK)"];}

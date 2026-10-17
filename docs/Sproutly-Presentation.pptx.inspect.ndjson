@@ -1,0 +1,141 @@
+{"kind":"deck","id":"pr/local","name":"Deck"}
+{"kind":"slide","id":"sl/s01e00","slide":1,"title":"PLANT CARE SCHEDULING SYSTEM","role":"cover","recipeId":"cover-editorial","recipeGroup":"cover","textShapes":5}
+{"kind":"textbox","id":"sh/s01e01","slide":1,"name":"Section label","text":"PLANT CARE SCHEDULING SYSTEM","textPreview":"PLANT CARE SCHEDULING SYSTEM","textChars":28,"textLines":1,"bbox":[72,110,900,26]}
+{"kind":"shape","id":"sh/s01e02","slide":1,"name":"Cover accent","bbox":[72,330,56,5]}
+{"kind":"textbox","id":"sh/s01e03","slide":1,"name":"","text":"Sproutly","textPreview":"Sproutly","textChars":8,"textLines":1,"bbox":[72,356,1040,168]}
+{"kind":"textbox","id":"sh/s01e04","slide":1,"name":"","text":"Small routines. Thriving plants.\nA responsive, weather-aware personal garden.","textPreview":"Small routines. Thriving plants. | A responsive, weather-aware personal garden.","textChars":77,"textLines":2,"bbox":[72,538,820,78]}
+{"kind":"textbox","id":"sh/s01e05","slide":1,"name":"Footer","text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[848,662,360,18]}
+{"kind":"shape","id":"sh/s01e06","slide":1,"name":"Footer rule","bbox":[72,650,1136,0]}
+{"kind":"textbox","id":"sh/s01e07","slide":1,"name":"Footer","text":"Local implementation · Production setup pending","textPreview":"Local implementation · Production setup pending","textChars":47,"textLines":1,"bbox":[72,662,760,18]}
+{"kind":"notes","id":"nt/s01e00","slide":1,"text":""}
+{"kind":"slide","id":"sl/s02e00","slide":2,"title":"THE PROBLEM","role":"comparison","recipeId":"comparison","recipeGroup":"comparison","textShapes":6}
+{"kind":"textbox","id":"sh/s02e01","slide":2,"name":"Section label","text":"THE PROBLEM","textPreview":"THE PROBLEM","textChars":11,"textLines":1,"bbox":[72,72,620,26]}
+{"kind":"shape","id":"sh/s02e02","slide":2,"name":"Title accent","bbox":[72,106,44,4]}
+{"kind":"textbox","id":"sh/s02e03","slide":2,"name":"Slide title","text":"Care should feel clear, not repetitive.","textPreview":"Care should feel clear, not repetitive.","textChars":39,"textLines":1,"bbox":[72,124,1136,92]}
+{"kind":"shape","id":"sh/s02e04","slide":2,"name":"","bbox":[72,226,548,374]}
+{"kind":"shape","id":"sh/s02e05","slide":2,"name":"","bbox":[660,226,548,374]}
+{"kind":"shape","id":"sh/s02e06","slide":2,"name":"","bbox":[116,270,40,4]}
+{"kind":"shape","id":"sh/s02e07","slide":2,"name":"","bbox":[704,270,40,4]}
+{"kind":"textbox","id":"sh/s02e08","slide":2,"name":"","text":"Before","textPreview":"Before","textChars":6,"textLines":1,"bbox":[116,318,460,42]}
+{"kind":"textbox","id":"sh/s02e09","slide":2,"name":"","text":"Repeated full data and image loads.\nCare notes confused with schedules.\nArchived plants had no way back.","textPreview":"Repeated full data and image loads. | Care notes confused with schedules. | Archived plants had no way back.","textChars":104,"textLines":3,"bbox":[116,374,460,126]}
+{"kind":"textbox","id":"sh/s02e10","slide":2,"name":"","text":"Sproutly","textPreview":"Sproutly","textChars":8,"textLines":1,"bbox":[704,318,460,42]}
+{"kind":"textbox","id":"sh/s02e11","slide":2,"name":"","text":"Change-only synchronization and stable images.\nExplicit every-N-days routines.\nSelective restore with fresh due dates.","textPreview":"Change-only synchronization and stable images. | Explicit every-N-days routines. | Selective restore with fresh due dates.","textChars":118,"textLines":3,"bbox":[704,374,460,126]}
+{"kind":"notes","id":"nt/s02e00","slide":2,"text":""}
+{"kind":"slide","id":"sl/s03e00","slide":3,"title":"CORE WORKFLOW","role":"process","recipeId":"process-steps","recipeGroup":"process","textShapes":11}
+{"kind":"textbox","id":"sh/s03e01","slide":3,"name":"Section label","text":"CORE WORKFLOW","textPreview":"CORE WORKFLOW","textChars":13,"textLines":1,"bbox":[72,72,620,26]}
+{"kind":"shape","id":"sh/s03e02","slide":3,"name":"Title accent","bbox":[72,106,44,4]}
+{"kind":"textbox","id":"sh/s03e03","slide":3,"name":"Slide title","text":"A routine with a reliable memory.","textPreview":"A routine with a reliable memory.","textChars":33,"textLines":1,"bbox":[72,124,1136,92]}
+{"kind":"shape","id":"sh/s03e04","slide":3,"name":"","bbox":[200,362,880,0]}
+{"kind":"shape","id":"sh/s03e05","slide":3,"name":"Process step 1 marker","bbox":[244,336,52,52]}
+{"kind":"textbox","id":"sh/s03e06","slide":3,"name":"","text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[244,350,52,24]}
+{"kind":"textbox","id":"sh/s03e07","slide":3,"name":"","text":"Add a plant","textPreview":"Add a plant","textChars":11,"textLines":1,"bbox":[90,410,360,34]}
+{"kind":"textbox","id":"sh/s03e08","slide":3,"name":"","text":"Light and location.","textPreview":"Light and location.","textChars":19,"textLines":1,"bbox":[90,452,360,82]}
+{"kind":"shape","id":"sh/s03e09","slide":3,"name":"Process step 2 marker","bbox":[614,336,52,52]}
+{"kind":"textbox","id":"sh/s03e10","slide":3,"name":"","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[614,350,52,24]}
+{"kind":"textbox","id":"sh/s03e11","slide":3,"name":"","text":"Set N days","textPreview":"Set N days","textChars":10,"textLines":1,"bbox":[460,410,360,34]}
+{"kind":"textbox","id":"sh/s03e12","slide":3,"name":"","text":"Separate care routines.","textPreview":"Separate care routines.","textChars":23,"textLines":1,"bbox":[460,452,360,82]}
+{"kind":"shape","id":"sh/s03e13","slide":3,"name":"Process step 3 marker","bbox":[984,336,52,52]}
+{"kind":"textbox","id":"sh/s03e14","slide":3,"name":"","text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[984,350,52,24]}
+{"kind":"textbox","id":"sh/s03e15","slide":3,"name":"","text":"Record and review","textPreview":"Record and review","textChars":17,"textLines":1,"bbox":[830,410,360,34]}
+{"kind":"textbox","id":"sh/s03e16","slide":3,"name":"","text":"History and progress.","textPreview":"History and progress.","textChars":21,"textLines":1,"bbox":[830,452,360,82]}
+{"kind":"notes","id":"nt/s03e00","slide":3,"text":""}
+{"kind":"slide","id":"sl/s04e00","slide":4,"title":"Local demo screenshot; fictional sample data.","role":"image-media","recipeId":"image-left-story","recipeGroup":"image-story","textShapes":4}
+{"kind":"shape","id":"sh/s04e01","slide":4,"name":"Media frame","bbox":[72,120,468,396]}
+{"kind":"image","id":"im/s04e02","slide":4,"name":"Story image","imageFit":"cover","bbox":[72,120,468,396]}
+{"kind":"textbox","id":"sh/s04e03","slide":4,"name":"","text":"Local demo screenshot; fictional sample data.","textPreview":"Local demo screenshot; fictional sample data.","textChars":45,"textLines":1,"bbox":[72,530,468,28]}
+{"kind":"textbox","id":"sh/s04e04","slide":4,"name":"Section label","text":"LIGHT, VIBRANT, RESPONSIVE","textPreview":"LIGHT, VIBRANT, RESPONSIVE","textChars":26,"textLines":1,"bbox":[650,120,461,26]}
+{"kind":"shape","id":"sh/s04e05","slide":4,"name":"","bbox":[650,152,44,4]}
+{"kind":"textbox","id":"sh/s04e06","slide":4,"name":"","text":"A garden at a glance.","textPreview":"A garden at a glance.","textChars":21,"textLines":1,"bbox":[650,170,470,124]}
+{"kind":"textbox","id":"sh/s04e07","slide":4,"name":"","text":"Lime and forest contrast inspired by Sweet Tape.\nColourful task types and emoji categories.\nNo breadcrumbs; clear navigation and back links.\nIn-app inbox with opt-in open-tab reminders.","textPreview":"Lime and forest contrast inspired by Sweet Tape. | Colourful task types and emoji categories. | No breadcrumbs; clear navigation and back l...","textChars":185,"textLines":4,"bbox":[650,316,470,210]}
+{"kind":"notes","id":"nt/s04e00","slide":4,"text":""}
+{"kind":"slide","id":"sl/s05e00","slide":5,"title":"ARCHITECTURE","role":"content","recipeId":"two-column","recipeGroup":"two-column","textShapes":8}
+{"kind":"textbox","id":"sh/s05e01","slide":5,"name":"Section label","text":"ARCHITECTURE","textPreview":"ARCHITECTURE","textChars":12,"textLines":1,"bbox":[72,72,620,26]}
+{"kind":"shape","id":"sh/s05e02","slide":5,"name":"Title accent","bbox":[72,106,44,4]}
+{"kind":"textbox","id":"sh/s05e03","slide":5,"name":"Slide title","text":"Prisma without bypassing garden privacy.","textPreview":"Prisma without bypassing garden privacy.","textChars":40,"textLines":1,"bbox":[72,124,1136,92]}
+{"kind":"textbox","id":"sh/s05e04","slide":5,"name":"","text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[72,236,54,30]}
+{"kind":"textbox","id":"sh/s05e05","slide":5,"name":"","text":"Application boundary","textPreview":"Application boundary","textChars":20,"textLines":1,"bbox":[134,234,400,34]}
+{"kind":"shape","id":"sh/s05e06","slide":5,"name":"","bbox":[72,292,534,0]}
+{"kind":"textbox","id":"sh/s05e07","slide":5,"name":"","text":"Next.js and TypeScript.\nSupabase verifies the session.\nPrisma runs a transaction as authenticated.\nVerified UID is transaction-local.","textPreview":"Next.js and TypeScript. | Supabase verifies the session. | Prisma runs a transaction as authenticated. | Verified UID is transaction-local.","textChars":133,"textLines":4,"bbox":[72,312,534,240]}
+{"kind":"textbox","id":"sh/s05e08","slide":5,"name":"","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[650,236,54,30]}
+{"kind":"textbox","id":"sh/s05e09","slide":5,"name":"","text":"Data boundary","textPreview":"Data boundary","textChars":13,"textLines":1,"bbox":[712,234,400,34]}
+{"kind":"shape","id":"sh/s05e10","slide":5,"name":"","bbox":[650,292,534,0]}
+{"kind":"textbox","id":"sh/s05e11","slide":5,"name":"","text":"PostgreSQL RLS limits owner rows.\nComposite foreign keys protect ownership.\nAuth owns password hashing.\nPrivate Storage uses owner folders.","textPreview":"PostgreSQL RLS limits owner rows. | Composite foreign keys protect ownership. | Auth owns password hashing. | Private Storage uses owner fo...","textChars":139,"textLines":4,"bbox":[650,312,534,240]}
+{"kind":"notes","id":"nt/s05e00","slide":5,"text":""}
+{"kind":"slide","id":"sl/s06e00","slide":6,"title":"CACHE AND CONNECTIVITY","role":"comparison","recipeId":"comparison","recipeGroup":"comparison","textShapes":6}
+{"kind":"textbox","id":"sh/s06e01","slide":6,"name":"Section label","text":"CACHE AND CONNECTIVITY","textPreview":"CACHE AND CONNECTIVITY","textChars":22,"textLines":1,"bbox":[72,72,620,26]}
+{"kind":"shape","id":"sh/s06e02","slide":6,"name":"Title accent","bbox":[72,106,44,4]}
+{"kind":"textbox","id":"sh/s06e03","slide":6,"name":"Slide title","text":"Less reloading. Honest offline behavior.","textPreview":"Less reloading. Honest offline behavior.","textChars":40,"textLines":1,"bbox":[72,124,1136,92]}
+{"kind":"shape","id":"sh/s06e04","slide":6,"name":"","bbox":[72,226,548,374]}
+{"kind":"shape","id":"sh/s06e05","slide":6,"name":"","bbox":[660,226,548,374]}
+{"kind":"shape","id":"sh/s06e06","slide":6,"name":"","bbox":[116,270,40,4]}
+{"kind":"shape","id":"sh/s06e07","slide":6,"name":"","bbox":[704,270,40,4]}
+{"kind":"textbox","id":"sh/s06e08","slide":6,"name":"","text":"While online","textPreview":"While online","textChars":12,"textLines":1,"bbox":[116,318,460,42]}
+{"kind":"textbox","id":"sh/s06e09","slide":6,"name":"","text":"Keep workspace state across navigation.\nRestore per-user same-tab cache.\nFetch changed rows and deletion IDs.\nUse stable private image URLs.","textPreview":"Keep workspace state across navigation. | Restore per-user same-tab cache. | Fetch changed rows and deletion IDs. | Use stable private imag...","textChars":140,"textLines":4,"bbox":[116,374,460,126]}
+{"kind":"textbox","id":"sh/s06e10","slide":6,"name":"","text":"When offline","textPreview":"When offline","textChars":12,"textLines":1,"bbox":[704,318,460,42]}
+{"kind":"textbox","id":"sh/s06e11","slide":6,"name":"","text":"Public service-worker fallback page.\nPreviously open views can remain visible.\nNo offline writes or queued task actions.\nNever cache private pages in the worker.","textPreview":"Public service-worker fallback page. | Previously open views can remain visible. | No offline writes or queued task actions. | Never cache ...","textChars":161,"textLines":4,"bbox":[704,374,460,126]}
+{"kind":"notes","id":"nt/s06e00","slide":6,"text":""}
+{"kind":"slide","id":"sl/s07e00","slide":7,"title":"WEATHER-AWARE, USER-CONTROLLED","role":"evidence","recipeId":"evidence-panel","recipeGroup":"claim-evidence","textShapes":11}
+{"kind":"textbox","id":"sh/s07e01","slide":7,"name":"Section label","text":"WEATHER-AWARE, USER-CONTROLLED","textPreview":"WEATHER-AWARE, USER-CONTROLLED","textChars":30,"textLines":1,"bbox":[72,72,620,26]}
+{"kind":"shape","id":"sh/s07e02","slide":7,"name":"Title accent","bbox":[72,106,44,4]}
+{"kind":"textbox","id":"sh/s07e03","slide":7,"name":"Slide title","text":"Rain is a suggestion, not completed care.","textPreview":"Rain is a suggestion, not completed care.","textChars":41,"textLines":1,"bbox":[72,124,1136,92]}
+{"kind":"textbox","id":"sh/s07e04","slide":7,"name":"","text":"A forecast never automatically marks watering done.","textPreview":"A forecast never automatically marks watering done.","textChars":51,"textLines":1,"bbox":[72,250,520,190]}
+{"kind":"textbox","id":"sh/s07e05","slide":7,"name":"","text":"","textPreview":"","textChars":0,"textLines":0,"bbox":[72,452,500,64]}
+{"kind":"textbox","id":"sh/s07e06","slide":7,"name":"Section label","text":"LOCATION","textPreview":"LOCATION","textChars":8,"textLines":1,"bbox":[650,250,300,18]}
+{"kind":"textbox","id":"sh/s07e07","slide":7,"name":"","text":"Permission-based or manual coordinates.","textPreview":"Permission-based or manual coordinates.","textChars":39,"textLines":1,"bbox":[650,276,558,60]}
+{"kind":"shape","id":"sh/s07e08","slide":7,"name":"","bbox":[650,340,558,0]}
+{"kind":"textbox","id":"sh/s07e09","slide":7,"name":"Section label","text":"EVIDENCE","textPreview":"EVIDENCE","textChars":8,"textLines":1,"bbox":[650,354,300,18]}
+{"kind":"textbox","id":"sh/s07e10","slide":7,"name":"","text":"Fresh matching date, ≥60% chance and ≥1 mm.","textPreview":"Fresh matching date, ≥60% chance and ≥1 mm.","textChars":43,"textLines":1,"bbox":[650,380,558,60]}
+{"kind":"shape","id":"sh/s07e11","slide":7,"name":"","bbox":[650,444,558,0]}
+{"kind":"textbox","id":"sh/s07e12","slide":7,"name":"Section label","text":"SCOPE","textPreview":"SCOPE","textChars":5,"textLines":1,"bbox":[650,458,300,18]}
+{"kind":"textbox","id":"sh/s07e13","slide":7,"name":"","text":"Due outdoor watering only.","textPreview":"Due outdoor watering only.","textChars":26,"textLines":1,"bbox":[650,484,558,60]}
+{"kind":"shape","id":"sh/s07e14","slide":7,"name":"","bbox":[650,548,558,0]}
+{"kind":"textbox","id":"sh/s07e15","slide":7,"name":"Section label","text":"ACTION","textPreview":"ACTION","textChars":6,"textLines":1,"bbox":[650,562,300,18]}
+{"kind":"textbox","id":"sh/s07e16","slide":7,"name":"","text":"User confirms “Skipped — rain”.","textPreview":"User confirms “Skipped — rain”.","textChars":31,"textLines":1,"bbox":[650,588,558,60]}
+{"kind":"notes","id":"nt/s07e00","slide":7,"text":""}
+{"kind":"slide","id":"sl/s08e00","slide":8,"title":"JOURNAL AND RESTORE","role":"content","recipeId":"two-column","recipeGroup":"two-column","textShapes":8}
+{"kind":"textbox","id":"sh/s08e01","slide":8,"name":"Section label","text":"JOURNAL AND RESTORE","textPreview":"JOURNAL AND RESTORE","textChars":19,"textLines":1,"bbox":[72,72,620,26]}
+{"kind":"shape","id":"sh/s08e02","slide":8,"name":"Title accent","bbox":[72,106,44,4]}
+{"kind":"textbox","id":"sh/s08e03","slide":8,"name":"Slide title","text":"Keep the story. Restart safely.","textPreview":"Keep the story. Restart safely.","textChars":31,"textLines":1,"bbox":[72,124,1136,92]}
+{"kind":"textbox","id":"sh/s08e04","slide":8,"name":"","text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[72,236,54,30]}
+{"kind":"textbox","id":"sh/s08e05","slide":8,"name":"","text":"Growth journal","textPreview":"Growth journal","textChars":14,"textLines":1,"bbox":[134,234,400,34]}
+{"kind":"shape","id":"sh/s08e06","slide":8,"name":"","bbox":[72,292,534,0]}
+{"kind":"textbox","id":"sh/s08e07","slide":8,"name":"","text":"Dated height and leaf observations.\nActual elapsed-day chart and exact table.\nCaptioned photo timeline/gallery.\nOwner-scoped edit and delete.","textPreview":"Dated height and leaf observations. | Actual elapsed-day chart and exact table. | Captioned photo timeline/gallery. | Owner-scoped edit and...","textChars":141,"textLines":4,"bbox":[72,312,534,240]}
+{"kind":"textbox","id":"sh/s08e08","slide":8,"name":"","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[650,236,54,30]}
+{"kind":"textbox","id":"sh/s08e09","slide":8,"name":"","text":"Selective restore","textPreview":"Selective restore","textChars":17,"textLines":1,"bbox":[712,234,400,34]}
+{"kind":"shape","id":"sh/s08e10","slide":8,"name":"","bbox":[650,292,534,0]}
+{"kind":"textbox","id":"sh/s08e11","slide":8,"name":"","text":"Archive stops routines and retains history.\nChoose routines explicitly on restore.\nNext due starts one interval from today.\nEnded routines remain stopped.","textPreview":"Archive stops routines and retains history. | Choose routines explicitly on restore. | Next due starts one interval from today. | Ended rou...","textChars":154,"textLines":4,"bbox":[650,312,534,240]}
+{"kind":"notes","id":"nt/s08e00","slide":8,"text":""}
+{"kind":"slide","id":"sl/s09e00","slide":9,"title":"VERIFICATION","role":"evidence","recipeId":"evidence-panel","recipeGroup":"claim-evidence","textShapes":11}
+{"kind":"textbox","id":"sh/s09e01","slide":9,"name":"Section label","text":"VERIFICATION","textPreview":"VERIFICATION","textChars":12,"textLines":1,"bbox":[72,72,620,26]}
+{"kind":"shape","id":"sh/s09e02","slide":9,"name":"Title accent","bbox":[72,106,44,4]}
+{"kind":"textbox","id":"sh/s09e03","slide":9,"name":"Slide title","text":"Evidence has a defined boundary.","textPreview":"Evidence has a defined boundary.","textChars":32,"textLines":1,"bbox":[72,124,1136,92]}
+{"kind":"textbox","id":"sh/s09e04","slide":9,"name":"","text":"Local tests are not production acceptance.","textPreview":"Local tests are not production acceptance.","textChars":42,"textLines":1,"bbox":[72,250,520,190]}
+{"kind":"textbox","id":"sh/s09e05","slide":9,"name":"","text":"","textPreview":"","textChars":0,"textLines":0,"bbox":[72,452,500,64]}
+{"kind":"textbox","id":"sh/s09e06","slide":9,"name":"Section label","text":"44 TESTS","textPreview":"44 TESTS","textChars":8,"textLines":1,"bbox":[650,250,300,18]}
+{"kind":"textbox","id":"sh/s09e07","slide":9,"name":"","text":"Dates, validation, demo and actual SQL policies.","textPreview":"Dates, validation, demo and actual SQL policies.","textChars":48,"textLines":1,"bbox":[650,276,558,60]}
+{"kind":"shape","id":"sh/s09e08","slide":9,"name":"","bbox":[650,340,558,0]}
+{"kind":"textbox","id":"sh/s09e09","slide":9,"name":"Section label","text":"BROWSER SUITE","textPreview":"BROWSER SUITE","textChars":13,"textLines":1,"bbox":[650,354,300,18]}
+{"kind":"textbox","id":"sh/s09e10","slide":9,"name":"","text":"Desktop/mobile flows; deterministic weather fixture.","textPreview":"Desktop/mobile flows; deterministic weather fixture.","textChars":52,"textLines":1,"bbox":[650,380,558,60]}
+{"kind":"shape","id":"sh/s09e11","slide":9,"name":"","bbox":[650,444,558,0]}
+{"kind":"textbox","id":"sh/s09e12","slide":9,"name":"Section label","text":"CHECKS","textPreview":"CHECKS","textChars":6,"textLines":1,"bbox":[650,458,300,18]}
+{"kind":"textbox","id":"sh/s09e13","slide":9,"name":"","text":"Strict TypeScript, lint and production build.","textPreview":"Strict TypeScript, lint and production build.","textChars":45,"textLines":1,"bbox":[650,484,558,60]}
+{"kind":"shape","id":"sh/s09e14","slide":9,"name":"","bbox":[650,548,558,0]}
+{"kind":"textbox","id":"sh/s09e15","slide":9,"name":"Section label","text":"PENDING","textPreview":"PENDING","textChars":7,"textLines":1,"bbox":[650,562,300,18]}
+{"kind":"textbox","id":"sh/s09e16","slide":9,"name":"","text":"Real Auth/email, Storage, Prisma and hosted-site tests.","textPreview":"Real Auth/email, Storage, Prisma and hosted-site tests.","textChars":55,"textLines":1,"bbox":[650,588,558,60]}
+{"kind":"notes","id":"nt/s09e00","slide":9,"text":""}
+{"kind":"slide","id":"sl/s10e00","slide":10,"title":"NEXT: LIVE ACCEPTANCE","role":"summary","recipeId":"closing-takeaways","recipeGroup":"takeaways","textShapes":10}
+{"kind":"textbox","id":"sh/s10e01","slide":10,"name":"Section label","text":"NEXT: LIVE ACCEPTANCE","textPreview":"NEXT: LIVE ACCEPTANCE","textChars":21,"textLines":1,"bbox":[72,72,620,26]}
+{"kind":"shape","id":"sh/s10e02","slide":10,"name":"Title accent","bbox":[72,106,44,4]}
+{"kind":"textbox","id":"sh/s10e03","slide":10,"name":"Slide title","text":"Ready for account-connected testing.","textPreview":"Ready for account-connected testing.","textChars":36,"textLines":1,"bbox":[72,124,1136,92]}
+{"kind":"textbox","id":"sh/s10e04","slide":10,"name":"","text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[72,226,72,48]}
+{"kind":"textbox","id":"sh/s10e05","slide":10,"name":"","text":"Connect authorized GitHub, Vercel and Supabase projects.","textPreview":"Connect authorized GitHub, Vercel and Supabase projects.","textChars":56,"textLines":1,"bbox":[168,224,1040,46]}
+{"kind":"shape","id":"sh/s10e06","slide":10,"name":"","bbox":[72,280,1136,0]}
+{"kind":"textbox","id":"sh/s10e07","slide":10,"name":"","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[72,312,72,48]}
+{"kind":"textbox","id":"sh/s10e08","slide":10,"name":"","text":"Apply migrations, configure environment and email redirects.","textPreview":"Apply migrations, configure environment and email redirects.","textChars":60,"textLines":1,"bbox":[168,310,1040,46]}
+{"kind":"shape","id":"sh/s10e09","slide":10,"name":"","bbox":[72,366,1136,0]}
+{"kind":"textbox","id":"sh/s10e10","slide":10,"name":"","text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[72,398,72,48]}
+{"kind":"textbox","id":"sh/s10e11","slide":10,"name":"","text":"Verify two-user privacy, live uploads, caching and weather on HTTPS.","textPreview":"Verify two-user privacy, live uploads, caching and weather on HTTPS.","textChars":68,"textLines":1,"bbox":[168,396,1040,46]}
+{"kind":"shape","id":"sh/s10e12","slide":10,"name":"","bbox":[72,452,1136,0]}
+{"kind":"textbox","id":"sh/s10e13","slide":10,"name":"","text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[72,484,72,48]}
+{"kind":"textbox","id":"sh/s10e14","slide":10,"name":"","text":"Rehearse the live presentation and keep the local demo as backup.","textPreview":"Rehearse the live presentation and keep the local demo as backup.","textChars":65,"textLines":1,"bbox":[168,482,1040,46]}
+{"kind":"notes","id":"nt/s10e00","slide":10,"text":""}

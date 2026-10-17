@@ -1,0 +1,59 @@
+
+> sproutly-plant-care@1.0.0 test:browser
+> node tests/browser.mjs
+
+PASS desktop: authentication setup state
+PASS desktop: register screen
+PASS desktop: plants renders without overflow
+PASS desktop: plant-detail renders without overflow
+PASS desktop: plant-edit renders without overflow
+PASS desktop: schedule-new renders without overflow
+PASS desktop: schedule-edit renders without overflow
+PASS desktop: tasks renders without overflow
+PASS desktop: calendar-month renders without overflow
+PASS desktop: populated calendar day details
+PASS desktop: history renders without overflow
+PASS desktop: profile renders without overflow
+PASS desktop: admin-users renders without overflow
+PASS desktop: admin-categories renders without overflow
+PASS desktop: create, search, edit and archive a plant
+PASS desktop: custom schedule creation and editing
+PASS desktop: complete flow updates history and next date
+PASS desktop: skip flow and persistence
+PASS desktop: category lifecycle and validation
+PASS desktop: profile timezone and search empty state
+PASS desktop: password visibility
+PASS desktop: growth journal CRUD, chart and dated photo gallery
+PASS desktop: archive and selective restore
+PASS desktop: weather permission fallback and rain-aware skip confirmation
+PASS desktop: calendar filters and no breadcrumbs
+PASS desktop: offline fallback
+PASS mobile: authentication setup state
+PASS mobile: register screen
+PASS mobile navigation drawer
+PASS mobile: plants renders without overflow
+PASS mobile: plant-detail renders without overflow
+PASS mobile: plant-edit renders without overflow
+PASS mobile: schedule-new renders without overflow
+PASS mobile: schedule-edit renders without overflow
+PASS mobile: tasks renders without overflow
+PASS mobile: calendar-month renders without overflow
+PASS mobile: populated calendar day details
+PASS mobile: history renders without overflow
+PASS mobile: profile renders without overflow
+PASS mobile: admin-users renders without overflow
+PASS mobile: admin-categories renders without overflow
+PASS mobile: create, search, edit and archive a plant
+PASS mobile: custom schedule creation and editing
+PASS mobile: complete flow updates history and next date
+PASS mobile: skip flow and persistence
+PASS mobile: category lifecycle and validation
+PASS mobile: profile timezone and search empty state
+PASS mobile: password visibility
+PASS mobile: growth journal CRUD, chart and dated photo gallery
+PASS mobile: archive and selective restore
+PASS mobile: weather permission fallback and rain-aware skip confirmation
+PASS mobile: calendar filters and no breadcrumbs
+PASS mobile: offline fallback
+PASS notifications: permission opt-in and cross-tab deduplication
+55 browser checks passed. Live Supabase integration remains unverified.

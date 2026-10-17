@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><meta name="theme-color" content="#B6FE00" /><title>
+    You're offline · Sproutly</title
+  ><style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: #f8faef;
+      color: #013900;
+      font:
+        16px/1.6 system-ui,
+        sans-serif;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    main {
+      max-width: 520px;
+    }
+    b {
+      font-size: 26px;
+    }
+    .leaf {
+      font-size: 64px;
+      margin: 28px 0;
+    }
+    h1 {
+      font-size: clamp(40px, 8vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -2px;
+    }
+    p {
+      color: #445942;
+    }
+    button,
+    a {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      padding: 12px 24px;
+      border: 2px solid #034102;
+      border-radius: 8px;
+      color: #013900;
+      background: #b6fe00;
+      font: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #013900;
+      outline-offset: 4px;
+    }
+    .hint {
+      font-size: 14px;
+      margin-top: 32px;
+    }
+  </style>
+  <main>
+    <b>🌱 sproutly.</b>
+    <div class="leaf" aria-hidden="true">🍃</div>
+    <h1>A little pause.<br />Still growing.</h1>
+    <p>
+      You’re offline. Reconnect to open your garden and save plant care. Nothing
+      has been marked completed or skipped.
+    </p>
+    <button onclick="location.reload()">Try again ↻</button>
+    <p class="hint" id="status" role="status">Waiting for a connection…</p>
+  </main>
+  <script>
+    function update() {
+      document.getElementById("status").textContent = navigator.onLine
+        ? "Connection detected. Try again to open your garden."
+        : "You’re offline. Your garden will be here when you reconnect.";
+    }
+    window.addEventListener("online", update);
+    window.addEventListener("offline", update);
+    update();
+  </script>
+</html>

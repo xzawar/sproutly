@@ -1,0 +1,50 @@
+
+> sproutly-plant-care@1.0.0 build
+> prisma generate && next build
+
+Prisma schema loaded from prisma/schema.prisma
+
+✔ Generated Prisma Client (v6.19.0) to ./node_modules/@prisma/client in 49ms
+
+Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+
+Tip: Interested in query caching in just a few lines of code? Try Accelerate today! https://pris.ly/tip-3-accelerate
+
+▲ Next.js 16.4.2 (Turbopack)
+✓ Running next.config.ts took 27ms
+- Experiments (use with caution):
+  · serverActions
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 2.6s
+  Running TypeScript ...
+  Finished TypeScript in 2.5s ...
+  Collecting page data using 1 worker ...
+  Generating static pages using 1 worker (0/10) ...
+  Generating static pages using 1 worker (2/10) 
+  Generating static pages using 1 worker (4/10) 
+  Generating static pages using 1 worker (7/10) 
+✓ Generating static pages using 1 worker (10/10) in 176ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /_not-found
+├ ƒ /[[...path]]
+├ ƒ /api/image
+├ ƒ /api/sync
+├ ƒ /api/weather
+├ ƒ /auth/confirm
+├ ƒ /auth/logout
+├ ƒ /demo/[[...path]]
+├ ○ /forgot-password
+├ ○ /icon.svg
+├ ƒ /login
+├ ƒ /register
+└ ○ /reset-password
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

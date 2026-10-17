@@ -1,0 +1,2091 @@
+{
+  "builderKind": "notion-pptx-scene-builder/v1",
+  "requireSlideRecipes": true,
+  "widthPx": 1280,
+  "heightPx": 720,
+  "slides": [
+    {
+      "recipeSource": "notion-ppt-slide-recipes",
+      "role": "cover",
+      "recipeId": "cover-editorial",
+      "recipeGroup": "cover",
+      "contentLoad": "low",
+      "structureKey": "large-left-title-accent-rule",
+      "elements": [
+        {
+          "type": "text",
+          "text": "PLANT CARE SCHEDULING SYSTEM",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 72,
+          "y": 110,
+          "width": 900,
+          "height": 26,
+          "fontSizePx": 14,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "shape",
+          "name": "Cover accent",
+          "semanticRole": "indicator",
+          "shape": "rect",
+          "x": 72,
+          "y": 330,
+          "width": 56,
+          "height": 5,
+          "fill": "#6a9700",
+          "stroke": {
+            "color": "#6a9700",
+            "width": 0
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "text",
+          "text": "Sproutly",
+          "semanticRole": "title",
+          "x": 72,
+          "y": 356,
+          "width": 1040,
+          "height": 168,
+          "fontSizePx": 66,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Small routines. Thriving plants.\nA responsive, weather-aware personal garden.",
+          "semanticRole": "subtitle",
+          "x": 72,
+          "y": 538,
+          "width": 820,
+          "height": 78,
+          "fontSizePx": 24,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "lineHeight": 1.25,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "01",
+          "name": "Footer",
+          "semanticRole": "source",
+          "x": 848,
+          "y": 662,
+          "width": 360,
+          "height": 18,
+          "fontSizePx": 12,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "align": "right",
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "line",
+          "name": "Footer rule",
+          "semanticRole": "rule",
+          "x1": 72,
+          "y1": 650,
+          "x2": 1208,
+          "y2": 650,
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Local implementation · Production setup pending",
+          "name": "Footer",
+          "semanticRole": "source",
+          "x": 72,
+          "y": 662,
+          "width": 760,
+          "height": 18,
+          "fontSizePx": 12,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "align": "left",
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        }
+      ]
+    },
+    {
+      "recipeSource": "notion-ppt-slide-recipes",
+      "role": "comparison",
+      "recipeId": "comparison",
+      "recipeGroup": "comparison",
+      "contentLoad": "medium",
+      "structureKey": "title-two-rounded-panels",
+      "elements": [
+        {
+          "type": "text",
+          "text": "THE PROBLEM",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 72,
+          "y": 72,
+          "width": 620,
+          "height": 26,
+          "fontSizePx": 14,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "shape",
+          "name": "Title accent",
+          "semanticRole": "indicator",
+          "shape": "rect",
+          "x": 72,
+          "y": 106,
+          "width": 44,
+          "height": 4,
+          "fill": "#6a9700",
+          "stroke": {
+            "color": "#6a9700",
+            "width": 0
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "text",
+          "text": "Care should feel clear, not repetitive.",
+          "name": "Slide title",
+          "semanticRole": "title",
+          "x": 72,
+          "y": 124,
+          "width": 1136,
+          "height": 92,
+          "fontSizePx": 42,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.04,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "shape",
+          "semanticRole": "panel",
+          "shape": "roundRect",
+          "x": 72,
+          "y": 226,
+          "width": 548,
+          "height": 374,
+          "fill": "#F9F8F7",
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "shape",
+          "semanticRole": "panel",
+          "shape": "roundRect",
+          "x": 660,
+          "y": 226,
+          "width": 548,
+          "height": 374,
+          "fill": "#F9F8F7",
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "shape",
+          "semanticRole": "shape",
+          "shape": "rect",
+          "x": 116,
+          "y": 270,
+          "width": 40,
+          "height": 4,
+          "fill": "#53634f",
+          "stroke": {
+            "color": "#53634f",
+            "width": 0
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "shape",
+          "semanticRole": "shape",
+          "shape": "rect",
+          "x": 704,
+          "y": 270,
+          "width": 40,
+          "height": 4,
+          "fill": "#6a9700",
+          "stroke": {
+            "color": "#6a9700",
+            "width": 0
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "text",
+          "text": "Before",
+          "x": 116,
+          "y": 318,
+          "width": 460,
+          "height": 42,
+          "fontSizePx": 28,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Repeated full data and image loads.\nCare notes confused with schedules.\nArchived plants had no way back.",
+          "x": 116,
+          "y": 374,
+          "width": 460,
+          "height": 126,
+          "fontSizePx": 20,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "lineHeight": 1.34,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Sproutly",
+          "x": 704,
+          "y": 318,
+          "width": 460,
+          "height": 42,
+          "fontSizePx": 28,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Change-only synchronization and stable images.\nExplicit every-N-days routines.\nSelective restore with fresh due dates.",
+          "x": 704,
+          "y": 374,
+          "width": 460,
+          "height": 126,
+          "fontSizePx": 20,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "lineHeight": 1.34,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        }
+      ]
+    },
+    {
+      "recipeSource": "notion-ppt-slide-recipes",
+      "role": "process",
+      "recipeId": "process-steps",
+      "recipeGroup": "process",
+      "contentLoad": "medium",
+      "structureKey": "title-connected-steps",
+      "elements": [
+        {
+          "type": "text",
+          "text": "CORE WORKFLOW",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 72,
+          "y": 72,
+          "width": 620,
+          "height": 26,
+          "fontSizePx": 14,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "shape",
+          "name": "Title accent",
+          "semanticRole": "indicator",
+          "shape": "rect",
+          "x": 72,
+          "y": 106,
+          "width": 44,
+          "height": 4,
+          "fill": "#6a9700",
+          "stroke": {
+            "color": "#6a9700",
+            "width": 0
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "text",
+          "text": "A routine with a reliable memory.",
+          "name": "Slide title",
+          "semanticRole": "title",
+          "x": 72,
+          "y": 124,
+          "width": 1136,
+          "height": 92,
+          "fontSizePx": 40,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.04,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "line",
+          "semanticRole": "rule",
+          "x1": 200,
+          "y1": 362,
+          "x2": 1080,
+          "y2": 362,
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          }
+        },
+        {
+          "type": "shape",
+          "name": "Process step 1 marker",
+          "semanticRole": "process-step",
+          "shape": "ellipse",
+          "x": 244,
+          "y": 336,
+          "width": 52,
+          "height": 52,
+          "fill": "#6a9700",
+          "stroke": {
+            "color": "#6a9700",
+            "width": 2
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "text",
+          "text": "01",
+          "x": 244,
+          "y": 350,
+          "width": 52,
+          "height": 24,
+          "fontSizePx": 18,
+          "fontFamily": "Arial",
+          "color": "#FFFFFF",
+          "bold": true,
+          "align": "center",
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Add a plant",
+          "x": 90,
+          "y": 410,
+          "width": 360,
+          "height": 34,
+          "fontSizePx": 25,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "align": "center",
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Light and location.",
+          "x": 90,
+          "y": 452,
+          "width": 360,
+          "height": 82,
+          "fontSizePx": 17,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "align": "center",
+          "lineHeight": 1.3,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "shape",
+          "name": "Process step 2 marker",
+          "semanticRole": "process-step",
+          "shape": "ellipse",
+          "x": 614,
+          "y": 336,
+          "width": 52,
+          "height": 52,
+          "fill": "#FFFFFF",
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 2
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "text",
+          "text": "02",
+          "x": 614,
+          "y": 350,
+          "width": 52,
+          "height": 24,
+          "fontSizePx": 18,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "align": "center",
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Set N days",
+          "x": 460,
+          "y": 410,
+          "width": 360,
+          "height": 34,
+          "fontSizePx": 25,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "align": "center",
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Separate care routines.",
+          "x": 460,
+          "y": 452,
+          "width": 360,
+          "height": 82,
+          "fontSizePx": 17,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "align": "center",
+          "lineHeight": 1.3,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "shape",
+          "name": "Process step 3 marker",
+          "semanticRole": "process-step",
+          "shape": "ellipse",
+          "x": 984,
+          "y": 336,
+          "width": 52,
+          "height": 52,
+          "fill": "#FFFFFF",
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 2
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "text",
+          "text": "03",
+          "x": 984,
+          "y": 350,
+          "width": 52,
+          "height": 24,
+          "fontSizePx": 18,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "align": "center",
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Record and review",
+          "x": 830,
+          "y": 410,
+          "width": 360,
+          "height": 34,
+          "fontSizePx": 25,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "align": "center",
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "History and progress.",
+          "x": 830,
+          "y": 452,
+          "width": 360,
+          "height": 82,
+          "fontSizePx": 17,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "align": "center",
+          "lineHeight": 1.3,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        }
+      ]
+    },
+    {
+      "recipeSource": "notion-ppt-slide-recipes",
+      "role": "image-media",
+      "recipeId": "image-left-story",
+      "recipeGroup": "image-story",
+      "contentLoad": "medium",
+      "structureKey": "left-image-right-story",
+      "elements": [
+        {
+          "type": "shape",
+          "name": "Media frame",
+          "semanticRole": "media-frame",
+          "shape": "roundRect",
+          "x": 72,
+          "y": 120,
+          "width": 468,
+          "height": 396,
+          "fill": "#F9F8F7",
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          },
+          "cornerRadiusPx": 12,
+          "fontSizePx": 0
+        },
+        {
+          "type": "image",
+          "name": "Story image",
+          "semanticRole": "media",
+          "x": 72,
+          "y": 120,
+          "width": 468,
+          "height": 396,
+          "src": "/data/sproutly/screenshots/desktop-overview.png",
+          "fit": "cover",
+          "borderRadius": 12
+        },
+        {
+          "type": "text",
+          "text": "Local demo screenshot; fictional sample data.",
+          "x": 72,
+          "y": 530,
+          "width": 468,
+          "height": 28,
+          "fontSizePx": 13,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "LIGHT, VIBRANT, RESPONSIVE",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 650,
+          "y": 120,
+          "width": 461,
+          "height": 26,
+          "fontSizePx": 14,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "shape",
+          "semanticRole": "shape",
+          "shape": "rect",
+          "x": 650,
+          "y": 152,
+          "width": 44,
+          "height": 4,
+          "fill": "#6a9700",
+          "stroke": {
+            "color": "#6a9700",
+            "width": 0
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "text",
+          "text": "A garden at a glance.",
+          "semanticRole": "title",
+          "x": 650,
+          "y": 170,
+          "width": 470,
+          "height": 124,
+          "fontSizePx": 40,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.05,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Lime and forest contrast inspired by Sweet Tape.\nColourful task types and emoji categories.\nNo breadcrumbs; clear navigation and back links.\nIn-app inbox with opt-in open-tab reminders.",
+          "x": 650,
+          "y": 316,
+          "width": 470,
+          "height": 210,
+          "fontSizePx": 21,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "lineHeight": 1.4,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        }
+      ]
+    },
+    {
+      "recipeSource": "notion-ppt-slide-recipes",
+      "role": "content",
+      "recipeId": "two-column",
+      "recipeGroup": "two-column",
+      "contentLoad": "medium",
+      "structureKey": "title-two-balanced-columns",
+      "elements": [
+        {
+          "type": "text",
+          "text": "ARCHITECTURE",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 72,
+          "y": 72,
+          "width": 620,
+          "height": 26,
+          "fontSizePx": 14,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "shape",
+          "name": "Title accent",
+          "semanticRole": "indicator",
+          "shape": "rect",
+          "x": 72,
+          "y": 106,
+          "width": 44,
+          "height": 4,
+          "fill": "#6a9700",
+          "stroke": {
+            "color": "#6a9700",
+            "width": 0
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "text",
+          "text": "Prisma without bypassing garden privacy.",
+          "name": "Slide title",
+          "semanticRole": "title",
+          "x": 72,
+          "y": 124,
+          "width": 1136,
+          "height": 92,
+          "fontSizePx": 42,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.04,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "01",
+          "x": 72,
+          "y": 236,
+          "width": 54,
+          "height": 30,
+          "fontSizePx": 20,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Application boundary",
+          "x": 134,
+          "y": 234,
+          "width": 400,
+          "height": 34,
+          "fontSizePx": 26,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "line",
+          "semanticRole": "rule",
+          "x1": 72,
+          "y1": 292,
+          "x2": 606,
+          "y2": 292,
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Next.js and TypeScript.\nSupabase verifies the session.\nPrisma runs a transaction as authenticated.\nVerified UID is transaction-local.",
+          "x": 72,
+          "y": 312,
+          "width": 534,
+          "height": 240,
+          "fontSizePx": 21,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "lineHeight": 1.4,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "02",
+          "x": 650,
+          "y": 236,
+          "width": 54,
+          "height": 30,
+          "fontSizePx": 20,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Data boundary",
+          "x": 712,
+          "y": 234,
+          "width": 400,
+          "height": 34,
+          "fontSizePx": 26,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "line",
+          "semanticRole": "rule",
+          "x1": 650,
+          "y1": 292,
+          "x2": 1184,
+          "y2": 292,
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "PostgreSQL RLS limits owner rows.\nComposite foreign keys protect ownership.\nAuth owns password hashing.\nPrivate Storage uses owner folders.",
+          "x": 650,
+          "y": 312,
+          "width": 534,
+          "height": 240,
+          "fontSizePx": 21,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "lineHeight": 1.4,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        }
+      ]
+    },
+    {
+      "recipeSource": "notion-ppt-slide-recipes",
+      "role": "comparison",
+      "recipeId": "comparison",
+      "recipeGroup": "comparison",
+      "contentLoad": "medium",
+      "structureKey": "title-two-rounded-panels",
+      "elements": [
+        {
+          "type": "text",
+          "text": "CACHE AND CONNECTIVITY",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 72,
+          "y": 72,
+          "width": 620,
+          "height": 26,
+          "fontSizePx": 14,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "shape",
+          "name": "Title accent",
+          "semanticRole": "indicator",
+          "shape": "rect",
+          "x": 72,
+          "y": 106,
+          "width": 44,
+          "height": 4,
+          "fill": "#6a9700",
+          "stroke": {
+            "color": "#6a9700",
+            "width": 0
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "text",
+          "text": "Less reloading. Honest offline behavior.",
+          "name": "Slide title",
+          "semanticRole": "title",
+          "x": 72,
+          "y": 124,
+          "width": 1136,
+          "height": 92,
+          "fontSizePx": 42,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.04,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "shape",
+          "semanticRole": "panel",
+          "shape": "roundRect",
+          "x": 72,
+          "y": 226,
+          "width": 548,
+          "height": 374,
+          "fill": "#F9F8F7",
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "shape",
+          "semanticRole": "panel",
+          "shape": "roundRect",
+          "x": 660,
+          "y": 226,
+          "width": 548,
+          "height": 374,
+          "fill": "#F9F8F7",
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "shape",
+          "semanticRole": "shape",
+          "shape": "rect",
+          "x": 116,
+          "y": 270,
+          "width": 40,
+          "height": 4,
+          "fill": "#53634f",
+          "stroke": {
+            "color": "#53634f",
+            "width": 0
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "shape",
+          "semanticRole": "shape",
+          "shape": "rect",
+          "x": 704,
+          "y": 270,
+          "width": 40,
+          "height": 4,
+          "fill": "#6a9700",
+          "stroke": {
+            "color": "#6a9700",
+            "width": 0
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "text",
+          "text": "While online",
+          "x": 116,
+          "y": 318,
+          "width": 460,
+          "height": 42,
+          "fontSizePx": 28,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Keep workspace state across navigation.\nRestore per-user same-tab cache.\nFetch changed rows and deletion IDs.\nUse stable private image URLs.",
+          "x": 116,
+          "y": 374,
+          "width": 460,
+          "height": 126,
+          "fontSizePx": 20,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "lineHeight": 1.34,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "When offline",
+          "x": 704,
+          "y": 318,
+          "width": 460,
+          "height": 42,
+          "fontSizePx": 28,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Public service-worker fallback page.\nPreviously open views can remain visible.\nNo offline writes or queued task actions.\nNever cache private pages in the worker.",
+          "x": 704,
+          "y": 374,
+          "width": 460,
+          "height": 126,
+          "fontSizePx": 20,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "lineHeight": 1.34,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        }
+      ]
+    },
+    {
+      "recipeSource": "notion-ppt-slide-recipes",
+      "role": "evidence",
+      "recipeId": "evidence-panel",
+      "recipeGroup": "claim-evidence",
+      "contentLoad": "medium",
+      "structureKey": "left-claim-right-evidence",
+      "elements": [
+        {
+          "type": "text",
+          "text": "WEATHER-AWARE, USER-CONTROLLED",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 72,
+          "y": 72,
+          "width": 620,
+          "height": 26,
+          "fontSizePx": 14,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "shape",
+          "name": "Title accent",
+          "semanticRole": "indicator",
+          "shape": "rect",
+          "x": 72,
+          "y": 106,
+          "width": 44,
+          "height": 4,
+          "fill": "#6a9700",
+          "stroke": {
+            "color": "#6a9700",
+            "width": 0
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "text",
+          "text": "Rain is a suggestion, not completed care.",
+          "name": "Slide title",
+          "semanticRole": "title",
+          "x": 72,
+          "y": 124,
+          "width": 1136,
+          "height": 92,
+          "fontSizePx": 40,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.04,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "A forecast never automatically marks watering done.",
+          "x": 72,
+          "y": 250,
+          "width": 520,
+          "height": 190,
+          "fontSizePx": 54,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.02,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "",
+          "x": 72,
+          "y": 452,
+          "width": 500,
+          "height": 64,
+          "fontSizePx": 20,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "lineHeight": 1.35,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "LOCATION",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 650,
+          "y": 250,
+          "width": 300,
+          "height": 18,
+          "fontSizePx": 13,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Permission-based or manual coordinates.",
+          "x": 650,
+          "y": 276,
+          "width": 558,
+          "height": 60,
+          "fontSizePx": 21,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.3,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "line",
+          "semanticRole": "rule",
+          "x1": 650,
+          "y1": 340,
+          "x2": 1208,
+          "y2": 340,
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "EVIDENCE",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 650,
+          "y": 354,
+          "width": 300,
+          "height": 18,
+          "fontSizePx": 13,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Fresh matching date, ≥60% chance and ≥1 mm.",
+          "x": 650,
+          "y": 380,
+          "width": 558,
+          "height": 60,
+          "fontSizePx": 21,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.3,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "line",
+          "semanticRole": "rule",
+          "x1": 650,
+          "y1": 444,
+          "x2": 1208,
+          "y2": 444,
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "SCOPE",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 650,
+          "y": 458,
+          "width": 300,
+          "height": 18,
+          "fontSizePx": 13,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Due outdoor watering only.",
+          "x": 650,
+          "y": 484,
+          "width": 558,
+          "height": 60,
+          "fontSizePx": 21,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.3,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "line",
+          "semanticRole": "rule",
+          "x1": 650,
+          "y1": 548,
+          "x2": 1208,
+          "y2": 548,
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "ACTION",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 650,
+          "y": 562,
+          "width": 300,
+          "height": 18,
+          "fontSizePx": 13,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "User confirms “Skipped — rain”.",
+          "x": 650,
+          "y": 588,
+          "width": 558,
+          "height": 60,
+          "fontSizePx": 21,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.3,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        }
+      ]
+    },
+    {
+      "recipeSource": "notion-ppt-slide-recipes",
+      "role": "content",
+      "recipeId": "two-column",
+      "recipeGroup": "two-column",
+      "contentLoad": "medium",
+      "structureKey": "title-two-balanced-columns",
+      "elements": [
+        {
+          "type": "text",
+          "text": "JOURNAL AND RESTORE",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 72,
+          "y": 72,
+          "width": 620,
+          "height": 26,
+          "fontSizePx": 14,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "shape",
+          "name": "Title accent",
+          "semanticRole": "indicator",
+          "shape": "rect",
+          "x": 72,
+          "y": 106,
+          "width": 44,
+          "height": 4,
+          "fill": "#6a9700",
+          "stroke": {
+            "color": "#6a9700",
+            "width": 0
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "text",
+          "text": "Keep the story. Restart safely.",
+          "name": "Slide title",
+          "semanticRole": "title",
+          "x": 72,
+          "y": 124,
+          "width": 1136,
+          "height": 92,
+          "fontSizePx": 42,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.04,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "01",
+          "x": 72,
+          "y": 236,
+          "width": 54,
+          "height": 30,
+          "fontSizePx": 20,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Growth journal",
+          "x": 134,
+          "y": 234,
+          "width": 400,
+          "height": 34,
+          "fontSizePx": 26,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "line",
+          "semanticRole": "rule",
+          "x1": 72,
+          "y1": 292,
+          "x2": 606,
+          "y2": 292,
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Dated height and leaf observations.\nActual elapsed-day chart and exact table.\nCaptioned photo timeline/gallery.\nOwner-scoped edit and delete.",
+          "x": 72,
+          "y": 312,
+          "width": 534,
+          "height": 240,
+          "fontSizePx": 21,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "lineHeight": 1.4,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "02",
+          "x": 650,
+          "y": 236,
+          "width": 54,
+          "height": 30,
+          "fontSizePx": 20,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Selective restore",
+          "x": 712,
+          "y": 234,
+          "width": 400,
+          "height": 34,
+          "fontSizePx": 26,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "line",
+          "semanticRole": "rule",
+          "x1": 650,
+          "y1": 292,
+          "x2": 1184,
+          "y2": 292,
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "Archive stops routines and retains history.\nChoose routines explicitly on restore.\nNext due starts one interval from today.\nEnded routines remain stopped.",
+          "x": 650,
+          "y": 312,
+          "width": 534,
+          "height": 240,
+          "fontSizePx": 21,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "lineHeight": 1.4,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        }
+      ]
+    },
+    {
+      "recipeSource": "notion-ppt-slide-recipes",
+      "role": "evidence",
+      "recipeId": "evidence-panel",
+      "recipeGroup": "claim-evidence",
+      "contentLoad": "medium",
+      "structureKey": "left-claim-right-evidence",
+      "elements": [
+        {
+          "type": "text",
+          "text": "VERIFICATION",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 72,
+          "y": 72,
+          "width": 620,
+          "height": 26,
+          "fontSizePx": 14,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "shape",
+          "name": "Title accent",
+          "semanticRole": "indicator",
+          "shape": "rect",
+          "x": 72,
+          "y": 106,
+          "width": 44,
+          "height": 4,
+          "fill": "#6a9700",
+          "stroke": {
+            "color": "#6a9700",
+            "width": 0
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "text",
+          "text": "Evidence has a defined boundary.",
+          "name": "Slide title",
+          "semanticRole": "title",
+          "x": 72,
+          "y": 124,
+          "width": 1136,
+          "height": 92,
+          "fontSizePx": 40,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.04,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Local tests are not production acceptance.",
+          "x": 72,
+          "y": 250,
+          "width": 520,
+          "height": 190,
+          "fontSizePx": 54,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.02,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "",
+          "x": 72,
+          "y": 452,
+          "width": 500,
+          "height": 64,
+          "fontSizePx": 20,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "lineHeight": 1.35,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "44 TESTS",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 650,
+          "y": 250,
+          "width": 300,
+          "height": 18,
+          "fontSizePx": 13,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Dates, validation, demo and actual SQL policies.",
+          "x": 650,
+          "y": 276,
+          "width": 558,
+          "height": 60,
+          "fontSizePx": 21,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.3,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "line",
+          "semanticRole": "rule",
+          "x1": 650,
+          "y1": 340,
+          "x2": 1208,
+          "y2": 340,
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "BROWSER SUITE",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 650,
+          "y": 354,
+          "width": 300,
+          "height": 18,
+          "fontSizePx": 13,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Desktop/mobile flows; deterministic weather fixture.",
+          "x": 650,
+          "y": 380,
+          "width": 558,
+          "height": 60,
+          "fontSizePx": 21,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.3,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "line",
+          "semanticRole": "rule",
+          "x1": 650,
+          "y1": 444,
+          "x2": 1208,
+          "y2": 444,
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "CHECKS",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 650,
+          "y": 458,
+          "width": 300,
+          "height": 18,
+          "fontSizePx": 13,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Strict TypeScript, lint and production build.",
+          "x": 650,
+          "y": 484,
+          "width": 558,
+          "height": 60,
+          "fontSizePx": 21,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.3,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "line",
+          "semanticRole": "rule",
+          "x1": 650,
+          "y1": 548,
+          "x2": 1208,
+          "y2": 548,
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "PENDING",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 650,
+          "y": 562,
+          "width": 300,
+          "height": 18,
+          "fontSizePx": 13,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Real Auth/email, Storage, Prisma and hosted-site tests.",
+          "x": 650,
+          "y": 588,
+          "width": 558,
+          "height": 60,
+          "fontSizePx": 21,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.3,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        }
+      ]
+    },
+    {
+      "recipeSource": "notion-ppt-slide-recipes",
+      "role": "summary",
+      "recipeId": "closing-takeaways",
+      "recipeGroup": "takeaways",
+      "contentLoad": "medium",
+      "structureKey": "title-numbered-takeaways",
+      "elements": [
+        {
+          "type": "text",
+          "text": "NEXT: LIVE ACCEPTANCE",
+          "name": "Section label",
+          "semanticRole": "label",
+          "x": 72,
+          "y": 72,
+          "width": 620,
+          "height": 26,
+          "fontSizePx": 14,
+          "fontFamily": "Arial",
+          "color": "#53634f",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "shape",
+          "name": "Title accent",
+          "semanticRole": "indicator",
+          "shape": "rect",
+          "x": 72,
+          "y": 106,
+          "width": 44,
+          "height": 4,
+          "fill": "#6a9700",
+          "stroke": {
+            "color": "#6a9700",
+            "width": 0
+          },
+          "fontSizePx": 0
+        },
+        {
+          "type": "text",
+          "text": "Ready for account-connected testing.",
+          "name": "Slide title",
+          "semanticRole": "title",
+          "x": 72,
+          "y": 124,
+          "width": 1136,
+          "height": 92,
+          "fontSizePx": 40,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.04,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "01",
+          "x": 72,
+          "y": 226,
+          "width": 72,
+          "height": 48,
+          "fontSizePx": 38,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Connect authorized GitHub, Vercel and Supabase projects.",
+          "x": 168,
+          "y": 224,
+          "width": 1040,
+          "height": 46,
+          "fontSizePx": 27,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": true,
+          "lineHeight": 1.12,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "line",
+          "semanticRole": "rule",
+          "x1": 72,
+          "y1": 280,
+          "x2": 1208,
+          "y2": 280,
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "02",
+          "x": 72,
+          "y": 312,
+          "width": 72,
+          "height": 48,
+          "fontSizePx": 38,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Apply migrations, configure environment and email redirects.",
+          "x": 168,
+          "y": 310,
+          "width": 1040,
+          "height": 46,
+          "fontSizePx": 27,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": false,
+          "lineHeight": 1.12,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "line",
+          "semanticRole": "rule",
+          "x1": 72,
+          "y1": 366,
+          "x2": 1208,
+          "y2": 366,
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "03",
+          "x": 72,
+          "y": 398,
+          "width": 72,
+          "height": 48,
+          "fontSizePx": 38,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Verify two-user privacy, live uploads, caching and weather on HTTPS.",
+          "x": 168,
+          "y": 396,
+          "width": 1040,
+          "height": 46,
+          "fontSizePx": 27,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": false,
+          "lineHeight": 1.12,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "line",
+          "semanticRole": "rule",
+          "x1": 72,
+          "y1": 452,
+          "x2": 1208,
+          "y2": 452,
+          "stroke": {
+            "color": "#E6E5E3",
+            "width": 1
+          }
+        },
+        {
+          "type": "text",
+          "text": "04",
+          "x": 72,
+          "y": 484,
+          "width": 72,
+          "height": 48,
+          "fontSizePx": 38,
+          "fontFamily": "Arial",
+          "color": "#6a9700",
+          "bold": true,
+          "lineHeight": 1.16,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        },
+        {
+          "type": "text",
+          "text": "Rehearse the live presentation and keep the local demo as backup.",
+          "x": 168,
+          "y": 482,
+          "width": 1040,
+          "height": 46,
+          "fontSizePx": 27,
+          "fontFamily": "Arial",
+          "color": "#14351a",
+          "bold": false,
+          "lineHeight": 1.12,
+          "stroke": {
+            "color": "#D8D6D1",
+            "width": 0
+          }
+        }
+      ]
+    }
+  ]
+}

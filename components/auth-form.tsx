@@ -133,18 +133,18 @@ export function AuthForm({
                     autoComplete={
                       mode === "login" ? "current-password" : "new-password"
                     }
-                    minLength={12}
+                    minLength={6}
                     maxLength={128}
                     required
                     placeholder={
                       mode === "register"
-                        ? "At least 12 characters"
+                        ? "At least 6 characters"
                         : "Your password"
                     }
                   />
                   {mode === "register" && (
                     <span className="hint">
-                      Use at least 12 characters. A unique passphrase works
+                      Use at least 6 characters. A unique passphrase works
                       well.
                     </span>
                   )}

@@ -2,7 +2,7 @@ import { ServiceWorker } from "@/components/service-worker";
 import type { Metadata } from "next";
 import "./globals.css";
 export const metadata: Metadata = {
-  title: "Sproutly — Plant care, simplified",
+  title: "Sproutly",
   description:
     "A calmer place to care for your plants. Personal care schedules, reminders, calendar and history.",
   robots: { index: false, follow: false },

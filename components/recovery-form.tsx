@@ -55,7 +55,7 @@ export function RecoveryForm({
           <>
             <p className="muted">
               {reset
-                ? "Choose a unique passphrase with at least 12 characters."
+                ? "Choose a unique passphrase with at least 6 characters."
                 : "We’ll send you a link to get back to your garden."}
             </p>
             {!configured && (
@@ -72,7 +72,7 @@ export function RecoveryForm({
                       id="new-password"
                       name="password"
                       required
-                      minLength={12}
+                      minLength={6}
                       maxLength={128}
                       autoComplete="new-password"
                     />
@@ -83,7 +83,7 @@ export function RecoveryForm({
                       id="confirm-password"
                       name="confirm"
                       required
-                      minLength={12}
+                      minLength={6}
                       maxLength={128}
                       autoComplete="new-password"
                     />

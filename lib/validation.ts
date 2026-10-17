@@ -97,7 +97,7 @@ export const categorySchema = z.object({
 export const idSchema = z.object({ id: uuid });
 export const authSchema = z.object({
   email: z.email().max(254),
-  password: z.string().min(12, "Use at least 12 characters").max(128),
+  password: z.string().min(6, "Use at least 6 characters").max(128),
   name: text(100).min(1).optional(),
 });
 

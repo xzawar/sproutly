@@ -10,6 +10,7 @@ import {
   Clock3,
   Droplets,
   Leaf,
+  House,
   MapPin,
   Pencil,
   Plus,
@@ -23,6 +24,7 @@ import { RestorePlant } from "./restore-plant";
 import { TaskList } from "./tasks";
 import { HistoryList } from "./history";
 import { addDays, formatDate, frequency, taskStatus } from "@/lib/dates";
+import { rooms, savedPlacement, spotName } from "@/lib/home";
 import { activityLabel, categoryEmoji, type Plant } from "@/lib/types";
 export function Dashboard() {
   const { data, demo, today } = useGarden();
@@ -33,6 +35,9 @@ export function Dashboard() {
     .sort((a, b) => a.next_due_date.localeCompare(b.next_due_date));
   const due = tasks.filter((s) => s.next_due_date === today);
   const overdue = tasks.filter((s) => s.next_due_date < today);
+  const upcoming = tasks.filter(
+    (s) => s.next_due_date > today && s.next_due_date <= addDays(today, 6),
+  );
   const recent = data.history.filter(
     (h) =>
       h.status === "Completed" &&
@@ -97,18 +102,23 @@ export function Dashboard() {
         />
         <div className="hero-copy">
           <h2>
-            Small routines.
+            Today in
             <br />
-            Thriving plants.
+            your garden.
           </h2>
           <p>
             {due.length + overdue.length
               ? `You have ${due.length + overdue.length} ${due.length + overdue.length === 1 ? "task" : "tasks"} ready for your attention.`
               : "You’re all caught up."}
           </p>
-          <Link href={`${base}/tasks`} className="text-link">
-            See your care tasks <ArrowRight size={17} />
-          </Link>
+          <div className="hero-actions">
+            <Link href={`${base}/tasks`} className="button primary">
+              See your care tasks
+            </Link>
+            <Link href={`${base}/home`} className="button secondary">
+              <House size={16} /> Open Home
+            </Link>
+          </div>
         </div>
       </section>
       <div className="stats-grid">
@@ -153,7 +163,8 @@ export function Dashboard() {
               return (
                 <Link
                   key={date}
-                  href={`${base}/calendar`}
+                  href={`${base}/calendar?day=${date}`}
+                  aria-label={`${formatDate(date)} · ${count} care tasks`}
                   className={`week-date ${i === 0 ? "current" : ""}`}
                 >
                   <span>{formatDate(date, { weekday: "narrow" })}</span>
@@ -167,25 +178,24 @@ export function Dashboard() {
             })}
           </div>
           <div className="horizon-list">
-            {tasks
-              .filter((s) => s.next_due_date > today)
-              .slice(0, 3)
-              .map((s) => (
-                <Link href={`${base}/plants/${s.plant_id}`} key={s.id}>
-                  <ActivityIcon activity={s.activity} />
-                  <div>
-                    <strong>
-                      {data.plants.find((p) => p.id === s.plant_id)?.name}
-                    </strong>
-                    <span>
-                      {activityLabel(s)} · {formatDate(s.next_due_date)}
-                    </span>
-                  </div>
-                  <ChevronRight size={16} />
-                </Link>
-              ))}
-            {!tasks.some((s) => s.next_due_date > today) && (
-              <p className="muted">No upcoming routines yet.</p>
+            {upcoming.slice(0, 3).map((s) => (
+              <Link href={`${base}/plants/${s.plant_id}`} key={s.id}>
+                <ActivityIcon activity={s.activity} />
+                <div>
+                  <strong>
+                    {data.plants.find((p) => p.id === s.plant_id)?.name}
+                  </strong>
+                  <span>
+                    {activityLabel(s)} · {formatDate(s.next_due_date)}
+                  </span>
+                </div>
+                <ChevronRight size={16} />
+              </Link>
+            ))}
+            {!upcoming.length && (
+              <p className="muted">
+                No upcoming routines in the next seven days.
+              </p>
             )}
           </div>
           <Link className="calendar-link" href={`${base}/calendar`}>
@@ -391,6 +401,7 @@ export function PlantDetail({ plant }: { plant: Plant }) {
     (s) => s.plant_id === plant.id && !s.archived_at,
   );
   const history = data.history.filter((h) => h.plant_id === plant.id);
+  const placement = savedPlacement(plant);
   return (
     <>
       <Link className="back-link" href={`${base}/plants`}>
@@ -446,6 +457,22 @@ export function PlantDetail({ plant }: { plant: Plant }) {
           )}
           <div className="plant-facts">
             <h2>At home</h2>
+            {!plant.archived_at && (
+              <div className="fact">
+                <House size={18} />
+                <div>
+                  <span>Home map</span>
+                  <Link
+                    className="text-link"
+                    href={`${base}/home?plant=${plant.id}`}
+                  >
+                    {placement
+                      ? `${rooms[placement.room].name} · ${spotName(placement)}`
+                      : "Place on Home map"}
+                  </Link>
+                </div>
+              </div>
+            )}
             <div className="fact">
               <MapPin size={18} />
               <div>

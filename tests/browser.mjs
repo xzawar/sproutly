@@ -1,4 +1,5 @@
 /** End-to-end local-demo checks. Start the app first: npm run build && npm start. */
+import { testEstateJourney } from "./estate-browser.mjs";
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
@@ -34,6 +35,8 @@ try {
     const label = viewport.width === 390 ? "mobile" : "desktop";
     const context = await browser.newContext({
       viewport,
+      isMobile: viewport.width < 700,
+      hasTouch: viewport.width < 700,
       colorScheme: "light",
     });
     const page = await context.newPage();
@@ -474,6 +477,10 @@ try {
       await shot("offline");
       await context.setOffline(false);
     });
+    await check(
+      `${label}: 3D plant placement, watering, recovery, floors and reload`,
+      () => testEstateJourney(page, goto, shot),
+    );
     await context.close();
   }
   await check(

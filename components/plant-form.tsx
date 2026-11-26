@@ -7,12 +7,24 @@ import { useGarden } from "./garden-provider";
 import { PageHeading } from "./ui";
 import { plantSchema, plantCreateSchema } from "@/lib/validation";
 import { uploadPlantImage, removeUnusedImage } from "@/app/actions";
+import { rooms, roomIds } from "@/lib/home";
 import type { Plant } from "@/lib/types";
 const read = (f: FormData, k: string) => String(f.get(k) ?? "").trim();
-export function PlantForm({ plant }: { plant?: Plant }) {
+export function PlantForm({
+  plant,
+  fromHome = false,
+}: {
+  plant?: Plant;
+  fromHome?: boolean;
+}) {
   const { data, demo, today, run, busy, notify } = useGarden();
   const router = useRouter();
   const base = demo ? "/demo" : "";
+  const returnPath = plant
+    ? `${base}/plants/${plant.id}`
+    : fromHome
+      ? `${base}/home`
+      : `${base}/plants`;
   const [imageMode, setImageMode] = useState(
     plant?.image_path ? "upload" : "url",
   );
@@ -90,15 +102,23 @@ export function PlantForm({ plant }: { plant?: Plant }) {
       if (uploaded) void removeUnusedImage(uploaded);
       return;
     }
+    let createdId = "";
     const ok = await run(
       plant
         ? { kind: "plant.save", payload: parsed.data }
         : { kind: "plant.create", payload: create.data! },
+      (id) => {
+        createdId = id;
+      },
     );
     if (ok) {
       if (!demo && plant?.image_path && plant.image_path !== imagePath)
         void removeUnusedImage(plant.image_path);
-      router.push(plant ? `${base}/plants/${plant.id}` : `${base}/plants`);
+      router.push(
+        fromHome && createdId
+          ? `${base}/home?plant=${encodeURIComponent(createdId)}`
+          : returnPath,
+      );
     } else if (uploaded) {
       await removeUnusedImage(uploaded);
       notify("The unsaved upload was removed. You can try again.", true);
@@ -106,11 +126,9 @@ export function PlantForm({ plant }: { plant?: Plant }) {
   }
   return (
     <>
-      <Link
-        className="back-link"
-        href={plant ? `${base}/plants/${plant.id}` : `${base}/plants`}
-      >
-        <ArrowLeft size={16} /> Back to {plant ? "plant" : "plants"}
+      <Link className="back-link" href={returnPath}>
+        <ArrowLeft size={16} /> Back to{" "}
+        {plant ? "plant" : fromHome ? "Home" : "plants"}
       </Link>
       <PageHeading title={plant ? "Edit plant" : "Add plant"} />
       <form className="editor-form" onSubmit={submit}>
@@ -161,15 +179,26 @@ export function PlantForm({ plant }: { plant?: Plant }) {
                 ))}
               </select>
             </label>
-            <label className="field">
-              Location
+            <div className="field">
+              <label htmlFor="plant-location">Location</label>
               <input
+                id="plant-location"
                 name="location"
+                list="home-location-options"
+                aria-describedby="plant-location-hint"
                 maxLength={100}
                 defaultValue={plant?.location}
-                placeholder="e.g. Living room"
+                placeholder="e.g. Kitchen countertop"
               />
-            </label>
+              <datalist id="home-location-options">
+                {roomIds.map((r) => (
+                  <option key={r} value={rooms[r].name} />
+                ))}
+              </datalist>
+              <span id="plant-location-hint" className="hint">
+                This sets the plant’s place in your 3D home.
+              </span>
+            </div>
             <label className="field">
               Date added
               <input
@@ -373,10 +402,7 @@ export function PlantForm({ plant }: { plant?: Plant }) {
           </p>
         )}
         <div className="form-actions">
-          <Link
-            className="button secondary"
-            href={plant ? `${base}/plants/${plant.id}` : `${base}/plants`}
-          >
+          <Link className="button secondary" href={returnPath}>
             Cancel
           </Link>
           <button className="button primary" disabled={busy || uploading}>

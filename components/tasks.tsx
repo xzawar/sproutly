@@ -1,7 +1,10 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Check, ChevronRight, SkipForward } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { prepareHandoff, scheduledAction } from "@/lib/estate/care";
+import { savedPlacement } from "@/lib/home";
+import { Check, House, ChevronRight, SkipForward } from "lucide-react";
 import { useWeather } from "./weather";
 import { rainExpected } from "@/lib/weather";
 import { useGarden } from "./garden-provider";
@@ -17,6 +20,7 @@ export function TaskList({
 }) {
   const { data, demo, today, busy, run } = useGarden();
   const { weather } = useWeather();
+  const router = useRouter();
   const base = demo ? "/demo" : "";
   const [resolve, setResolve] = useState<{
     s: Schedule;
@@ -75,6 +79,16 @@ export function TaskList({
                   </button>
                 )}
               <div className="task-actions">
+                {compact && p && !p.archived_at && (
+                  <Link
+                    className="icon-button"
+                    aria-label={`Find ${p.name} in 3D home`}
+                    title="Find in Home"
+                    href={`${base}/home?plant=${p.id}`}
+                  >
+                    <House size={17} />
+                  </Link>
+                )}
                 <button
                   className="icon-button complete-button"
                   disabled={busy || s.next_due_date > today}
@@ -169,7 +183,43 @@ export function TaskList({
               >
                 Cancel
               </button>
-              <button className="button primary" disabled={busy}>
+              {resolve.status === "Completed" &&
+                scheduledAction(resolve.s) &&
+                data.plants.some(
+                  (p) =>
+                    p.id === resolve.s.plant_id &&
+                    !p.archived_at &&
+                    savedPlacement(p),
+                ) && (
+                  <button
+                    className="button primary"
+                    type="button"
+                    disabled={busy}
+                    onClick={() => {
+                      const s = resolve.s;
+                      const token = prepareHandoff({
+                        plantId: s.plant_id,
+                        scheduleId: s.id,
+                        due: s.next_due_date,
+                        notes,
+                        userId: data.profile.id,
+                      });
+                      router.push(
+                        `${base}/home?plant=${encodeURIComponent(s.plant_id)}${token ? `&visit=${token}` : ""}`,
+                      );
+                    }}
+                  >
+                    Care in 3D
+                  </button>
+                )}
+              <button
+                className={
+                  resolve.status === "Completed" && scheduledAction(resolve.s)
+                    ? "button secondary"
+                    : "button primary"
+                }
+                disabled={busy}
+              >
                 {busy
                   ? "Saving…"
                   : resolve.status === "Completed"

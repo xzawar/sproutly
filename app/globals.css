@@ -4170,3 +4170,20 @@ h2 {
     min-height: 132px;
   }
 }
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 13px;
+}
+.hero-actions .button.primary {
+  background: #224d35;
+  border-color: #224d35;
+  color: #fff;
+}
+.hero-actions .button.secondary {
+  background: #f9ffed;
+  border-color: #739259;
+  color: #26452d;
+}

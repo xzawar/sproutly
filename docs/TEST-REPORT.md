@@ -1,5 +1,7 @@
 # Sproutly verification report
 
+This report covers the platform before the living Home release. The [Living Home guide](LIVING-HOME.md#verification) records the current Home, database and performance checks.
+
 Verified locally on 2026-10-17 using Node 24.14.1 and sandbox Chromium. This report is not a security certification or evidence of a deployed Supabase project.
 
 ## Final results

@@ -12,11 +12,13 @@
 8. Inbox: upcoming horizon, read state, opt-in browser notification. Explain open-tab limitation.
 9. After worker activation, set browser offline and perform a full navigation: fallback appears. Reconnect. Do not promise offline editing.
 
+Open **Home** from Overview. Add an Aloe vera at Kitchen countertop and a Rose at Front garden. Select the Rose, enter fullscreen and choose Water. Wait for the gardener to return, check History and move the Rose to Roof terrace. Reload its Home link and confirm its saved position on the first floor. See [Living Home](LIVING-HOME.md) for evidence and device checks.
+
 ## Production setup (requires owner authorization)
 
-- Choose/create GitHub repository; review diff and secret scan before initial push. Do not overwrite an existing repo blindly.
+- Review the feature branch against the existing `xzawar/sproutly` repository before merging.
 - Create/import Vercel project; Node 22+, production build `npm run build` (postinstall generates Prisma). Keep project root at source directory.
-- Create/configure Supabase DB; back up existing data; apply migrations 001 then 002 once; verify role grants and private bucket.
+- Create/configure Supabase DB; back up existing data; apply outstanding migrations through 005 in order; verify role grants and private bucket.
 - Add DATABASE_URL, DIRECT_URL and public Supabase URL/key using each provider's secret/environment settings, not chat or committed files. SMTP/redirect origins and Auth recovery template must match deployed origin.
 - Run deployment and inspect build/runtime logs. Visit the actual public URL and complete the acceptance checklist below. No deployed URL is supplied until this happens.
 

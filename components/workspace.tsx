@@ -4,8 +4,10 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
   CalendarDays,
+  ChartNoAxesCombined,
   ChevronRight,
   History,
+  House,
   LayoutDashboard,
   Leaf,
   ListChecks,
@@ -24,6 +26,8 @@ import {
   PlantsView,
   TasksView,
 } from "./views";
+import { CareAnalytics } from "./care-analytics";
+import { HomeView } from "./home";
 import { CalendarView } from "./calendar";
 import { PlantForm } from "./plant-form";
 import { ScheduleForm } from "./schedule-form";
@@ -78,17 +82,28 @@ function WorkspaceInner() {
   }, [menu]);
   const nav = [
     { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
+    { href: "/home", label: "Home", icon: House },
     { href: "/plants", label: "My plants", icon: Sprout },
     { href: "/tasks", label: "Care tasks", icon: ListChecks },
     { href: "/calendar", label: "Calendar", icon: CalendarDays },
+    { href: "/analytics", label: "Analytics", icon: ChartNoAxesCombined },
     { href: "/history", label: "Care history", icon: History },
     { href: "/growth", label: "Growth journal", icon: Sprout },
     { href: "/weather", label: "Weather", icon: Leaf },
   ];
   const route = () => {
     if (current === "/" || current === "/dashboard") return <Dashboard />;
+    if (current === "/home")
+      return (
+        <HomeView
+          key={`${params.get("plant") ?? ""}/${params.get("visit") ?? ""}`}
+          initialPlant={params.get("plant")}
+          handoff={params.get("visit")}
+        />
+      );
     if (current === "/plants") return <PlantsView />;
-    if (current === "/plants/new") return <PlantForm />;
+    if (current === "/plants/new")
+      return <PlantForm fromHome={params.get("from") === "home"} />;
     if (current === "/tasks")
       return (
         <TasksView
@@ -96,7 +111,11 @@ function WorkspaceInner() {
           initialStatus={params.get("status") ?? "All"}
         />
       );
-    if (current === "/calendar") return <CalendarView />;
+    if (current === "/calendar")
+      return (
+        <CalendarView key={params.get("day")} initialDay={params.get("day")} />
+      );
+    if (current === "/analytics") return <CareAnalytics />;
     if (current === "/history") return <HistoryView />;
     if (current === "/weather") return <WeatherView />;
     if (current === "/growth") return <GrowthView />;
@@ -157,6 +176,62 @@ function WorkspaceInner() {
       {current === href && <span className="active-dot" />}
     </Link>
   );
+  if (current === "/home")
+    return (
+      <div className="home-shell">
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
+        <header className="home-top">
+          <div className="home-top-inner">
+            <Link
+              href={`${base}/dashboard`}
+              className="home-wordmark"
+              aria-label="Sproutly overview"
+            >
+              <span>
+                <Leaf size={21} />
+              </span>
+              sproutly.
+            </Link>
+            <nav className="home-global-nav" aria-label="Workspace">
+              {(
+                [
+                  ["Home", "/home"],
+                  ["Plants", "/plants"],
+                  ["Tasks", "/tasks"],
+                  ["Analytics", "/analytics"],
+                  ["Settings", "/profile"],
+                ] as const
+              ).map(([label, href]) => (
+                <Link
+                  key={href}
+                  href={`${base}${href}`}
+                  aria-current={href === "/home" ? "page" : undefined}
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+            <div className="home-account">
+              {demo && (
+                <Link
+                  className="home-demo"
+                  href="/login"
+                  title="Demo garden saved in this browser"
+                >
+                  Demo garden
+                </Link>
+              )}
+              <NotificationCenter />
+            </div>
+          </div>
+        </header>
+        <main id="main" className="home-container" aria-busy={busy}>
+          {route()}
+        </main>
+      </div>
+    );
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main">

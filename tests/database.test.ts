@@ -53,6 +53,12 @@ test("actual migration: permissions and complete/skip integration", async (t) =>
       "utf8",
     ),
   );
+  const repair = await readFile(
+    new URL("../supabase/migrations/006_repair.sql", import.meta.url),
+    "utf8",
+  );
+  await db.exec(repair);
+  await db.exec(repair); // idempotent
   await db.exec(
     `insert into auth.users(id,email,raw_user_meta_data) values('${A}','a@example.test','{"name":"Alice"}'),('${B}','b@example.test','{"name":"Bob"}'),('${ADMIN}','admin@example.test','{"name":"Admin"}');update public.profiles set role='admin' where id='${ADMIN}';update public.profiles set timezone='Asia/Karachi' where id='${A}';insert into public.plants(id,user_id,name) values('${PA}','${A}','Aloe'),('${PB}','${B}','Basil');`,
   );
@@ -857,4 +863,47 @@ test("actual migration: permissions and complete/skip integration", async (t) =>
     },
   );
   await db.close();
+});
+
+test("006 repairs a database that skipped 003-005 and lets Auth delete users", async () => {
+  const db = new PGlite();
+  await db.exec(`create role anon;create role authenticated;
+ create schema auth;create schema storage;
+ create table auth.users(id uuid primary key,email text,raw_user_meta_data jsonb default '{}');
+ create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;
+ grant usage on schema auth,storage to authenticated,anon;grant execute on function auth.uid() to authenticated,anon;
+ create table storage.buckets(id text primary key,name text,public boolean,file_size_limit bigint,allowed_mime_types text[]);
+ create table storage.objects(id uuid primary key default gen_random_uuid(),bucket_id text,name text);
+ alter table storage.objects enable row level security;grant select,insert,delete on storage.objects to authenticated;
+ create function storage.foldername(text) returns text[] language sql immutable as $$select string_to_array($1,'/')$$;
+ `);
+  for (const file of ["001_initial.sql", "002_sproutly.sql", "006_repair.sql"])
+    await db.exec(
+      await readFile(
+        new URL(`../supabase/migrations/${file}`, import.meta.url),
+        "utf8",
+      ),
+    );
+  const columns = await db.query<{ column_name: string }>(
+    "select column_name from information_schema.columns where table_schema='public' and table_name='plants' and column_name like 'home_%' order by 1",
+  );
+  assert.deepEqual(
+    columns.rows.map((r) => r.column_name),
+    ["home_layout_version", "home_room", "home_x", "home_y"],
+  );
+  const fn = await db.query(
+    "select 1 from pg_proc where proname='complete_home_visit'",
+  );
+  assert.equal(fn.rows.length, 1);
+  await db.exec(
+    `insert into auth.users(id,email) values('${A}','a@example.test');
+     insert into public.plants(id,user_id,name,home_room,home_x,home_y) values('${PA}','${A}','Aloe','kitchen',10,10);
+     insert into public.growth_records(user_id,plant_id,recorded_on,height_cm) values('${A}','${PA}',current_date,12);
+     insert into public.plant_photos(user_id,plant_id,taken_on,image_url) values('${A}','${PA}',current_date,'https://example.test/a.jpg');`,
+  );
+  await db.exec(`delete from auth.users where id='${A}'`);
+  const left = await db.query<{ n: number }>(
+    "select (select count(*) from public.growth_records)+(select count(*) from public.plant_photos)+(select count(*) from public.plants) as n",
+  );
+  assert.equal(Number(left.rows[0].n), 0);
 });

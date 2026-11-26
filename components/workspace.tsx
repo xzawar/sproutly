@@ -12,6 +12,8 @@ import {
   Leaf,
   ListChecks,
   LogOut,
+  CloudSun,
+  Sparkles,
   Menu,
   Settings2,
   Sprout,
@@ -35,6 +37,7 @@ import { AdminCategories, AdminUsers, ProfileView } from "./settings";
 import { WeatherProvider, WeatherView } from "./weather";
 import { GrowthView } from "./growth";
 import { NotificationCenter } from "./notification-center";
+import { AssistantView } from "./assistant";
 import { Empty } from "./ui";
 
 import type { WorkspaceData } from "@/lib/types";
@@ -82,14 +85,15 @@ function WorkspaceInner() {
   }, [menu]);
   const nav = [
     { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
-    { href: "/home", label: "Home", icon: House },
+    { href: "/assistant", label: "Assistant", icon: Sparkles },
+    { href: "/home", label: "3D Home", icon: House },
     { href: "/plants", label: "My plants", icon: Sprout },
     { href: "/tasks", label: "Care tasks", icon: ListChecks },
     { href: "/calendar", label: "Calendar", icon: CalendarDays },
     { href: "/analytics", label: "Analytics", icon: ChartNoAxesCombined },
     { href: "/history", label: "Care history", icon: History },
-    { href: "/growth", label: "Growth journal", icon: Sprout },
-    { href: "/weather", label: "Weather", icon: Leaf },
+    { href: "/growth", label: "Growth journal", icon: Leaf },
+    { href: "/weather", label: "Weather", icon: CloudSun },
   ];
   const route = () => {
     if (current === "/" || current === "/dashboard") return <Dashboard />;
@@ -118,6 +122,7 @@ function WorkspaceInner() {
     if (current === "/analytics") return <CareAnalytics />;
     if (current === "/history") return <HistoryView />;
     if (current === "/weather") return <WeatherView />;
+    if (current === "/assistant") return <AssistantView />;
     if (current === "/growth") return <GrowthView />;
     if (current === "/profile") return <ProfileView />;
     if (current === "/admin/users") return <AdminUsers />;
@@ -176,62 +181,6 @@ function WorkspaceInner() {
       {current === href && <span className="active-dot" />}
     </Link>
   );
-  if (current === "/home")
-    return (
-      <div className="home-shell">
-        <a href="#main" className="skip-link">
-          Skip to content
-        </a>
-        <header className="home-top">
-          <div className="home-top-inner">
-            <Link
-              href={`${base}/dashboard`}
-              className="home-wordmark"
-              aria-label="Sproutly overview"
-            >
-              <span>
-                <Leaf size={21} />
-              </span>
-              sproutly.
-            </Link>
-            <nav className="home-global-nav" aria-label="Workspace">
-              {(
-                [
-                  ["Home", "/home"],
-                  ["Plants", "/plants"],
-                  ["Tasks", "/tasks"],
-                  ["Analytics", "/analytics"],
-                  ["Settings", "/profile"],
-                ] as const
-              ).map(([label, href]) => (
-                <Link
-                  key={href}
-                  href={`${base}${href}`}
-                  aria-current={href === "/home" ? "page" : undefined}
-                >
-                  {label}
-                </Link>
-              ))}
-            </nav>
-            <div className="home-account">
-              {demo && (
-                <Link
-                  className="home-demo"
-                  href="/login"
-                  title="Demo garden saved in this browser"
-                >
-                  Demo garden
-                </Link>
-              )}
-              <NotificationCenter />
-            </div>
-          </div>
-        </header>
-        <main id="main" className="home-container" aria-busy={busy}>
-          {route()}
-        </main>
-      </div>
-    );
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main">
@@ -333,7 +282,16 @@ function WorkspaceInner() {
             >
               <Menu size={22} />
             </button>
-            <span className="workspace-label">Sproutly</span>
+            <Link
+              href={`${base}/dashboard`}
+              className="workspace-label"
+              aria-label="Sproutly overview"
+            >
+              <span className="brand-mark small">
+                <Leaf size={16} />
+              </span>
+              sproutly
+            </Link>
           </div>
           <NotificationCenter />
         </header>

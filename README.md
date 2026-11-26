@@ -1,6 +1,6 @@
 # Sproutly 🌱
 
-Bright, light-mode plant care: Next.js + React + TypeScript, Prisma, Supabase Auth/Postgres/Storage and Open-Meteo. Sweet Tape-inspired lime `#B6FE00`, forest `#034102`, paper backgrounds and colourful activities. **No breadcrumbs.**
+Bright, light-mode plant care: Next.js + React + TypeScript, Prisma, Supabase Auth/Postgres/Storage, Open-Meteo and Claude for AI automation. Sweet Tape-inspired lime `#B6FE00`, forest `#034102`, paper backgrounds and colourful activities. **No breadcrumbs.**
 
 ## Run the local backup demo
 
@@ -14,7 +14,17 @@ npm start
 # http://localhost:3000/demo/dashboard
 ```
 
-The demo is fictional, isolated browser-local data. It supports plant and routine editing, every-N-days schedules, complete/skip, archive/selective restore, growth measurements/charts, dated photo URLs, calendar filters and notifications. Reset from Profile. Uploads, real account access and private Storage require the live setup below. Weather requires network access and either location permission or manual coordinates. Rain skip is always confirmed, never automatic.
+The demo is fictional, isolated browser-local data. It supports plant and routine editing, every-N-days schedules, complete/skip, archive/selective restore, growth measurements/charts, dated photo URLs, calendar filters and notifications. Reset from Profile. Uploads, real account access and private Storage require the live setup below. Weather requires network access: search for your city by name, or allow location access. Rain skip is always confirmed, never automatic.
+
+## AI automation
+
+Three AI features run through server routes using the official Anthropic SDK. Each has a non-AI fallback, so the app works without a key:
+
+- **Fill with AI** on Add plant: type a name (even "my balcony tulsi") and the AI fills in the care profile and switches on watering and fertilizing routines.
+- **Daily brief** on the Overview: a short plan for today, grouped by room, with rain and heat tips.
+- **Plant assistant** (sidebar → Assistant): streaming chat that knows your plants, upcoming tasks and local weather.
+
+Set `ANTHROPIC_API_KEY` (server-only) in `.env.local` to turn them on. `ANTHROPIC_MODEL` is optional and defaults to `claude-opus-5-5`. Details, architecture and safety notes: [AI features](docs/AI-FEATURES.md).
 
 ## Virtual Home
 
@@ -31,8 +41,8 @@ For the model registry, release checks, performance measurements and extension i
 
 ## Connect Supabase + Prisma
 
-1. Back up the target database. On a fresh project, apply `001_initial.sql`, `002_sproutly.sql`, `003_home.sql`, `004_upper_floor.sql` and `005_living_home.sql` in order from `supabase/migrations/`. On an existing project, apply only its pending files. Version 005 enables outdoor placements, atomic care visits and owner-scoped revision notifications. These SQL migrations include policies and functions outside the Prisma schema.
-2. Copy `.env.example` to `.env.local`. Set the public Supabase URL/key and server-only `DATABASE_URL` / `DIRECT_URL`. Use the Supabase dashboard's connection strings, URL-encode password characters and require SSL. Runtime can use the transaction pooler; DIRECT_URL must use direct/session connectivity. Never commit secrets.
+1. Back up the target database. On a fresh project, run `001_initial.sql`, `002_sproutly.sql`, `003_home.sql`, `004_upper_floor.sql`, `005_living_home.sql` and `006_repair.sql` in order from `supabase/migrations/` in the SQL Editor. **Existing project:** if the app says "Unable to open garden" after the 3D Home update, the 003–005 columns are probably missing. Run `006_repair.sql`. It is safe on any database that already has 001 and 002, whether or not 003–005 ran, and safe to run twice. It also lets Supabase Auth delete users who have growth records or photos, and speeds up RLS policies. These SQL migrations include policies and functions outside the Prisma schema.
+2. Copy `.env.example` to `.env.local`. Set the public Supabase URL/key and server-only `DATABASE_URL` / `DIRECT_URL` from Supabase → **Connect**. URL-encode password characters and require SSL. `DATABASE_URL` uses the transaction pooler (port 6543) **with `?pgbouncer=true&connection_limit=1`**; without it Prisma fails with "prepared statement already exists". `DIRECT_URL` uses the session pooler (5432) or the direct connection. Never commit secrets.
 3. The runtime DB login must be able to `SET ROLE authenticated`. Every Prisma app operation verifies Supabase Auth, starts a transaction, sets that role and transaction-local verified UID claims, then checks the active profile. **Never call the exported Prisma client for app rows outside `withUser`.** A dedicated least-privilege login is recommended; have the database administrator grant it membership in `authenticated`. Do not grant it schema-owner, service_role or superuser privileges. Transaction role/claims reset on pool return.
 4. Configure Supabase Auth email/password, confirmation, SMTP and rate limits. The form currently accepts six characters. If the project uses the recommended deployment setting of 12, align signup and recovery validation and help text before launch. Set Site URL and approved redirect URLs to your local/production origin. Configure these email template links:
 
@@ -57,7 +67,7 @@ Admins manage categories and read the user directory, **not other users' gardens
 
 ## Main routes
 
-`/login`, `/register`, `/forgot-password`, `/reset-password`; authenticated `/dashboard`, `/home`, `/plants`, `/plants/new`, `/plants/:id`, `/plants/:id/edit`, `/plants/:id/schedules/new`, `/schedules/:id/edit`, `/tasks`, `/calendar`, `/history`, `/analytics`, `/growth`, `/weather`, `/profile`, `/admin/users`, `/admin/categories`. Workspace routes have equivalent `/demo` paths.
+`/login`, `/register`, `/forgot-password`, `/reset-password`; authenticated `/dashboard`, `/assistant`, `/home`, `/plants`, `/plants/new`, `/plants/:id`, `/plants/:id/edit`, `/plants/:id/schedules/new`, `/schedules/:id/edit`, `/tasks`, `/calendar`, `/history`, `/analytics`, `/growth`, `/weather`, `/profile`, `/admin/users`, `/admin/categories`. Workspace routes have equivalent `/demo` paths.
 
 ## Scheduling and restore
 
@@ -76,7 +86,8 @@ Admins manage categories and read the user directory, **not other users' gardens
 
 ## Weather and notifications
 
-- Server `/api/weather` validates and rounds coordinates to 0.01°, requests Open-Meteo seven-day/current temperature/humidity/rain and caches upstream responses for 10 minutes. Data remains in this tab's session cache; Forget location removes it. No coordinate logging is implemented. Hosting/provider access logs may still contain URL parameters.
+- Search for a city by name: `/api/geocode` uses Open-Meteo's geocoding API and returns up to six matches. Use the arrow keys and Enter, or click. **Use my location** is still available. The chosen place is remembered in this browser (`localStorage`) and **Change** clears it.
+- Server `/api/weather` validates and rounds coordinates to 0.01°, requests Open-Meteo seven-day/current temperature/humidity/rain and caches upstream responses for 10 minutes. The forecast stays in this tab's session cache. No coordinate logging is implemented. Hosting/provider access logs may still contain URL parameters.
 - Only outdoor/exposed due watering gets a rain suggestion, when a forecast matching the profile date is fresh ≤30 min, probability ≥60% and rain + showers ≥1 mm. Inspect soil and exposure, then confirm **Skipped — rain**. Weather failures never change a task. Forecast timing can differ from the profile timezone; no matching date means no suggestion.
 - In-app inbox includes overdue, due and selected upcoming horizon. Mark all read and choose 0/1/2/3/7 days ahead. Browser notifications are opt-in, deduplicated by user/occurrence/day; Web Locks coordinate tabs. They work **while a tab is open**; no push/cron/email delivery is claimed. Permission denial/unsupported browsers leave the in-app inbox usable.
 

@@ -7,6 +7,23 @@ import { Empty, Modal, PageHeading } from "./ui";
 import { profileSchema } from "@/lib/validation";
 import { formatDate } from "@/lib/dates";
 import type { Category } from "@/lib/types";
+const COMMON_ZONES = [
+  "UTC",
+  "Asia/Karachi",
+  "Asia/Kolkata",
+  "Asia/Dubai",
+  "Europe/London",
+  "America/New_York",
+];
+function timezones(current: string) {
+  let all: string[] = [];
+  try {
+    all = Intl.supportedValuesOf("timeZone");
+  } catch {
+    all = COMMON_ZONES;
+  }
+  return [...new Set([current, "UTC", ...all])];
+}
 export function ProfileView() {
   const { data, demo, run, busy, reset } = useGarden();
   const [error, setError] = useState("");
@@ -57,32 +74,19 @@ export function ProfileView() {
             </label>
             <label className="field full">
               Timezone
-              <input
+              <select
                 name="timezone"
-                aria-label="Timezone"
-                list="timezones"
                 required
                 defaultValue={data.profile.timezone}
-              />
-              <datalist id="timezones">
-                {[
-                  "UTC",
-                  "Asia/Karachi",
-                  "Asia/Kolkata",
-                  "Asia/Dubai",
-                  "Europe/London",
-                  "Europe/Berlin",
-                  "America/New_York",
-                  "America/Chicago",
-                  "America/Los_Angeles",
-                  "Australia/Sydney",
-                ].map((t) => (
-                  <option key={t}>{t}</option>
+              >
+                {timezones(data.profile.timezone).map((t) => (
+                  <option key={t} value={t}>
+                    {t.replaceAll("_", " ")}
+                  </option>
                 ))}
-              </datalist>
+              </select>
               <span className="hint">
-                Use an IANA timezone, such as Asia/Karachi. Due dates and
-                completion dates follow this setting.
+                Due dates and completions follow this timezone.
               </span>
             </label>
           </div>

@@ -23,6 +23,7 @@ import { ActivityIcon, Badge, Empty, Modal, PageHeading } from "./ui";
 import { RestorePlant } from "./restore-plant";
 import { TaskList } from "./tasks";
 import { HistoryList } from "./history";
+import { DailyBrief } from "./daily-brief";
 import { addDays, formatDate, frequency, taskStatus } from "@/lib/dates";
 import { rooms, savedPlacement, spotName } from "@/lib/home";
 import { activityLabel, categoryEmoji, type Plant } from "@/lib/types";
@@ -88,39 +89,34 @@ export function Dashboard() {
           year: "numeric",
         }).toUpperCase()}
         title={`A good day to grow, ${data.profile.name.split(" ")[0]}.`}
-
         action={
           <Link className="button primary" href={`${base}/plants/new`}>
             <Plus size={18} /> Add plant
           </Link>
         }
       />
-      <section className="garden-hero">
-        <img
-          src="/monstera.webp"
-          alt="Lush monstera leaves in a simple ivory pot"
-        />
-        <div className="hero-copy">
-          <h2>
-            Today in
-            <br />
-            your garden.
-          </h2>
-          <p>
-            {due.length + overdue.length
-              ? `You have ${due.length + overdue.length} ${due.length + overdue.length === 1 ? "task" : "tasks"} ready for your attention.`
-              : "You’re all caught up."}
-          </p>
-          <div className="hero-actions">
-            <Link href={`${base}/tasks`} className="button primary">
-              See your care tasks
-            </Link>
-            <Link href={`${base}/home`} className="button secondary">
-              <House size={16} /> Open Home
-            </Link>
+      <div className="today-grid">
+        <section className="garden-hero">
+          <img src="/monstera.webp" alt="" />
+          <div className="hero-copy">
+            <h2>Today in your garden</h2>
+            <p>
+              {due.length + overdue.length
+                ? `${due.length + overdue.length} ${due.length + overdue.length === 1 ? "task needs" : "tasks need"} your attention${overdue.length ? `, ${overdue.length} overdue` : ""}.`
+                : "You’re all caught up. Nothing is due today."}
+            </p>
+            <div className="hero-actions">
+              <Link href={`${base}/tasks`} className="button dark">
+                See care tasks
+              </Link>
+              <Link href={`${base}/home`} className="button secondary">
+                <House size={16} /> Open Home
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+        <DailyBrief />
+      </div>
       <div className="stats-grid">
         {stats.map(({ label, value, icon: Icon, link }) => (
           <Link href={`${base}${link}`} className="stat-card" key={label}>
@@ -128,7 +124,7 @@ export function Dashboard() {
               <span>{label}</span>
               <Icon size={17} />
             </div>
-            <strong>{value.toString().padStart(2, "0")}</strong>
+            <strong>{value}</strong>
             <span className="stat-foot">
               <ArrowDownRight size={15} />
             </span>

@@ -539,7 +539,16 @@ export function HomeView({
               disabled={locked}
             >
               {walking ? <MapIcon size={16} /> : <Footprints size={16} />}{" "}
-              {walking ? "Back to map" : "Walk as gardener"}
+              {walking ? (
+                "Back to map"
+              ) : (
+                <>
+                  <span className="walk-long">Walk as gardener</span>
+                  <span className="walk-short" aria-hidden="true">
+                    Walk
+                  </span>
+                </>
+              )}
             </button>
             {!walking && (
               <label className="estate-location">

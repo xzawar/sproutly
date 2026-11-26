@@ -1,41 +1,97 @@
 "use client";
-/* eslint-disable react-hooks/set-state-in-effect -- restore an explicit per-user weather cache */
+/* eslint-disable react-hooks/set-state-in-effect -- restore a per-user place and forecast cache */
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
+  useId,
+  useRef,
   useState,
-  useCallback,
   type ReactNode,
 } from "react";
+import {
+  Cloud,
+  CloudDrizzle,
+  CloudFog,
+  CloudLightning,
+  CloudRain,
+  CloudSnow,
+  CloudSun,
+  Droplets,
+  LoaderCircle,
+  LocateFixed,
+  MapPin,
+  Search,
+  Sun,
+  Umbrella,
+  X,
+} from "lucide-react";
 import { useGarden } from "./garden-provider";
 import { PageHeading, Empty } from "./ui";
-import { rainExpected, weatherLabel, type Forecast } from "@/lib/weather";
+import {
+  rainExpected,
+  weatherKind,
+  weatherLabel,
+  type Forecast,
+  type Place,
+  type WeatherKind,
+} from "@/lib/weather";
 import { TaskList } from "./tasks";
-const Context = createContext<{
+
+interface WeatherContext {
   weather: Forecast | null;
+  place: Place | null;
   loading: boolean;
   error: string;
+  choose: (place: Place) => void;
   locate: () => void;
   clear: () => void;
-  load: (lat: number, lon: number) => Promise<void>;
-}>({
+}
+const Context = createContext<WeatherContext>({
   weather: null,
+  place: null,
   loading: false,
   error: "",
+  choose: () => {},
   locate: () => {},
   clear: () => {},
-  load: async () => {},
 });
 export const useWeather = () => useContext(Context);
+
+const STALE = 10 * 60000;
+const read = <T,>(store: () => Storage, key: string): T | null => {
+  try {
+    const raw = store().getItem(key);
+    return raw ? (JSON.parse(raw) as T) : null;
+  } catch {
+    return null;
+  }
+};
+const write = (store: () => Storage, key: string, value: unknown) => {
+  try {
+    if (value === null) store().removeItem(key);
+    else store().setItem(key, JSON.stringify(value));
+  } catch {
+    /* storage can be unavailable in private windows */
+  }
+};
+const local = () => localStorage;
+const session = () => sessionStorage;
+
 export function WeatherProvider({ children }: { children: ReactNode }) {
   const { data } = useGarden();
-  const key = `sproutly-weather:${data.profile.id}`;
-  const [weather, setWeather] = useState<Forecast | null>(null),
-    [loading, setLoading] = useState(false),
-    [error, setError] = useState("");
+  const placeKey = `sproutly-place:${data.profile.id}`;
+  const forecastKey = `sproutly-weather:${data.profile.id}`;
+  const [weather, setWeather] = useState<Forecast | null>(null);
+  const [place, setPlace] = useState<Place | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const request = useRef(0);
+
   const load = useCallback(
     async (lat: number, lon: number) => {
+      const ticket = ++request.current;
       setLoading(true);
       setError("");
       try {
@@ -44,34 +100,42 @@ export function WeatherProvider({ children }: { children: ReactNode }) {
         );
         const w = await r.json();
         if (!r.ok) throw Error(w.error);
+        if (ticket !== request.current) return;
         setWeather(w);
-        sessionStorage.setItem(key, JSON.stringify(w));
+        write(session, forecastKey, w);
       } catch (e) {
-        setError(e instanceof Error ? e.message : "Unable to load weather");
+        if (ticket === request.current)
+          setError(e instanceof Error ? e.message : "Unable to load weather");
       } finally {
-        setLoading(false);
+        if (ticket === request.current) setLoading(false);
       }
     },
-    [key],
+    [forecastKey],
   );
+
+  // Restore the saved place and any fresh forecast; refresh a stale one.
   useEffect(() => {
-    try {
-      const s = sessionStorage.getItem(key);
-      if (s) {
-        const w = JSON.parse(s) as Forecast;
-        setWeather(w);
-        if (Date.now() - w.fetchedAt > 600000)
-          void load(w.latitude, w.longitude);
-      }
-    } catch {
-      sessionStorage.removeItem(key);
-    }
-  }, [key, load]);
+    const saved = read<Place>(local, placeKey);
+    const cached = read<Forecast>(session, forecastKey);
+    setPlace(saved);
+    if (!saved) return;
+    const matches =
+      cached &&
+      Math.abs(cached.latitude - saved.latitude) < 0.1 &&
+      Math.abs(cached.longitude - saved.longitude) < 0.1;
+    if (matches) setWeather(cached);
+    if (!matches || !cached || Date.now() - cached.fetchedAt > STALE)
+      void load(saved.latitude, saved.longitude);
+  }, [placeKey, forecastKey, load]);
+
   useEffect(() => {
-    if (!weather) return;
+    if (!place) return;
     const refresh = () => {
-      if (navigator.onLine && Date.now() - weather.fetchedAt > 600000)
-        void load(weather.latitude, weather.longitude);
+      if (
+        navigator.onLine &&
+        (!weather || Date.now() - weather.fetchedAt > STALE)
+      )
+        void load(place.latitude, place.longitude);
     };
     const timer = setInterval(refresh, 60000);
     window.addEventListener("focus", refresh);
@@ -79,45 +143,239 @@ export function WeatherProvider({ children }: { children: ReactNode }) {
       clearInterval(timer);
       window.removeEventListener("focus", refresh);
     };
-  }, [weather, load]);
+  }, [place, weather, load]);
+
+  const choose = useCallback(
+    (next: Place) => {
+      setPlace(next);
+      write(local, placeKey, next);
+      void load(next.latitude, next.longitude);
+    },
+    [placeKey, load],
+  );
+
   const locate = () => {
     if (!navigator.geolocation) {
-      setError("Location isn’t supported. Choose coordinates below.");
+      setError("Location isn’t supported here. Search for your city instead.");
       return;
     }
     setLoading(true);
+    setError("");
     navigator.geolocation.getCurrentPosition(
-      (p) => void load(p.coords.latitude, p.coords.longitude),
+      (p) =>
+        choose({
+          id: "current",
+          name: "Current location",
+          region: "",
+          country: "",
+          latitude: Math.round(p.coords.latitude * 100) / 100,
+          longitude: Math.round(p.coords.longitude * 100) / 100,
+          label: "Current location",
+        }),
       () => {
         setLoading(false);
         setError(
-          "Location permission was declined or unavailable. You can enter coordinates below.",
+          "Location permission was declined. Search for your city instead.",
         );
       },
       { timeout: 12000, maximumAge: 300000 },
     );
   };
+
+  const clear = () => {
+    request.current++;
+    write(local, placeKey, null);
+    write(session, forecastKey, null);
+    setPlace(null);
+    setWeather(null);
+    setLoading(false);
+    setError("");
+  };
+
   return (
     <Context.Provider
-      value={{
-        weather,
-        loading,
-        error,
-        locate,
-        load,
-        clear: () => {
-          sessionStorage.removeItem(key);
-          setWeather(null);
-        },
-      }}
+      value={{ weather, place, loading, error, choose, locate, clear }}
     >
       {children}
     </Context.Provider>
   );
 }
+
+const icons: Record<WeatherKind, typeof Sun> = {
+  clear: Sun,
+  cloudy: CloudSun,
+  fog: CloudFog,
+  drizzle: CloudDrizzle,
+  rain: CloudRain,
+  snow: CloudSnow,
+  storm: CloudLightning,
+};
+export function WeatherIcon({
+  code,
+  size = 22,
+}: {
+  code: number;
+  size?: number;
+}) {
+  const kind = weatherKind(code);
+  const Icon = code === 3 ? Cloud : icons[kind];
+  return (
+    <Icon size={size} className={`wx-icon wx-${kind}`} aria-hidden="true" />
+  );
+}
+
+/** City search with suggestions (combobox pattern). */
+export function PlaceSearch() {
+  const { choose, locate, loading } = useWeather();
+  const [q, setQ] = useState("");
+  const [results, setResults] = useState<Place[]>([]);
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(-1);
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState("");
+  const listId = useId();
+
+  useEffect(() => {
+    const text = q.trim();
+    if (text.length < 2) {
+      setResults([]);
+      setMessage("");
+      return;
+    }
+    const controller = new AbortController();
+    const timer = setTimeout(async () => {
+      setBusy(true);
+      try {
+        const r = await fetch(`/api/geocode?q=${encodeURIComponent(text)}`, {
+          signal: controller.signal,
+        });
+        const body = await r.json();
+        if (!r.ok) throw Error(body.error);
+        setResults(body.places);
+        setActive(body.places.length ? 0 : -1);
+        setMessage(body.places.length ? "" : `No places match “${text}”.`);
+        setOpen(true);
+      } catch (e) {
+        if (!controller.signal.aborted) {
+          setResults([]);
+          setMessage(e instanceof Error ? e.message : "Search failed.");
+          setOpen(true);
+        }
+      } finally {
+        if (!controller.signal.aborted) setBusy(false);
+      }
+    }, 280);
+    return () => {
+      controller.abort();
+      clearTimeout(timer);
+    };
+  }, [q]);
+
+  const pick = (p: Place) => {
+    choose(p);
+    setQ("");
+    setResults([]);
+    setOpen(false);
+  };
+
+  return (
+    <div className="place-search">
+      <div className="place-input">
+        <Search size={18} aria-hidden="true" />
+        <input
+          role="combobox"
+          aria-expanded={open && (results.length > 0 || Boolean(message))}
+          aria-controls={listId}
+          aria-autocomplete="list"
+          aria-activedescendant={
+            active >= 0 && results[active] ? `${listId}-${active}` : undefined
+          }
+          aria-label="Search for a city or town"
+          placeholder="Search a city, e.g. Lahore"
+          value={q}
+          autoComplete="off"
+          onChange={(e) => setQ(e.target.value)}
+          onFocus={() => setOpen(true)}
+          onBlur={() => setTimeout(() => setOpen(false), 150)}
+          onKeyDown={(e) => {
+            if (e.key === "ArrowDown") {
+              e.preventDefault();
+              setOpen(true);
+              setActive((i) => Math.min(results.length - 1, i + 1));
+            } else if (e.key === "ArrowUp") {
+              e.preventDefault();
+              setActive((i) => Math.max(0, i - 1));
+            } else if (e.key === "Enter" && results[active]) {
+              e.preventDefault();
+              pick(results[active]);
+            } else if (e.key === "Escape") setOpen(false);
+          }}
+        />
+        {busy ? (
+          <LoaderCircle size={18} className="spin" aria-label="Searching" />
+        ) : q ? (
+          <button
+            className="icon-button ghost"
+            aria-label="Clear search"
+            onClick={() => setQ("")}
+          >
+            <X size={16} />
+          </button>
+        ) : null}
+      </div>
+      <button
+        className="button secondary locate-button"
+        onClick={locate}
+        disabled={loading}
+        title="Use my current location"
+      >
+        <LocateFixed size={17} />
+        <span>Use my location</span>
+      </button>
+      {open && (results.length > 0 || message) && (
+        <ul className="place-results" id={listId} role="listbox">
+          {results.map((p, i) => (
+            <li
+              key={`${p.id}-${i}`}
+              id={`${listId}-${i}`}
+              role="option"
+              aria-selected={i === active}
+              className={i === active ? "active" : ""}
+              onMouseDown={(e) => {
+                e.preventDefault();
+                pick(p);
+              }}
+              onMouseEnter={() => setActive(i)}
+            >
+              <MapPin size={16} aria-hidden="true" />
+              <span>
+                <strong>{p.name}</strong>
+                <small>
+                  {[p.region !== p.name ? p.region : "", p.country]
+                    .filter(Boolean)
+                    .join(", ")}
+                </small>
+              </span>
+            </li>
+          ))}
+          {message && <li className="place-empty">{message}</li>}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+const day = (iso: string, i: number) =>
+  i === 0
+    ? "Today"
+    : new Date(iso + "T12:00:00Z").toLocaleDateString("en", {
+        weekday: "short",
+        timeZone: "UTC",
+      });
+
 export function WeatherView() {
   const { data, today } = useGarden();
-  const { weather: w, loading, error, locate, clear, load } = useWeather();
+  const { weather: w, place, loading, error, clear } = useWeather();
   const rain = rainExpected(w, today);
   const outdoor = data.schedules.filter(
     (s) =>
@@ -130,111 +388,124 @@ export function WeatherView() {
           p.id === s.plant_id && p.environment === "outdoor" && !p.archived_at,
       ),
   );
+  const todayIndex = w ? Math.max(0, w.daily.time.indexOf(today)) : 0;
   return (
     <>
       <PageHeading
-        eyebrow="A LITTLE LOCAL KNOW-HOW"
-        title="Weather & your garden"
-        description="A forecast, not a soil sensor. Check your plants before changing care."
-        action={
-          <button
-            className="button primary"
-            disabled={loading}
-            onClick={locate}
-          >
-            {loading ? "Finding your forecast…" : "📍 Use current location"}
-          </button>
-        }
+        title="Weather"
+        description="Your local forecast and what it means for outdoor plants."
       />
+      <section className="panel weather-search">
+        <PlaceSearch />
+        {place && (
+          <p className="place-current">
+            <MapPin size={15} aria-hidden="true" />
+            Showing <strong>{place.label}</strong>
+            <button className="text-link" onClick={clear}>
+              Change
+            </button>
+          </p>
+        )}
+      </section>
       {error && (
         <p className="form-error" role="alert">
           {error}
         </p>
       )}
       {!w ? (
-        <section className="panel weather-intro">
-          <Empty title="Let’s see what’s overhead.">
-            <p>
-              Allow location access to see your local forecast. We round
-              coordinates before sending them to Open-Meteo; location stays in
-              this tab’s cache.
-            </p>
-          </Empty>
-        </section>
+        loading ? (
+          <p className="loading-inline" role="status">
+            <LoaderCircle size={18} className="spin" /> Loading forecast…
+          </p>
+        ) : (
+          <section className="panel weather-intro">
+            <Empty title="Where are your plants?">
+              <p>
+                Search for your city above. Only the place name and rounded
+                coordinates are sent to the forecast provider.
+              </p>
+            </Empty>
+          </section>
+        )
       ) : (
         <>
-          <section className="weather-hero">
-            <div>
-              <span className="eyebrow">
-                {w.latitude.toFixed(2)}°, {w.longitude.toFixed(2)}° ·{" "}
-                {w.timezone}
-              </span>
-              <h2>
-                {weatherLabel(w.current.weather_code) === "Clear skies"
-                  ? "☀️"
-                  : "🌦️"}{" "}
-                {Math.round(w.current.temperature_2m)}°<span>C</span>
-              </h2>
-              <p>
-                {weatherLabel(w.current.weather_code)} · Observed{" "}
-                {w.current.time.replace("T", " ")}
-              </p>
+          <section className="wx-now" aria-live="polite">
+            <div className="wx-now-main">
+              <WeatherIcon code={w.current.weather_code} size={52} />
+              <div>
+                <p className="wx-place">{place?.label ?? "Your location"}</p>
+                <p className="wx-temp">
+                  {Math.round(w.current.temperature_2m)}°<span>C</span>
+                </p>
+                <p className="wx-cond">
+                  {weatherLabel(w.current.weather_code)} · H{" "}
+                  {Math.round(w.daily.temperature_2m_max[todayIndex])}° · L{" "}
+                  {Math.round(w.daily.temperature_2m_min[todayIndex])}°
+                </p>
+              </div>
             </div>
-            <div className="weather-stats">
-              <p>
-                <strong>{w.current.relative_humidity_2m}%</strong> Humidity
-              </p>
-              <p>
-                <strong>{w.current.rain} mm</strong> Current rain
-              </p>
-              <p>
-                <strong>
-                  {w.daily.precipitation_probability_max[0] ?? "—"}%
-                </strong>{" "}
-                Rain chance today
-              </p>
-            </div>
+            <dl className="wx-stats">
+              <div>
+                <dt>
+                  <Droplets size={15} /> Humidity
+                </dt>
+                <dd>{w.current.relative_humidity_2m}%</dd>
+              </div>
+              <div>
+                <dt>
+                  <Umbrella size={15} /> Rain chance
+                </dt>
+                <dd>
+                  {w.daily.precipitation_probability_max[todayIndex] ?? "—"}%
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  <CloudRain size={15} /> Rain today
+                </dt>
+                <dd>
+                  {(
+                    w.daily.rain_sum[todayIndex] +
+                    w.daily.showers_sum[todayIndex]
+                  ).toFixed(1)}{" "}
+                  mm
+                </dd>
+              </div>
+            </dl>
           </section>
-          <div className="forecast-grid">
-            {w.daily.time.map((day, i) => (
-              <article className="panel forecast-card" key={day}>
-                <strong>
-                  {new Date(day + "T12:00:00Z").toLocaleDateString("en", {
-                    weekday: "short",
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </strong>
-                <span>{weatherLabel(w.daily.weather_code[i])}</span>
-                <b>
-                  {Math.round(w.daily.temperature_2m_max[i])}° /{" "}
-                  {Math.round(w.daily.temperature_2m_min[i])}°
-                </b>
-                <span>
-                  💧 {w.daily.precipitation_probability_max[i]}% ·{" "}
-                  {(w.daily.rain_sum[i] + w.daily.showers_sum[i]).toFixed(1)} mm
+          <section className="panel wx-week" aria-label="7-day forecast">
+            {w.daily.time.map((d, i) => (
+              <div className="wx-day" key={d}>
+                <span className="wx-day-name">{day(d, i)}</span>
+                <WeatherIcon code={w.daily.weather_code[i]} size={20} />
+                <span className="wx-day-label">
+                  {weatherLabel(w.daily.weather_code[i])}
                 </span>
-              </article>
+                <span className="wx-day-rain">
+                  <Droplets size={13} aria-hidden="true" />
+                  {w.daily.precipitation_probability_max[i]}%
+                </span>
+                <span className="wx-day-temp">
+                  <b>{Math.round(w.daily.temperature_2m_max[i])}°</b>
+                  <span>{Math.round(w.daily.temperature_2m_min[i])}°</span>
+                </span>
+              </div>
             ))}
-          </div>
+          </section>
           <section className="panel weather-tasks">
-            <h2>
-              {rain ? "🌧️ Rain expected today" : "🌱 Your outdoor watering"}
-            </h2>
+            <h2>{rain ? "Rain expected today" : "Outdoor watering"}</h2>
             <p className="muted">
               {rain
-                ? "Forecast: at least 60% rain probability and 1 mm of rain/showers. Only outdoor watering is flagged. Confirm soil moisture and exposure; a forecast never automatically completes care."
-                : "No rain-based skip suggestion right now. Follow your schedule and check soil moisture."}
+                ? "At least 60% chance and 1 mm of rain. You can skip outdoor watering — check the soil first. Nothing changes until you confirm."
+                : "No rain skip suggested today. Follow your schedule and check the soil."}
             </p>
             {outdoor.length ? (
               <TaskList schedules={outdoor} />
             ) : (
-              <Empty title="No outdoor watering due">
-                <p>
-                  Your indoor plants and future watering routines stay
-                  unchanged.
-                </p>
-              </Empty>
+              <p className="weather-none">
+                No outdoor watering is due. Indoor plants aren’t affected by
+                rain.
+              </p>
             )}
           </section>
           <p className="hint">
@@ -242,53 +513,15 @@ export function WeatherView() {
             <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">
               Open-Meteo
             </a>{" "}
-            · Retrieved {new Date(w.fetchedAt).toLocaleTimeString()} ·{" "}
-            <button className="text-link" onClick={clear}>
-              Forget location
-            </button>
+            · Updated{" "}
+            {new Date(w.fetchedAt).toLocaleTimeString([], {
+              hour: "numeric",
+              minute: "2-digit",
+            })}
+            {loading && " · refreshing…"}
           </p>
         </>
       )}
-      <details className="panel location-fallback">
-        <summary>Choose location manually</summary>
-        <p className="hint">
-          If location access is unavailable, enter latitude and longitude.
-        </p>
-        <form
-          className="filter-bar"
-          onSubmit={(e) => {
-            e.preventDefault();
-            const f = new FormData(e.currentTarget);
-            void load(Number(f.get("lat")), Number(f.get("lon")));
-          }}
-        >
-          <label className="field">
-            Latitude
-            <input
-              name="lat"
-              type="number"
-              min={-90}
-              max={90}
-              step="any"
-              required
-            />
-          </label>
-          <label className="field">
-            Longitude
-            <input
-              name="lon"
-              type="number"
-              min={-180}
-              max={180}
-              step="any"
-              required
-            />
-          </label>
-          <button className="button secondary" disabled={loading}>
-            Show weather
-          </button>
-        </form>
-      </details>
     </>
   );
 }

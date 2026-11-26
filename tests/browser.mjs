@@ -283,7 +283,7 @@ try {
       async () => {
         await goto("/demo/profile");
         await page.getByLabel("Name", { exact: true }).fill("Taylor Gardener");
-        await page.getByLabel(/^Timezone/).fill("Europe/London");
+        await page.getByLabel(/^Timezone/).selectOption("Europe/London");
         await page.getByRole("button", { name: "Save profile" }).click();
         await page.getByRole("status").waitFor();
         await goto("/demo/plants");
@@ -416,15 +416,34 @@ try {
             },
           });
         });
+        await page.route("**/api/geocode**", (route) =>
+          route.fulfill({
+            json: {
+              places: [
+                {
+                  id: 2643743,
+                  name: "London",
+                  region: "England",
+                  country: "United Kingdom",
+                  latitude: 51.51,
+                  longitude: -0.13,
+                  label: "London, England, United Kingdom",
+                },
+              ],
+            },
+          }),
+        );
         await goto("/demo/weather");
         await shot("weather-empty");
         await page
-          .getByText("Choose location manually", { exact: true })
-          .click();
-        await page.getByLabel("Latitude", { exact: true }).fill("51.5");
-        await page.getByLabel("Longitude", { exact: true }).fill("-0.12");
-        await page.getByRole("button", { name: "Show weather" }).click();
+          .getByRole("combobox", { name: "Search for a city or town" })
+          .fill("London");
+        await page.getByRole("option", { name: /London/ }).click();
         await page.getByText("Humidity", { exact: false }).first().waitFor();
+        await page
+          .getByText("London, England, United Kingdom")
+          .first()
+          .waitFor();
         await shot("weather");
         // Put Basil's next occurrence back on today in the isolated local store.
         await page.evaluate(() => {

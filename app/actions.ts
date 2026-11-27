@@ -1,6 +1,17 @@
 "use server";
 import { createPlantWithRoutines } from "@/lib/plant-create";
 import { withUser } from "@/lib/server/prisma";
+import {
+  lockHomeOwner,
+  ownerPlants,
+  prepareHome,
+} from "@/lib/server/plant-home";
+import {
+  allocatePlant,
+  movedPlantFields,
+  recordPlacement,
+  restoredPlantFields,
+} from "@/lib/home-records";
 import { saveRow } from "@/lib/server/repository";
 import { redirect } from "next/navigation";
 import { supabaseServer, isConfigured } from "@/lib/supabase/server";
@@ -12,16 +23,18 @@ import {
   categorySchema,
   idSchema,
   plantSchema,
+  placementSchema,
   plantCreateSchema,
   profileSchema,
   resolveSchema,
+  oneOffCareSchema,
   scheduleSchema,
 } from "@/lib/validation";
 import type { ActionResult, Mutation } from "@/lib/types";
 
 export async function mutate(input: Mutation): Promise<ActionResult> {
   try {
-    await withUser(async (tx, uid) => {
+    const createdId = await withUser(async (tx, uid) => {
       const p = input.payload;
       const checkPath = (path: unknown) => {
         if (path && (typeof path !== "string" || !path.startsWith(uid + "/")))
@@ -31,24 +44,54 @@ export async function mutate(input: Mutation): Promise<ActionResult> {
         case "plant.create": {
           const v = plantCreateSchema.parse(p);
           checkPath(v.plant.image_path);
-          await createPlantWithRoutines(v, (table, row) =>
-            saveRow(tx, table, row, uid),
+          await prepareHome(tx, uid);
+          const active = await ownerPlants(tx, uid);
+          const fields = allocatePlant(
+            active,
+            v.plant.location,
+            v.plant.environment,
           );
-          break;
+          return createPlantWithRoutines(v, (table, row) =>
+            saveRow(
+              tx,
+              table,
+              table === "plants" ? { ...row, ...fields } : row,
+              uid,
+            ),
+          );
         }
         case "plant.save": {
           const v = plantSchema.parse(p);
           checkPath(v.image_path);
-          if (v.id) {
-            const existing = await tx.plant.findFirst({
-              where: { id: v.id, user_id: uid, archived_at: null },
-            });
-            if (!existing) throw Error("Plant unavailable");
-          }
-          await saveRow(tx, "plants", v, uid);
+          await prepareHome(tx, uid);
+          const active = await ownerPlants(tx, uid);
+          const existing = active.find((plant) => plant.id === v.id);
+          if (v.id && !existing) throw Error("Plant unavailable");
+          const keep =
+            existing &&
+            recordPlacement(existing) &&
+            existing.location === v.location &&
+            (v.location.trim() || existing.environment === v.environment);
+          const fields = keep
+            ? {}
+            : allocatePlant(active, v.location, v.environment, existing);
+          await saveRow(tx, "plants", { ...v, ...fields }, uid);
+          break;
+        }
+        case "plant.place": {
+          const { id, placement } = placementSchema.parse(p);
+          await prepareHome(tx, uid);
+          const active = await ownerPlants(tx, uid);
+          const plant = active.find((item) => item.id === id);
+          if (!plant) throw Error("Plant unavailable");
+          await tx.plant.update({
+            where: { id },
+            data: movedPlantFields(active, plant, placement),
+          });
           break;
         }
         case "plant.archive": {
+          await lockHomeOwner(tx, uid);
           const { id } = idSchema.parse(p);
           if (
             !(
@@ -63,7 +106,17 @@ export async function mutate(input: Mutation): Promise<ActionResult> {
         }
         case "plant.restore": {
           const { id, schedule_ids } = restoreSchema.parse(p);
-          await tx.$queryRaw`SELECT public.restore_plant(${id}::uuid,${schedule_ids}::uuid[])`;
+          await prepareHome(tx, uid);
+          const all = await ownerPlants(tx, uid, id);
+          const archived = all.find(
+            (plant) => plant.id === id && plant.archived_at,
+          );
+          if (!archived) throw Error("Archived plant unavailable");
+          await tx.plant.update({
+            where: { id },
+            data: restoredPlantFields(all, archived),
+          });
+          await tx.$executeRaw`SELECT public.restore_plant(${id}::uuid,${schedule_ids}::uuid[])`;
           break;
         }
         case "schedule.save": {
@@ -95,7 +148,18 @@ export async function mutate(input: Mutation): Promise<ActionResult> {
         }
         case "task.resolve": {
           const v = resolveSchema.parse(p);
-          await tx.$queryRaw`SELECT public.resolve_care_task(${v.id}::uuid,${v.expected_due}::date,${v.status}::text,${v.notes}::text)`;
+          if (v.expected_location && v.request_id && v.plant_id) {
+            const loc = v.expected_location;
+            await tx.$queryRaw`SELECT public.complete_home_visit(${v.request_id}::uuid,${v.plant_id}::uuid,${loc.room}::text,${loc.x}::integer,${loc.y}::integer,${v.activity ?? null}::text,${v.id}::uuid,${v.expected_due}::date,${v.notes}::text)`;
+            break;
+          }
+          await tx.$executeRaw`SELECT public.resolve_care_task(${v.id}::uuid,${v.expected_due}::date,${v.status}::text,${v.notes}::text)`;
+          break;
+        }
+        case "care.record": {
+          const v = oneOffCareSchema.parse(p);
+          const loc = v.expected_location;
+          await tx.$queryRaw`SELECT public.complete_home_visit(${v.id}::uuid,${v.plant_id}::uuid,${loc.room}::text,${loc.x}::integer,${loc.y}::integer,${v.activity}::text)`;
           break;
         }
         case "profile.save": {
@@ -137,8 +201,8 @@ export async function mutate(input: Mutation): Promise<ActionResult> {
         default:
           throw Error("Unknown operation");
       }
-    });
-    return { ok: true };
+    }, "ReadCommitted");
+    return { ok: true, ...(createdId ? { createdId } : {}) };
   } catch (e) {
     if (e && typeof e === "object" && "issues" in e)
       return {
@@ -147,6 +211,14 @@ export async function mutate(input: Mutation): Promise<ActionResult> {
           (e as { issues: { message: string }[] }).issues[0]?.message ??
           "Check your input",
       };
+    const meta =
+      e && typeof e === "object" && "meta" in e
+        ? (e.meta as { code?: string; message?: string })
+        : null;
+    if (meta?.code === "P0001" && meta.message) {
+      const reason = meta.message.replace(/^ERROR:\s*/, "").split("\n")[0];
+      if (reason.length < 180) return { ok: false, error: reason };
+    }
     const msg = e instanceof Error ? e.message : "";
     if (/23503|foreign key/i.test(msg))
       return {

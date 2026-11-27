@@ -4,12 +4,16 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
   CalendarDays,
+  ChartNoAxesCombined,
   ChevronRight,
   History,
+  House,
   LayoutDashboard,
   Leaf,
   ListChecks,
   LogOut,
+  CloudSun,
+  Sparkles,
   Menu,
   Settings2,
   Sprout,
@@ -24,6 +28,8 @@ import {
   PlantsView,
   TasksView,
 } from "./views";
+import { CareAnalytics } from "./care-analytics";
+import { HomeView } from "./home";
 import { CalendarView } from "./calendar";
 import { PlantForm } from "./plant-form";
 import { ScheduleForm } from "./schedule-form";
@@ -31,6 +37,7 @@ import { AdminCategories, AdminUsers, ProfileView } from "./settings";
 import { WeatherProvider, WeatherView } from "./weather";
 import { GrowthView } from "./growth";
 import { NotificationCenter } from "./notification-center";
+import { AssistantView } from "./assistant";
 import { Empty } from "./ui";
 
 import type { WorkspaceData } from "@/lib/types";
@@ -78,17 +85,29 @@ function WorkspaceInner() {
   }, [menu]);
   const nav = [
     { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
+    { href: "/assistant", label: "Assistant", icon: Sparkles },
+    { href: "/home", label: "3D Home", icon: House },
     { href: "/plants", label: "My plants", icon: Sprout },
     { href: "/tasks", label: "Care tasks", icon: ListChecks },
     { href: "/calendar", label: "Calendar", icon: CalendarDays },
+    { href: "/analytics", label: "Analytics", icon: ChartNoAxesCombined },
     { href: "/history", label: "Care history", icon: History },
-    { href: "/growth", label: "Growth journal", icon: Sprout },
-    { href: "/weather", label: "Weather", icon: Leaf },
+    { href: "/growth", label: "Growth journal", icon: Leaf },
+    { href: "/weather", label: "Weather", icon: CloudSun },
   ];
   const route = () => {
     if (current === "/" || current === "/dashboard") return <Dashboard />;
+    if (current === "/home")
+      return (
+        <HomeView
+          key={`${params.get("plant") ?? ""}/${params.get("visit") ?? ""}`}
+          initialPlant={params.get("plant")}
+          handoff={params.get("visit")}
+        />
+      );
     if (current === "/plants") return <PlantsView />;
-    if (current === "/plants/new") return <PlantForm />;
+    if (current === "/plants/new")
+      return <PlantForm fromHome={params.get("from") === "home"} />;
     if (current === "/tasks")
       return (
         <TasksView
@@ -96,9 +115,14 @@ function WorkspaceInner() {
           initialStatus={params.get("status") ?? "All"}
         />
       );
-    if (current === "/calendar") return <CalendarView />;
+    if (current === "/calendar")
+      return (
+        <CalendarView key={params.get("day")} initialDay={params.get("day")} />
+      );
+    if (current === "/analytics") return <CareAnalytics />;
     if (current === "/history") return <HistoryView />;
     if (current === "/weather") return <WeatherView />;
+    if (current === "/assistant") return <AssistantView />;
     if (current === "/growth") return <GrowthView />;
     if (current === "/profile") return <ProfileView />;
     if (current === "/admin/users") return <AdminUsers />;
@@ -258,7 +282,16 @@ function WorkspaceInner() {
             >
               <Menu size={22} />
             </button>
-            <span className="workspace-label">Sproutly</span>
+            <Link
+              href={`${base}/dashboard`}
+              className="workspace-label"
+              aria-label="Sproutly overview"
+            >
+              <span className="brand-mark small">
+                <Leaf size={16} />
+              </span>
+              sproutly
+            </Link>
           </div>
           <NotificationCenter />
         </header>

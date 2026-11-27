@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { roomIds } from "./home";
+import { homeActivities } from "./home-care";
 import { validDate } from "./dates";
 const text = (n = 2000) => z.string().trim().max(n);
 const uuid = z.uuid();
@@ -104,15 +106,46 @@ export const profileSchema = z.object({
     }
   }, "Choose a valid timezone"),
 });
-export const resolveSchema = z.object({
+const homePosition = z.object({
+  room: z.enum(roomIds),
+  x: z.number().int().min(0).max(100),
+  y: z.number().int().min(0).max(100),
+});
+export const resolveSchema = z
+  .object({
+    id: uuid,
+    expected_due: date,
+    status: z.enum(["Completed", "Skipped"]),
+    notes: text(4000),
+    request_id: uuid.optional(),
+    plant_id: uuid.optional(),
+    expected_location: homePosition.optional(),
+    activity: z.enum(homeActivities).optional(),
+  })
+  .refine(
+    (v) =>
+      (!v.expected_location && !v.request_id && !v.plant_id) ||
+      Boolean(
+        v.request_id &&
+        v.plant_id &&
+        v.expected_location &&
+        v.status === "Completed",
+      ),
+    "Check the care visit and try again.",
+  );
+export const oneOffCareSchema = z.object({
   id: uuid,
-  expected_due: date,
-  status: z.enum(["Completed", "Skipped"]),
-  notes: text(4000),
+  plant_id: uuid,
+  activity: z.enum(homeActivities),
+  expected_location: homePosition,
 });
 export const categorySchema = z.object({
   id: uuid.optional(),
   name: text(80).min(1),
+});
+export const placementSchema = z.object({
+  id: uuid,
+  placement: homePosition.nullable(),
 });
 export const idSchema = z.object({ id: uuid });
 export const authSchema = z.object({

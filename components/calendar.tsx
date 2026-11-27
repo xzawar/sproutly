@@ -3,7 +3,13 @@ import { useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useGarden } from "./garden-provider";
 import { PageHeading, Badge, Empty, Modal } from "./ui";
-import { addDays, formatDate, projections, taskStatus } from "@/lib/dates";
+import {
+  validDate,
+  addDays,
+  formatDate,
+  projections,
+  taskStatus,
+} from "@/lib/dates";
 import { activityLabel, activityEmoji } from "@/lib/types";
 type Event = {
   id: string;
@@ -18,11 +24,12 @@ function monday(date: string) {
   const d = new Date(`${date}T12:00:00Z`);
   return addDays(date, -((d.getUTCDay() + 6) % 7));
 }
-export function CalendarView() {
+export function CalendarView({ initialDay }: { initialDay: string | null }) {
+  const requestedDay = initialDay && validDate(initialDay) ? initialDay : null;
   const { data, today } = useGarden();
   const [mode, setMode] = useState<"month" | "week">("month");
-  const [focus, setFocus] = useState(today);
-  const [day, setDay] = useState<string | null>(null);
+  const [focus, setFocus] = useState(requestedDay ?? today);
+  const [day, setDay] = useState<string | null>(requestedDay);
   const [plantFilter, setPlantFilter] = useState(""),
     [activityFilter, setActivityFilter] = useState(""),
     [statusFilter, setStatusFilter] = useState("");

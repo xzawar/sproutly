@@ -9,6 +9,7 @@ export type Tx = Prisma.TransactionClient;
  * SET LOCAL and transaction-local claims are reset automatically on pool release. */
 export async function withUser<T>(
   work: (tx: Tx, userId: string) => Promise<T>,
+  isolationLevel: "RepeatableRead" | "ReadCommitted" = "RepeatableRead",
 ): Promise<T> {
   const auth = await supabaseServer();
   const {
@@ -24,6 +25,6 @@ export async function withUser<T>(
         throw Error("Account unavailable.");
       return work(tx, user.id);
     },
-    { isolationLevel: "RepeatableRead", timeout: 20000 },
+    { isolationLevel, timeout: 20000 },
   );
 }

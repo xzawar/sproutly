@@ -50,9 +50,11 @@ export function HistoryList({
                 </Link>
                 <span className="muted">
                   {h.activity}
-                  {!compact
-                    ? ` · Due ${formatDate(h.due_date, { month: "short", day: "numeric", year: "numeric" })}`
-                    : ""}
+                  {!compact && !h.schedule_id
+                    ? " · One-off care"
+                    : !compact
+                      ? ` · Due ${formatDate(h.due_date, { month: "short", day: "numeric", year: "numeric" })}`
+                      : ""}
                 </span>
                 {h.notes && !compact && (
                   <p className="history-note">{h.notes}</p>

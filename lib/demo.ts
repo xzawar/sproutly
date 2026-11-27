@@ -1,3 +1,14 @@
+import { homeCareActivity } from "./home-care";
+import {
+  allocatePlant,
+  movedPlantFields,
+  recordPlacement,
+  samePlacement,
+  restoredPlantFields,
+  backfillHome,
+  HOME_LAYOUT_VERSION,
+} from "./home-records";
+import type { Placement } from "./home";
 import { addDays, addInterval, nextOccurrence, todayIn } from "./dates";
 import {
   activityLabel,
@@ -12,9 +23,11 @@ import {
   growthSchema,
   photoSchema,
   plantSchema,
+  placementSchema,
   plantCreateSchema,
   profileSchema,
   resolveSchema,
+  oneOffCareSchema,
   scheduleSchema,
 } from "./validation";
 export const DEMO_KEY = "sproutly-demo-v1";
@@ -39,6 +52,9 @@ export function createDemo(): WorkspaceData {
       common_name: "Swiss cheese plant",
       scientific_name: "Monstera deliciosa",
       location: "Living room",
+      home_room: "living",
+      home_x: 18,
+      home_y: 70,
       sunlight: "Indirect",
       watering: "Let the top 5 cm of soil dry before watering.",
       fertilizing: "Feed monthly in the growing season.",
@@ -51,6 +67,9 @@ export function createDemo(): WorkspaceData {
       common_name: "Mother-in-law’s tongue",
       scientific_name: "Dracaena trifasciata",
       location: "Bedroom",
+      home_room: "bedroom",
+      home_x: 79,
+      home_y: 38,
       sunlight: "Low light",
       watering: "Let soil dry fully between waterings.",
       fertilizing: "Feed lightly during spring.",
@@ -84,6 +103,9 @@ export function createDemo(): WorkspaceData {
       common_name: "Sweet basil",
       scientific_name: "Ocimum basilicum",
       location: "Balcony",
+      home_room: "balcony",
+      home_x: 72,
+      home_y: 72,
       sunlight: "Full",
       watering: "Check the soil daily in warm weather.",
       fertilizing: "Feed according to the product label.",
@@ -150,7 +172,7 @@ export function createDemo(): WorkspaceData {
     timezone: "Asia/Karachi",
     created_at: new Date().toISOString(),
   };
-  return {
+  return upgradeDemoHome({
     profile,
     categories,
     plants,
@@ -187,17 +209,82 @@ export function createDemo(): WorkspaceData {
         role: "user",
       },
     ],
+  });
+}
+
+export function upgradeDemoHome(data: WorkspaceData): WorkspaceData {
+  if (
+    !data.plants.some(
+      (p) => !p.archived_at && p.home_layout_version !== HOME_LAYOUT_VERSION,
+    )
+  )
+    return data;
+  const changes = new Map(
+    backfillHome(data.plants).map(({ id, ...fields }) => [id, fields]),
+  );
+  return {
+    ...data,
+    plants: data.plants.map((p) =>
+      changes.has(p.id) ? { ...p, ...changes.get(p.id) } : p,
+    ),
   };
+}
+
+function assertVisitTarget(
+  data: WorkspaceData,
+  id: string,
+  location: Placement,
+) {
+  const plant = data.plants.find((p) => p.id === id && !p.archived_at);
+  if (!plant) throw Error("Plant unavailable");
+  if (!samePlacement(location, recordPlacement(plant)))
+    throw Error(
+      "Plant moved during the visit. Open its new location and try again.",
+    );
+}
+
+function replayedVisit(
+  data: WorkspaceData,
+  key: string,
+  plant: string,
+  activity: string | undefined,
+  schedule: string | null,
+  due?: string,
+) {
+  const prior = data.history.find((h) => h.care_request_id === key);
+  if (!prior) return false;
+  const label = /^(mist|misting)$/i.test(prior.activity.trim())
+    ? "Mist"
+    : prior.activity;
+  if (
+    prior.plant_id !== plant ||
+    prior.schedule_id !== schedule ||
+    (activity && label !== activity) ||
+    (due && prior.due_date !== due)
+  ) {
+    throw Error("This care request changed. Start a new visit.");
+  }
+  return true;
 }
 // Isolated browser-only sample. Never used for production authorization or persisted to Supabase.
 export function demoMutation(data: WorkspaceData, m: Mutation): WorkspaceData {
-  const d = structuredClone(data);
+  const d = structuredClone(upgradeDemoHome(data));
   const p = m.payload;
   const today = todayIn(d.profile.timezone);
   switch (m.kind) {
+    case "plant.place": {
+      const { id, placement } = placementSchema.parse(p);
+      const plant = d.plants.find(
+        (plant) => plant.id === id && !plant.archived_at,
+      );
+      if (!plant) throw Error("Plant unavailable");
+      Object.assign(plant, movedPlantFields(d.plants, plant, placement));
+      break;
+    }
     case "plant.restore": {
       const plant = d.plants.find((x) => x.id === p.id);
-      if (!plant) throw Error("Plant unavailable");
+      if (!plant?.archived_at) throw Error("Archived plant unavailable");
+      Object.assign(plant, restoredPlantFields(d.plants, plant));
       plant.archived_at = null;
       const ids = Array.isArray(p.schedule_ids) ? p.schedule_ids : [];
       for (const s of d.schedules.filter(
@@ -247,6 +334,7 @@ export function demoMutation(data: WorkspaceData, m: Mutation): WorkspaceData {
       const id = crypto.randomUUID();
       d.plants.push({
         ...plant,
+        ...allocatePlant(d.plants, plant.location, plant.environment),
         id,
         user_id: d.profile.id,
         archived_at: null,
@@ -274,10 +362,18 @@ export function demoMutation(data: WorkspaceData, m: Mutation): WorkspaceData {
     case "plant.save": {
       const v = plantSchema.parse(p);
       if (v.id) {
-        const i = d.plants.findIndex((x) => x.id === v.id);
+        const i = d.plants.findIndex((x) => x.id === v.id && !x.archived_at);
         if (i < 0) throw Error("Plant unavailable");
+        const previous = d.plants[i];
+        const keep =
+          recordPlacement(previous) &&
+          v.location === previous.location &&
+          (v.location.trim() || v.environment === previous.environment);
         d.plants[i] = {
-          ...d.plants[i],
+          ...previous,
+          ...(keep
+            ? {}
+            : allocatePlant(d.plants, v.location, v.environment, previous)),
           ...v,
           display_image:
             v.image_url ?? (v.image_path ? d.plants[i].display_image : null),
@@ -285,6 +381,7 @@ export function demoMutation(data: WorkspaceData, m: Mutation): WorkspaceData {
       } else
         d.plants.push({
           ...v,
+          ...allocatePlant(d.plants, v.location, v.environment),
           id: crypto.randomUUID(),
           user_id: d.profile.id,
           archived_at: null,
@@ -329,7 +426,30 @@ export function demoMutation(data: WorkspaceData, m: Mutation): WorkspaceData {
     }
     case "task.resolve": {
       const v = resolveSchema.parse(p);
-      const s = d.schedules.find((x) => x.id === v.id);
+      if (v.expected_location && v.plant_id && v.request_id) {
+        if (
+          replayedVisit(
+            d,
+            v.request_id,
+            v.plant_id,
+            v.activity,
+            v.id,
+            v.expected_due,
+          )
+        )
+          break;
+        assertVisitTarget(d, v.plant_id, v.expected_location);
+      }
+      const s = d.schedules.find(
+        (x) => x.id === v.id && (!v.plant_id || x.plant_id === v.plant_id),
+      );
+      if (
+        v.request_id &&
+        s &&
+        (!homeCareActivity(s) ||
+          (v.activity && v.activity !== homeCareActivity(s)))
+      )
+        throw Error("This routine changed. Open the updated task.");
       if (!s?.active || s.archived_at || s.next_due_date !== v.expected_due)
         throw Error("Task already changed. Refresh and try again.");
       if (s.next_due_date > today) throw Error("This task is not due yet");
@@ -344,6 +464,7 @@ export function demoMutation(data: WorkspaceData, m: Mutation): WorkspaceData {
         user_id: d.profile.id,
         plant_id: s.plant_id,
         schedule_id: s.id,
+        care_request_id: v.request_id ?? null,
         activity: activityLabel(s),
         due_date: s.next_due_date,
         action_date: today,
@@ -353,6 +474,50 @@ export function demoMutation(data: WorkspaceData, m: Mutation): WorkspaceData {
       });
       s.next_due_date = next.date;
       s.active = next.active;
+      break;
+    }
+    case "care.record": {
+      const v = oneOffCareSchema.parse(p);
+      if (replayedVisit(d, v.id, v.plant_id, v.activity, null)) break;
+      assertVisitTarget(d, v.plant_id, v.expected_location);
+      if (
+        d.schedules.some(
+          (s) =>
+            s.plant_id === v.plant_id &&
+            s.active &&
+            !s.archived_at &&
+            s.next_due_date <= today &&
+            homeCareActivity(s) === v.activity,
+        )
+      )
+        throw Error(
+          "A matching routine is due. Refresh and complete its task.",
+        );
+      if (
+        d.history.some(
+          (h) =>
+            h.plant_id === v.plant_id &&
+            h.action_date === today &&
+            h.status === "Completed" &&
+            (h.activity === v.activity ||
+              (v.activity === "Mist" &&
+                /^(mist|misting)$/i.test(h.activity.trim()))),
+        )
+      )
+        throw Error("This care was already recorded today.");
+      d.history.unshift({
+        id: crypto.randomUUID(),
+        care_request_id: v.id,
+        user_id: d.profile.id,
+        plant_id: v.plant_id,
+        schedule_id: null,
+        activity: v.activity,
+        action_date: today,
+        due_date: today,
+        created_at: new Date().toISOString(),
+        status: "Completed",
+        notes: "",
+      });
       break;
     }
     case "profile.save": {

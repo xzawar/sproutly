@@ -22,6 +22,10 @@ export interface Plant {
   scientific_name: string;
   category_id: string | null;
   location: string;
+  home_room?: import("./home").RoomId | null;
+  home_x?: number | null;
+  home_y?: number | null;
+  home_layout_version?: number;
   sunlight: "Full" | "Partial" | "Indirect" | "Low light";
   watering: string;
   fertilizing: string;
@@ -53,7 +57,8 @@ export interface History {
   id: string;
   user_id: string;
   plant_id: string;
-  schedule_id: string;
+  schedule_id: string | null;
+  care_request_id?: string | null;
   activity: string;
   due_date: string;
   action_date: string;
@@ -76,6 +81,7 @@ export type Mutation = {
   kind:
     | "plant.create"
     | "plant.save"
+    | "plant.place"
     | "plant.archive"
     | "plant.restore"
     | "growth.save"
@@ -85,12 +91,14 @@ export type Mutation = {
     | "schedule.save"
     | "schedule.archive"
     | "task.resolve"
+    | "care.record"
     | "profile.save"
     | "category.save"
     | "category.delete";
   payload: Record<string, unknown>;
 };
-export type ActionResult = { ok: true } | { ok: false; error: string };
+export type ActionResult =
+  { ok: true; createdId?: string } | { ok: false; error: string };
 export const activityLabel = (s: Schedule) =>
   s.activity === "Custom" ? s.custom_name : s.activity;
 

@@ -35,6 +35,10 @@ model Plant {
   scientific_name String    @default("")
   category_id     String?   @db.Uuid
   location        String    @default("")
+  home_room       String?
+  home_x          Int?      @db.SmallInt
+  home_y          Int?      @db.SmallInt
+  home_layout_version Int   @default(0) @db.SmallInt
   sunlight        String    @default("Indirect")
   watering        String    @default("")
   fertilizing     String    @default("")
@@ -71,7 +75,8 @@ model CareHistory {
   id          String   @id @db.Uuid
   user_id     String   @db.Uuid
   plant_id    String   @db.Uuid
-  schedule_id String   @db.Uuid
+  schedule_id String?  @db.Uuid
+  care_request_id String? @db.Uuid
   activity    String
   due_date    DateTime @db.Date
   action_date DateTime @db.Date

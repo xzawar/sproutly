@@ -14,6 +14,7 @@ const entities = {
 export type Entity = keyof typeof entities;
 export type Delta = {
   cursor: string;
+  hasMore: boolean;
   rows: Partial<Record<Entity, unknown[]>>;
   deleted: Partial<Record<Entity, string[]>>;
   profile: WorkspaceData["profile"];
@@ -57,9 +58,12 @@ export async function changes(cursor: string): Promise<Delta> {
     const [profile] = await rows(tx, "profiles", [id]);
     const events = await tx.$queryRaw<
       { entity: string; row_id: string; deleted: boolean; revision: string }[]
-    >`SELECT entity,row_id,deleted,revision::text FROM public.sync_events WHERE revision > ${BigInt(cursor)} ORDER BY revision LIMIT 2000`;
+    >`SELECT e.entity,e.row_id,e.deleted,e.revision::text FROM public.sync_events e WHERE e.revision > ${BigInt(cursor)} ORDER BY e.revision LIMIT 2001`;
+    const hasMore = events.length > 2000;
+    if (hasMore) events.pop();
     const result: Delta = {
       cursor: events.at(-1)?.revision ?? cursor,
+      hasMore,
       rows: {},
       deleted: {},
       profile: profile as unknown as WorkspaceData["profile"],

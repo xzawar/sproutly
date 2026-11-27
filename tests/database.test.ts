@@ -36,6 +36,30 @@ test("actual migration: permissions and complete/skip integration", async (t) =>
     ),
   );
   await db.exec(
+    await readFile(
+      new URL("../supabase/migrations/003_home.sql", import.meta.url),
+      "utf8",
+    ),
+  );
+  await db.exec(
+    await readFile(
+      new URL("../supabase/migrations/004_upper_floor.sql", import.meta.url),
+      "utf8",
+    ),
+  );
+  await db.exec(
+    await readFile(
+      new URL("../supabase/migrations/005_living_home.sql", import.meta.url),
+      "utf8",
+    ),
+  );
+  const repair = await readFile(
+    new URL("../supabase/migrations/006_repair.sql", import.meta.url),
+    "utf8",
+  );
+  await db.exec(repair);
+  await db.exec(repair); // idempotent
+  await db.exec(
     `insert into auth.users(id,email,raw_user_meta_data) values('${A}','a@example.test','{"name":"Alice"}'),('${B}','b@example.test','{"name":"Bob"}'),('${ADMIN}','admin@example.test','{"name":"Admin"}');update public.profiles set role='admin' where id='${ADMIN}';update public.profiles set timezone='Asia/Karachi' where id='${A}';insert into public.plants(id,user_id,name) values('${PA}','${A}','Aloe'),('${PB}','${B}','Basil');`,
   );
   const as = async <T>(uid: string, fn: () => Promise<T>): Promise<T> => {
@@ -120,6 +144,57 @@ test("actual migration: permissions and complete/skip integration", async (t) =>
       await assert.rejects(
         as(ADMIN, () =>
           db.exec("insert into public.categories(name) values('trees')"),
+        ),
+      );
+    },
+  );
+  await t.test(
+    "home pins follow plant ownership, validate coordinates and emit a plant delta",
+    async () => {
+      const previous = await scalar(
+        "select max(revision) as n from public.sync_events",
+      );
+      await as(A, () =>
+        db.query(
+          "update public.plants set home_room='living', home_x=21, home_y=82 where id=$1",
+          [PA],
+        ),
+      );
+      assert.equal(
+        await as(A, () =>
+          scalar(
+            "select count(*) as n from public.sync_events where revision>$1 and entity='plants' and row_id=$2",
+            [previous, PA],
+          ),
+        ),
+        1,
+      );
+      assert.equal(
+        (
+          await as(B, () =>
+            db.query(
+              "update public.plants set home_x=23 where id=$1 returning id",
+              [PA],
+            ),
+          )
+        ).rows.length,
+        0,
+      );
+      await as(A, () =>
+        db.query("update public.plants set home_room='terrace' where id=$1", [
+          PA,
+        ]),
+      );
+      for (const set of ["home_x=120", "home_room='attic'", "home_y=null"])
+        await assert.rejects(
+          as(A, () =>
+            db.query(`update public.plants set ${set} where id=$1`, [PA]),
+          ),
+        );
+      await as(A, () =>
+        db.query(
+          "update public.plants set home_room=null,home_x=null,home_y=null where id=$1",
+          [PA],
         ),
       );
     },
@@ -644,5 +719,191 @@ test("actual migration: permissions and complete/skip integration", async (t) =>
       );
     },
   );
+  await t.test(
+    "living home saves care at the verified surface exactly once and signals the owner",
+    async () => {
+      const rose = "20000000-0000-4000-8000-000000000090";
+      const routine = "20000000-0000-4000-8000-000000000091";
+      const request = crypto.randomUUID(),
+        scheduled = crypto.randomUUID();
+      const visit = (
+        user: string,
+        token: string,
+        activity: string,
+        x = 26,
+        schedule: string | null = null,
+        due: string | null = null,
+      ) =>
+        as(user, () =>
+          db.query<{ event: string }>(
+            "select public.complete_home_visit($1::uuid,$2::uuid,'front-garden',$3::integer,50,$4::text,$5::uuid,$6::date,'')::text as event",
+            [token, rose, x, activity, schedule, due],
+          ),
+        );
+      await as(A, () =>
+        db.query(
+          "insert into public.plants(id,user_id,name,location,home_room,home_x,home_y,home_layout_version) values($1,$2,'Rose','Front garden','front-garden',26,50,1)",
+          [rose, A],
+        ),
+      );
+      await assert.rejects(
+        as(A, () =>
+          db.query(
+            "insert into public.plants(user_id,name,home_room,home_x,home_y) values($1,'Overlapping rose','front-garden',26,50)",
+            [A],
+          ),
+        ),
+        /unique/i,
+      );
+      await assert.rejects(visit(ADMIN, request, "Water"), /unavailable/);
+      await assert.rejects(visit(A, request, "Water", 25), /moved/);
+      await assert.rejects(
+        visit(A, request, "Imaginary"),
+        /Check the care visit/,
+      );
+      assert.equal(
+        await scalar(
+          "select count(*) as n from public.care_history where plant_id=$1",
+          [rose],
+        ),
+        0,
+      );
+      const first = (await visit(A, request, "Water")).rows[0].event;
+      assert.equal((await visit(A, request, "Water")).rows[0].event, first);
+      await assert.rejects(
+        visit(A, crypto.randomUUID(), "Water"),
+        /already recorded/,
+      );
+      await assert.rejects(visit(A, request, "Prune"), /request changed/);
+      const history = await as(A, () =>
+        db.query<{
+          schedule_id: string | null;
+          action_date: string;
+          activity: string;
+        }>(
+          "select schedule_id,action_date::text,activity from public.care_history where id=$1",
+          [first],
+        ),
+      );
+      assert.deepEqual(history.rows, [
+        { schedule_id: null, action_date: today, activity: "Water" },
+      ]);
+      assert.equal(
+        await as(B, () =>
+          scalar(
+            "select count(*) as n from public.care_history where plant_id=$1",
+            [rose],
+          ),
+        ),
+        0,
+      );
+      assert.equal(
+        await as(A, () =>
+          scalar(
+            "select count(*) as n from public.sync_events where entity='care_history' and row_id=$1",
+            [first],
+          ),
+        ),
+        1,
+      );
+      await as(A, () =>
+        db.query(
+          "insert into public.care_schedules(id,plant_id,activity,custom_name,interval_count,interval_unit,start_date,next_due_date) values($1,$2,'Custom','Misting',3,'days',$3,$3)",
+          [routine, rose, today],
+        ),
+      );
+      await assert.rejects(
+        visit(A, crypto.randomUUID(), "Mist"),
+        /routine is due/,
+      );
+      await assert.rejects(
+        visit(A, scheduled, "Prune", 26, routine, today),
+        /routine changed/i,
+      );
+      await assert.rejects(
+        visit(A, scheduled, "Mist", 25, routine, today),
+        /moved/,
+      );
+      const done = (await visit(A, scheduled, "Mist", 26, routine, today))
+        .rows[0].event;
+      assert.equal(
+        (await visit(A, scheduled, "Mist", 26, routine, today)).rows[0].event,
+        done,
+      );
+      assert.equal(
+        (
+          await db.query<{ d: string }>(
+            "select next_due_date::text as d from public.care_schedules where id=$1",
+            [routine],
+          )
+        ).rows[0].d,
+        addInterval(today, 3, "days"),
+      );
+      await assert.rejects(
+        visit(A, crypto.randomUUID(), "Mist", 26, routine, today),
+        /Task already changed/,
+      );
+      await as(A, () =>
+        db.query("update public.plants set archived_at=now() where id=$1", [
+          rose,
+        ]),
+      );
+      await assert.rejects(
+        visit(A, crypto.randomUUID(), "Prune"),
+        /Plant unavailable/,
+      );
+      assert.equal((await visit(A, request, "Water")).rows[0].event, first);
+      assert.equal(
+        await scalar(
+          "select count(*) as n from public.care_history where plant_id=$1",
+          [rose],
+        ),
+        2,
+      );
+    },
+  );
   await db.close();
+});
+
+test("006 repairs a database that skipped 003-005 and lets Auth delete users", async () => {
+  const db = new PGlite();
+  await db.exec(`create role anon;create role authenticated;
+ create schema auth;create schema storage;
+ create table auth.users(id uuid primary key,email text,raw_user_meta_data jsonb default '{}');
+ create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;
+ grant usage on schema auth,storage to authenticated,anon;grant execute on function auth.uid() to authenticated,anon;
+ create table storage.buckets(id text primary key,name text,public boolean,file_size_limit bigint,allowed_mime_types text[]);
+ create table storage.objects(id uuid primary key default gen_random_uuid(),bucket_id text,name text);
+ alter table storage.objects enable row level security;grant select,insert,delete on storage.objects to authenticated;
+ create function storage.foldername(text) returns text[] language sql immutable as $$select string_to_array($1,'/')$$;
+ `);
+  for (const file of ["001_initial.sql", "002_sproutly.sql", "006_repair.sql"])
+    await db.exec(
+      await readFile(
+        new URL(`../supabase/migrations/${file}`, import.meta.url),
+        "utf8",
+      ),
+    );
+  const columns = await db.query<{ column_name: string }>(
+    "select column_name from information_schema.columns where table_schema='public' and table_name='plants' and column_name like 'home_%' order by 1",
+  );
+  assert.deepEqual(
+    columns.rows.map((r) => r.column_name),
+    ["home_layout_version", "home_room", "home_x", "home_y"],
+  );
+  const fn = await db.query(
+    "select 1 from pg_proc where proname='complete_home_visit'",
+  );
+  assert.equal(fn.rows.length, 1);
+  await db.exec(
+    `insert into auth.users(id,email) values('${A}','a@example.test');
+     insert into public.plants(id,user_id,name,home_room,home_x,home_y) values('${PA}','${A}','Aloe','kitchen',10,10);
+     insert into public.growth_records(user_id,plant_id,recorded_on,height_cm) values('${A}','${PA}',current_date,12);
+     insert into public.plant_photos(user_id,plant_id,taken_on,image_url) values('${A}','${PA}',current_date,'https://example.test/a.jpg');`,
+  );
+  await db.exec(`delete from auth.users where id='${A}'`);
+  const left = await db.query<{ n: number }>(
+    "select (select count(*) from public.growth_records)+(select count(*) from public.plant_photos)+(select count(*) from public.plants) as n",
+  );
+  assert.equal(Number(left.rows[0].n), 0);
 });
